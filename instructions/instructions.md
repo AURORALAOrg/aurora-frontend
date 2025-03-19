@@ -1,4 +1,4 @@
-# Prompt for Integrating Eliza AI into the STARKLA Platform
+# Prompt for Integrating Eliza AI into the AURORALA Platform
 
 **Objective:**  
 Research and document the technical requirements, capabilities, and implementation strategy for integrating Eliza AI into the STARKLA platform with a focus on enhancing educational features and supporting language learning.
@@ -46,7 +46,7 @@ Research and document the technical requirements, capabilities, and implementati
 - Ensure definitions, diagrams, and code samples (if needed) are clear and concise.
 
 **Outcome:**  
-Produce a comprehensive documentation package that includes the integration architecture, feature implementation guide, and technical requirements. This package will serve as the blueprint for incorporating Eliza AI into STARKLA to deliver enhanced educational and language learning capabilities.
+Produce a comprehensive documentation package that includes the integration architecture, feature implementation guide, and technical requirements. This package will serve as the blueprint for incorporating Eliza AI into AURORALA to deliver enhanced educational and language learning capabilities.
 
 **References:**  
 For further details on Eliza AI's capabilities and plugin system, please refer to the [Eliza documentation](https://elizaos.github.io/eliza/docs/packages/plugins/).
