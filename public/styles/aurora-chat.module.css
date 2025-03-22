@@ -1,0 +1,77 @@
+.chatContainer {
+    height: calc(100% - 60px); 
+  }
+  
+  .messageHistory {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .inputBar {
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+  }
+  
+  .message {
+    padding: 8px 16px; 
+    border-radius: 8px;
+    max-width: 49%; 
+    word-wrap: break-word;
+    margin: 8px 0; 
+  }
+  
+  .messageEliza {
+    background-color: #ebf4ff;
+    color: #1a202c;
+    align-self: flex-start;
+    text-align: left;
+    margin-left: 0; 
+  }
+  
+  .messageUser {
+    background-color: #2b6cb0;
+    color: white;
+    align-self: flex-end;
+    text-align: right;
+    margin-left: auto; 
+  }
+  
+  
+  .dotAnimate {
+    display: inline-flex;
+    gap: 4px;
+  }
+  
+  .dotAnimate span {
+    width: 8px;
+    height: 8px;
+    background-color: #007bff;
+    border-radius: 50%;
+    animation: dot-flash 1.5s infinite;
+  }
+  
+  .dotAnimate span:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .dotAnimate span:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+  
+  .dotAnimate span:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  
+  @keyframes dot-flash {
+    0%, 20% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+  

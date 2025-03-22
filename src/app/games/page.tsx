@@ -1,9 +1,9 @@
-import HomePage from "@/pages/aurora-site/home";
+import GamePanel from "@/pages/games/game-panel";
 
 export default function Home() {
   return (
     <div>
-      <HomePage />
+      <GamePanel />
     </div>
   );
 }
