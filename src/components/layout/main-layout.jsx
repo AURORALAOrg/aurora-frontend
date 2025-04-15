@@ -1,44 +1,51 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Outlet } from "react-router-dom"
-import Footer from "./Footer"
-import Header from "./Header"
-import Sidebar from "./Sidebar"
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import Footer from "./Footer";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 const MainLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-  }
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
-    <div className="flex min-h-screen w-full overflow-hidden bg-gray-50">
+    <div className="min-h-screen w-full bg-gray-50">
       {/* Sidebar */}
-      <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} headerHeight="64px" />
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={toggleSidebar}
+        headerHeight="64px"
+      />
+      {/* Header */}
 
       {/* Main Content Container */}
       <div className="flex flex-col flex-1 w-full transition-all duration-300 ease-in-out">
-        {/* Header */}
-        <Header onMenuClick={toggleSidebar} />
-
         {/* Main Content */}
         <main
-          className={`flex-1 p-4 sm:p-6 overflow-y-auto transition-all duration-300 ease-in-out ${
-            isSidebarOpen ? "lg:ml-64" : ""
+          className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out ${
+            isSidebarOpen ? "sm:ml-80" : ""
           }`}
         >
-          <div className="container mx-auto max-w-7xl">
-            <Outlet /> 
+          <div className="w-full">
+            <Header onMenuClick={toggleSidebar} />
+            <Outlet />
           </div>
         </main>
 
         {/* Footer */}
-        <Footer customClass={`transition-all duration-300 ease-in-out ${isSidebarOpen ? "lg:ml-64" : ""}`} />
+        <Footer
+          customClass={`transition-all duration-300 ease-in-out ${
+            isSidebarOpen ? "lg:ml-64" : ""
+          }`}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MainLayout
+export default MainLayout;
