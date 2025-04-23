@@ -1,6 +1,6 @@
 import React from 'react';
 // import GameCompleteStory from '../../../components/games/story-game/game-complete-story';
-import GameCompleteStory from '../../../components/games/story-game/game-complete-story';
+import GameCompleteStory from '@/components/Games/story-game/game-complete-story';
 
 
 const StoryGame = () => {

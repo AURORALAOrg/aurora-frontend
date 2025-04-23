@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
-import WordScrambleDifficultySelector from "@/components/games/word-scramble/difficulty-selector";
-import ResultModal from "@/components/games/word-scramble/result-modal";
+import WordScrambleDifficultySelector from "@/components/Games/word-scramble/difficulty-selector";
+import ResultModal from "@/components/Games/word-scramble/result-modal";
 import { words } from "@/lib/constants/mock-data/word-list";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { PiSpeakerSimpleNone } from "react-icons/pi";
