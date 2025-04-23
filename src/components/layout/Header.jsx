@@ -14,8 +14,8 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full">
-      <div className="container mx-auto px-4 py-3 md:py-2">
+    <header className="">
+      <div className="container mx-auto px-4 py-3 md:py-2 max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           {/* Logo Section */}
           <div className="flex justify-between items-center mb-4 md:mb-0">
