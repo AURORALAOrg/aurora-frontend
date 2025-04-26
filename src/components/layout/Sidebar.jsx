@@ -51,7 +51,7 @@ const Sidebar = ({ isOpen, onClose, headerHeight }) => {
     <div
       className={`fixed left-0 z-50 transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
-      } transition-transform bg-white w-64 min-h-screen flex flex-col h-full shadow-lg border-r border-gray-200 pc-sidebar`}
+      } transition-transform bg-background text-foreground w-64 min-h-screen flex flex-col h-full shadow-lg border-r border-border pc-sidebar`}
       style={{ top: headerHeight }}
     >
       <div className="p-4 flex flex-col h-full">
@@ -61,22 +61,27 @@ const Sidebar = ({ isOpen, onClose, headerHeight }) => {
         </div>
         <nav className="flex flex-col gap-2 flex-1">
           {/* Home Button */}
-
           <NavLink to="/">
             <button
               onClick={() => handleNavClick("/")}
-              className={`flex items-center gap-3 hover:text-blue-600 px-3 py-2 w-full text-left rounded-lg hover:transparent hover:border-blue-600 bg-blue-500  ${
-                currentPage === "/" ? "bg-transparent  " : "bg-blue-600 "
+              className={`flex items-center gap-3 hover:text-primary px-3 py-2 w-full text-left rounded-lg hover:transparent hover:border-primary ${
+                currentPage === "/"
+                  ? "bg-muted text-muted-foreground"
+                  : "bg-secondary text-secondary-foreground"
               }`}
             >
               <Home
-                className={`w-5 h-5    ${
-                  currentPage === "/" ? "text-blue-800  " : "text-gray-200  "
+                className={`w-5 h-5 ${
+                  currentPage === "/"
+                    ? "text-primary-foreground"
+                    : "text-muted-foreground"
                 }`}
               />
               <span
-                className={`text-sm font-medium text-gray-100  ${
-                  currentPage === "/" ? "text-blue-800  " : "text-gray-200  "
+                className={`text-sm font-medium ${
+                  currentPage === "/"
+                    ? "text-primary-foreground"
+                    : "text-muted-foreground"
                 }`}
               >
                 Home
@@ -88,16 +93,16 @@ const Sidebar = ({ isOpen, onClose, headerHeight }) => {
           <div className="mb-2">
             <button
               onClick={() => setIsLearningExpanded(!isLearningExpanded)}
-              className="flex items-center justify-between w-full px-3 py-2 bg-blue-600 text-gray-100 hover:bg-gray-100 hover:text-blue-600 rounded-lg transition-colors "
+              className="flex items-center justify-between w-full px-3 py-2 bg-secondary text-secondary-foreground hover:bg-muted hover:text-muted-foreground rounded-lg transition-colors"
             >
               <div className="flex items-center gap-3">
                 <BookOpen className="w-5 h-5" />
-                <span className="text-sm font-medium ">Learning content</span>
+                <span className="text-sm font-medium">Learning content</span>
               </div>
               {isLearningExpanded ? (
-                <ChevronDown className="w-4 h-4 text-gray-500" />
+                <ChevronDown className="w-4 h-4 text-muted-foreground" />
               ) : (
-                <ChevronRight className="w-4 h-4 text-gray-500" />
+                <ChevronRight className="w-4 h-4 text-muted-foreground" />
               )}
             </button>
 
@@ -106,13 +111,13 @@ const Sidebar = ({ isOpen, onClose, headerHeight }) => {
               <div className="mt-2 ml-2">
                 {/* Level Selection */}
                 <div className="px-3 mb-4">
-                  <h2 className="text-xs font-semibold mb-2 text-gray-600">
+                  <h2 className="text-xs font-semibold mb-2 text-muted-foreground">
                     LEVEL
                   </h2>
                   <select
                     value={level}
                     onChange={(e) => setLevel(e.target.value)}
-                    className="w-full bg-white text-gray-900 p-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-background text-foreground p-2 rounded-lg border border-border focus:ring-2 focus:ring-primary focus:border-primary"
                   >
                     <option>Choose Your Level</option>
                     <option>A1</option>
@@ -126,7 +131,7 @@ const Sidebar = ({ isOpen, onClose, headerHeight }) => {
 
                 {/* Categories */}
                 <div className="px-3">
-                  <h2 className="text-xs font-semibold mb-2 text-gray-600">
+                  <h2 className="text-xs font-semibold mb-2 text-muted-foreground">
                     CATEGORIES
                   </h2>
                   <div className="flex flex-col gap-1">
@@ -138,10 +143,10 @@ const Sidebar = ({ isOpen, onClose, headerHeight }) => {
                               `category-${item.label.toLowerCase()}`
                             )
                           }
-                          className="flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg bg-blue-600 text-gray-100 hover:bg-gray-100 hover:text-blue-600 transition-colors "
+                          className="flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg bg-secondary text-secondary-foreground hover:bg-muted hover:text-muted-foreground transition-colors"
                         >
                           <span className="">{item.icon}</span>
-                          <span className="text-sm ">{item.label}</span>
+                          <span className="text-sm">{item.label}</span>
                         </button>
                       </NavLink>
                     ))}
@@ -156,12 +161,13 @@ const Sidebar = ({ isOpen, onClose, headerHeight }) => {
             <NavLink key={index} to={item.page}>
               <button
                 onClick={() => handleNavClick(item.page)}
-                className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors active:bg-gray-100 active:text-blue-600  bg-blue-600 text-gray-100 hover:bg-gray-100 hover:text-blue-600 ${
-                  currentPage === item.page && "bg-gray-50 text-blue-600"
+                className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors bg-secondary text-secondary-foreground hover:bg-muted hover:text-muted-foreground ${
+                  currentPage === item.page &&
+                  "bg-muted text-muted-foreground"
                 }`}
               >
                 <span className="">{item.icon}</span>
-                <span className="text-sm font-medium ">{item.label}</span>
+                <span className="text-sm font-medium">{item.label}</span>
               </button>
             </NavLink>
           ))}
@@ -171,7 +177,7 @@ const Sidebar = ({ isOpen, onClose, headerHeight }) => {
           <NavLink to="aurora-chat">
             <button
               onClick={() => handleNavClick("aurora-chat")}
-              className="flex items-center gap-3 px-4 py-2.5 w-full text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+              className="flex items-center gap-3 px-4 py-2.5 w-full text-foreground bg-primary rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
             >
               <MessageSquare className="w-5 h-5" />
               <span className="text-sm font-medium">Talk with Aurora</span>

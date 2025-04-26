@@ -1,18 +1,8 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardFooter, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import {
-  popularDiscussions,
-  communityAchievements,
-} from "@/data/mock-data-community";
+import { popularDiscussions, communityAchievements } from "@/data/mock-data-community";
 import { MessageCircle, Heart, Share2, ChevronRight } from "lucide-react";
 
 export const ForumsTab = () => {
@@ -53,16 +43,13 @@ export const ForumsTab = () => {
                       </CardDescription>
                     </div>
                   </div>
-                  <Badge
-                    variant="outline"
-                    className="border-transparent rounded bg-light-blue-4 text-light-blue-1 max-h-6"
-                  >
+                  <Badge variant="outline" className="bg-blue-50 text-blue-500">
                     {discussion.language}
                   </Badge>
                 </div>
               </CardHeader>
-              <CardFooter className="flex justify-between pt-2">
-                <div className="flex items-center gap-4 text-sm text-gray-500">
+              <CardFooter className="pt-2 flex justify-between">
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center">
                     <MessageCircle className="w-4 h-4 mr-1" />
                     {discussion.replies} replies
@@ -86,7 +73,7 @@ export const ForumsTab = () => {
         </div>
 
         <div className="mt-8">
-          <Button className="w-full border border-transparent bg-light-blue-1 hover:bg-transparent hover:border-light-blue-1 hover:text-light-blue-1">
+          <Button className="w-full bg-[#3b82f6] text-white hover:bg-blue-600">
             Start New Discussion
           </Button>
         </div>
@@ -99,19 +86,20 @@ export const ForumsTab = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             {communityAchievements.map((achievement) => {
+              const IconComponent = achievement.icon;
+
               return (
                 <div key={achievement.id} className="flex items-start gap-3">
+                  <div className="bg-blue-50 p-2 rounded-full">
+                    {IconComponent && <IconComponent className="h-6 w-6 text-blue-500" />}
+                  </div>
                   <div className="flex-1">
                     <div className="flex justify-between">
-                      <h4 className="text-sm font-medium">{achievement.title}</h4>
-                      <span className="text-xs text-gray-500">
-                        {achievement.progress}%
-                      </span>
+                      <h4 className="font-medium">{achievement.title}</h4>
+                      <span className="text-sm text-muted-foreground">{achievement.progress}%</span>
                     </div>
-                    <p className="text-sm text-gray-500">
-                      {achievement.description}
-                    </p>
-                    <div className="w-full h-2 mt-2 rounded-full bg-dark-blue-4">
+                    <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                    <div className="w-full bg-border rounded-full h-2 mt-2">
                       <div
                         className="h-2 rounded-full bg-light-blue-1"
                         style={{ width: `${achievement.progress}%` }}
@@ -138,23 +126,27 @@ export const ForumsTab = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
-              {[
-                "AuroraAI",
-                "AdaptiveLearning",
-                "PerfectPronunciation",
-                "EnglishWithAI",
-                "SimulatedConversation",
-                "MemorizationTechniques",
-                "DailyPractice",
-              ].map((tag, index) => (
-                <Badge
-                  key={`${tag}-${index}`}
-                  variant="secondary"
-                  className="border-transparent hover:border-light-blue-1 bg-light-blue-4 text-light-blue-1 max-h-6"
-                >
-                  #{tag}
-                </Badge>
-              ))}
+              <Badge variant="secondary" className="bg-blue-50 text-blue-500">
+                #AuroraAI
+              </Badge>
+              <Badge variant="secondary" className="bg-blue-50 text-blue-500">
+                #AdaptiveLearning
+              </Badge>
+              <Badge variant="secondary" className="bg-blue-50 text-blue-500">
+                #PerfectPronunciation
+              </Badge>
+              <Badge variant="secondary" className="bg-blue-50 text-blue-500">
+                #EnglishWithAI
+              </Badge>
+              <Badge variant="secondary" className="bg-blue-50 text-blue-500">
+                #SimulatedConversation
+              </Badge>
+              <Badge variant="secondary" className="bg-blue-50 text-blue-500">
+                #MemorizationTechniques
+              </Badge>
+              <Badge variant="secondary" className="bg-blue-50 text-blue-500">
+                #DailyPractice
+              </Badge>
             </div>
           </CardContent>
         </Card>

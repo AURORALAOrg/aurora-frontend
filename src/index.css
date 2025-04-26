@@ -6,11 +6,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424; */
-
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,12 +15,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: hsl(var(--primary));
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: hsl(var(--primary), 0.8);
 }
 
 body {
@@ -44,6 +40,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: hsl(var(--foreground));
 }
 
 button {
@@ -54,31 +51,19 @@ button {
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.25s;
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: hsl(var(--primary));
 }
 
 button:focus,
 button:focus-visible {
-  /* outline: 4px auto -webkit-focus-ring-color; */
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
 }
 
 @layer base {
@@ -144,16 +129,22 @@ button:focus-visible {
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
   }
 }
 
-/* Form styling */
 .auth-card {
   backdrop-filter: blur(16px);
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dark .auth-card {
+  background: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(50, 50, 50, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .auth-input {
@@ -163,21 +154,44 @@ button:focus-visible {
   transition: all 0.2s ease;
 }
 
+.dark .auth-input {
+  background: rgba(30, 30, 30, 0.6);
+  border: 2px solid rgba(50, 50, 50, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+}
+
 .auth-input:focus {
   background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 0 2px rgba(var(--primary), 0.2);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.dark .auth-input:focus {
+  background: rgba(40, 40, 40, 0.8);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 .auth-button {
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 100%
-  );
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary), 0.8) 100%);
+  color: hsl(var(--primary-foreground));
   transition: all 0.2s ease;
 }
 
 .auth-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(var(--primary), 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dark .auth-button:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* Prevent FOUC */
+.theme-loading {
+  visibility: hidden;
+}
+
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }

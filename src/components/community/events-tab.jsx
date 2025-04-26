@@ -1,23 +1,9 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardFooter, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import { upcomingEvents } from "@/data/mock-data-community";
-import {
-  Users,
-  Calendar,
-  Share2,
-  ChevronRight,
-  MessageSquare,
-  LaptopIcon,
-  BookOpen,
-} from "lucide-react";
+import { Users, Calendar, Share2, ChevronRight, Video, Bot, MessageSquare } from "lucide-react";
 
 export const EventsTab = () => {
   return (
@@ -49,30 +35,21 @@ export const EventsTab = () => {
                       {event.date} • {event.time}
                     </CardDescription>
                   </div>
-                  <Badge
-                    variant="default"
-                    className="border-none pointer-events-none bg-light-blue-1"
-                  >
+                  <Badge variant="default" className="bg-[#3b82f6] text-white">
                     {event.type === "online" ? "Online" : "In-person"}
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent className="py-2">
                 <div className="flex flex-wrap gap-2">
-                  <Badge
-                    variant="outline"
-                    className="border-none rounded pointer-events-none bg-light-blue-4 text-light-blue-1"
-                  >
+                  <Badge variant="outline" className="bg-blue-50 text-blue-500">
                     {event.language}
                   </Badge>
-                  <Badge
-                    variant="outline"
-                    className="border-none rounded pointer-events-none text-neutral-2 bg-neutral-4"
-                  >
+                  <Badge variant="outline" className="bg-purple-50 text-purple-500">
                     {event.level}
                   </Badge>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <Users className="w-4 h-4 mr-1" />
+                  <div className="flex items-center text-sm text-muted-foreground">
+                    <Users className="h-4 w-4 mr-1" />
                     {event.participants} participants
                   </div>
                 </div>
@@ -96,10 +73,7 @@ export const EventsTab = () => {
                     Share
                   </Button>
                 </div>
-                <Button
-                  className="bg-light-blue-1 hover:border-light-blue-1 hover:text-light-blue-1 hover:bg-transparent"
-                  size="sm"
-                >
+                <Button className="bg-[#3b82f6] text-white hover:bg-blue-600" size="sm">
                   Register
                 </Button>
               </CardFooter>
@@ -108,7 +82,9 @@ export const EventsTab = () => {
         </div>
 
         <div className="mt-8">
-          <Button variant="clear" className="w-full border border-transparent bg-light-blue-1 hover:bg-transparent">View All Events</Button>
+          <Button className="w-full bg-[#3b82f6] text-white hover:bg-blue-600">
+            View All Events
+          </Button>
         </div>
       </div>
 
@@ -118,41 +94,34 @@ export const EventsTab = () => {
             <CardTitle>Event Types</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {[
-              {
-                icon: <LaptopIcon className="size-4 text-light-blue-1" />,
-                title: "Learning Webinars",
-                subtitle: "Learn advanced techniques with experts",
-              },
-              {
-                icon:  <BookOpen className="size-4 text-light-blue-1" />,
-                title: "AI Demonstrations",
-                subtitle: "Discover Aurora&apos;s new features",
-              },
-              {
-                icon:<Users className="size-4 text-light-blue-1" />,
-                title: "Group Practice Sessions",
-                subtitle: "Practice with other students and AI",
-              },
-              {
-                icon:  <MessageSquare className="size-4 text-light-blue-1" />,
-                title: "Q&A Sessions",
-                subtitle: "Resolve your doubts about using Aurora AI",
-              },
-            ].map(({ title, subtitle, icon }, index) => (
-              <div
-                key={`${title}-${index}`}
-                className="flex items-center gap-3 p-3 rounded-lg bg-dark-blue-1 hover:bg-[#173244]"
-              >
-                <span className="flex items-center justify-center rounded-lg bg-[#114d60] size-10 aspect-square">
-                  {icon}
-                </span>
-                <div>
-                  <h4 className="text-sm font-medium">{title}</h4>
-                  <p className="text-xs text-neutral-1/70">{subtitle}</p>
-                </div>
+            <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+              <Video className="h-5 w-5 text-blue-600" />
+              <div>
+                <h4 className="font-medium text-black">Learning Webinars</h4>
+                <p className="text-sm text-muted-foreground">Learn advanced techniques with experts</p>
               </div>
-            ))}
+            </div>
+            <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
+              <Bot className="h-5 w-5 text-purple-600" />
+              <div>
+                <h4 className="font-medium text-black">AI Demonstrations</h4>
+                <p className="text-sm text-muted-foreground">Discover Aurora&apos;s new features</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+              <Users className="h-5 w-5 text-green-600" />
+              <div>
+                <h4 className="font-medium text-black">Group Practice Sessions</h4>
+                <p className="text-sm text-muted-foreground">Practice with other students and AI</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 bg-amber-50 rounded-lg">
+              <MessageSquare className="h-5 w-5 text-amber-600" />
+              <div>
+                <h4 className="font-medium text-black">Q&A Sessions</h4>
+                <p className="text-sm text-muted-foreground">Resolve your doubts about using Aurora AI</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
@@ -168,11 +137,9 @@ export const EventsTab = () => {
                   <div className="text-xl font-bold">15</div>
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium">Aurora AI Summit 2023</h4>
-                  <p className="text-xs text-neutral-1/50">
-                    Virtual conference on the future of AI learning
-                  </p>
-                  <Badge variant="outline" className="mt-1 border-none rounded pointer-events-none text-neutral-2 bg-neutral-4">
+                  <h4 className="font-medium">Aurora AI Summit 2023</h4>
+                  <p className="text-sm text-muted-foreground">Virtual conference on the future of AI learning</p>
+                  <Badge variant="outline" className="mt-1 bg-blue-50 text-blue-500">
                     Main event
                   </Badge>
                 </div>
@@ -183,11 +150,9 @@ export const EventsTab = () => {
                   <div className="text-xl font-bold">08</div>
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium">AI Practice Marathon</h4>
-                  <p className="text-xs text-neutral-1/50">
-                    12 hours of intensive practice with Aurora
-                  </p>
-                  <Badge variant="outline" className="border-none rounded pointer-events-none text-neutral-2 bg-neutral-4">
+                  <h4 className="font-medium">AI Practice Marathon</h4>
+                  <p className="text-sm text-gray-500">12 hours of intensive practice with Aurora</p>
+                  <Badge variant="outline" className="mt-1 bg-blue-50">
                     All levels
                   </Badge>
                 </div>
@@ -197,5 +162,6 @@ export const EventsTab = () => {
         </Card>
       </div>
     </div>
-  );
-};
+  )
+}
+

@@ -1,12 +1,7 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardFooter, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import { aiPracticeTools, aiFeatures } from "@/data/mock-data-community";
 import {
   TrendingUp,
@@ -19,7 +14,6 @@ import {
   Laptop,
   Brain,
   Zap,
-  FileText,
 } from "lucide-react";
 
 export const AIPracticeTab = () => {
@@ -45,16 +39,11 @@ export const AIPracticeTab = () => {
               <CardHeader className="pb-2">
                 <div className="flex flex-col justify-between">
                   <div className="flex items-center gap-3">
-                    <div
-                      className={`flex items-center justify-center rounded-lg bg-[#114d60] text-light-blue-1 size-10 aspect-square`}
-                    >
-                      {/* Dynamically render the icon based on the tool.icon string */}
-                      {tool.icon === "Bot" && <Bot className=" size-5" />}
-                      {tool.icon === "Mic" && <Mic className="size-5" />}
-                      {tool.icon === "PenTool" && (
-                        <PenTool className="size-5" />
-                      )}
-                      {tool.icon === "Laptop" && <Laptop className="size-5" />}
+                    <div className="bg-blue-50 p-2 rounded-full">
+                      {tool.icon === "Bot" && <Bot className="h-6 w-6 text-blue-500" />}
+                      {tool.icon === "Mic" && <Mic className="h-6 w-6 text-purple-500" />}
+                      {tool.icon === "PenTool" && <PenTool className="h-6 w-6 text-green-500" />}
+                      {tool.icon === "Laptop" && <Laptop className="h-6 w-6 text-amber-500" />}
                     </div>
                     <div className="flex flex-col gap-1">
                       <CardTitle>{tool.name}</CardTitle>
@@ -66,13 +55,14 @@ export const AIPracticeTab = () => {
                       </Badge>
                     </div>
                   </div>
+                  <Badge variant="outline" className="bg-blue-50 text-black">
+                    {tool.level}
+                  </Badge>
                 </div>
               </CardHeader>
               <CardContent className="py-2">
-                <p className="mb-3 text-sm text-neutral-1/50">
-                  {tool.description}
-                </p>
-                <div className="flex flex-wrap gap-2 text-sm text-neutral-1/50">
+                <p className="text-muted-foreground mb-3">{tool.description}</p>
+                <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
                   <div className="flex items-center">
                     <TrendingUp className="w-4 h-4 mr-1" />
                     {tool.popularity}% popularity
@@ -83,11 +73,8 @@ export const AIPracticeTab = () => {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="pt-2 mt-auto">
-                <Button
-                  variant="clear"
-                  className="w-full border border-transparent bg-light-blue-1 hover:bg-transparent"
-                >
+              <CardFooter className="pt-2">
+                <Button className="w-full bg-[#3b82f6] text-white hover:bg-blue-600">
                   Start Practice
                 </Button>
               </CardFooter>
@@ -96,10 +83,7 @@ export const AIPracticeTab = () => {
         </div>
 
         <div className="mt-8">
-          <Button
-            variant="clear"
-            className="w-full border border-transparent bg-light-blue-1 hover:bg-transparent"
-          >
+          <Button className="w-full bg-[#3b82f6] text-white hover:bg-blue-600">
             Explore More Tools
           </Button>
         </div>
@@ -141,10 +125,8 @@ export const AIPracticeTab = () => {
                   )}
                 </span>
                 <div>
-                  <h4 className="text-sm font-medium">{feature.name}</h4>
-                  <p className="text-xs text-neutral-1/50">
-                    {feature.description}
-                  </p>
+                  <h4 className="font-medium text-white">{feature.name}</h4>
+                  <p className="text-sm text-muted-foreground">{feature.description}</p>
                 </div>
               </div>
             ))}
@@ -171,10 +153,8 @@ export const AIPracticeTab = () => {
                   <MessageSquare className="size-4 text-light-blue-1" />
                 </span>
                 <div>
-                  <h4 className="text-sm font-medium">Travel conversation</h4>
-                  <p className="text-xs text-neutral-1/50">
-                    2 hours ago • 15 minutes
-                  </p>
+                  <h4 className="font-medium text-white">Travel conversation</h4>
+                  <p className="text-xs text-muted-foreground">2 hours ago • 15 minutes</p>
                 </div>
               </div>
 
@@ -187,12 +167,8 @@ export const AIPracticeTab = () => {
                   <Mic className="text-purple-600 size-4" />
                 </span>
                 <div>
-                  <h4 className="text-sm font-medium">
-                    Pronunciation practice
-                  </h4>
-                  <p className="text-xs text-neutral-1/50">
-                    Yesterday • 10 minutes
-                  </p>
+                  <h4 className="font-medium text-white">Pronunciation practice</h4>
+                  <p className="text-xs text-muted-foreground">Yesterday • 10 minutes</p>
                 </div>
               </div>
 
@@ -205,10 +181,8 @@ export const AIPracticeTab = () => {
                   <PenTool className="text-sm text-[#10ae7b] size-4" />
                 </span>
                 <div>
-                  <h4 className="font-medium">Writing correction</h4>
-                  <p className="text-xs text-neutral-1/50">
-                    2 days ago • 20 minutes
-                  </p>
+                  <h4 className="font-medium text-white">Writing correction</h4>
+                  <p className="text-xs text-muted-foreground">2 days ago • 20 minutes</p>
                 </div>
               </div>
             </div>

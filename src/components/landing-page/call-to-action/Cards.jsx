@@ -4,15 +4,14 @@ import { Quote } from "lucide-react";
 // Memoize components to prevent unnecessary re-renders
 export const SkillCards = memo(function SkillCards({ icons, tag, content }) {
   return (
-    <article className="bg-white rounded-[8px] w-full h-auto min-h-[172px] p-4 sm:p-5 flex-col flex shadow-sm items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-2 border border-transparent hover:border-[#00B8D4] hover:bg-gray-50 cursor-default">
-      <div className="mb-2 flex items-center justify-center" aria-hidden="true">{icons}</div>
-      <h3 className="font-bold text-[#09090B] group-hover:text-[#00B8D4] text-base sm:text-lg text-center mt-1 transition-colors duration-300">
-        {tag}
-      </h3>
-      <p className="text-center w-full flex flex-col font-normal text-sm sm:text-base lg:text-sm mt-1 text-[#71717A] group-hover:text-[#111827] transition-colors duration-300">
+    <div className="bg-white rounded-[8px] w-full lg:w-[238px] h-[172px] p-4 flex-col flex shadow-sm items-center justify-center">
+      {icons}
+
+      <strong className="font-bold  text-[#09090B] text-lg">{tag}</strong>
+      <p className="text-center  w-full flex flex-col font-normal text-lg lg:text-sm text-muted-foreground">
         {content}
       </p>
-    </article>
+    </div>
   );
 });
 

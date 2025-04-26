@@ -1,4 +1,5 @@
 "use client";
+"use client";
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -8,94 +9,73 @@ import { ForumsTab } from "@/components/community/forums-tab";
 import { EventsTab } from "@/components/community/events-tab";
 import { StudyGroupsTab } from "@/components/community/study-groups-tab";
 import { AIPracticeTab } from "@/components/community/ai-practice-tab";
-import {
-  Search,
-  Filter,
-  Bot,
-  Bell,
-  MessageSquare,
-  Calendar,
-  Users,
-} from "lucide-react";
+import { Search, Filter, Bot, Bell, MessageSquare, Calendar, Users } from "lucide-react";
 
 export const TabsSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [_, setActiveTab] = useState("forums");
+  const [setActiveTab] = useState("forums");
 
   return (
-    <div className="container py-12 mx-auto text-black sm:px-8">
+    <div className="container mx-auto px-4 py-12 bg-background text-foreground">
       {/* Search and Filter Bar */}
       <div className="flex flex-wrap gap-4 px-4 mb-8">
         <div className="relative flex-grow">
-          <Search
-            className={`absolute transform -translate-y-1/2 bg-transparent left-3 top-1/2 ${
-              searchQuery ? "text-white" : "text-[#9096a0]"
-            }`}
-          />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
           <Input
             type="search"
             placeholder="Search in community..."
-            className="pl-10 h-full text-white border outline-none peer bg-dark-blue-5 border-dark-blue-4 placeholder:text-[#9096a0] ring-0 focus:border-light-blue-1 ring-offset-[-1px] !ring-light-blue-1"
+            className="pl-10 border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <div className="flex gap-2">
-          <Button variant="clear" className="flex items-center gap-1">
-            <Filter className="w-4 h-4" />
+          <Button className="flex items-center gap-1 bg-background text-foreground border border-border hover:bg-muted">
+            <Filter className="h-4 w-4" />
             Filters
           </Button>
-          <Button variant="clear" className="flex items-center gap-1">
-            <Bot className="w-4 h-4" />
+          <Button className="flex items-center gap-1 bg-background text-foreground border border-border hover:bg-muted">
+            <Bot className="h-4 w-4" />
             AI Level
           </Button>
-          <Button variant="clear" className="flex items-center gap-1">
-            <Bell className="w-4 h-4" />
+          <Button className="flex items-center gap-1 bg-background text-foreground border border-border hover:bg-muted">
+            <Bell className="h-4 w-4" />
             Notifications
           </Button>
         </div>
       </div>
 
       {/* Tabs Navigation */}
-      <Tabs
-        defaultValue="forums"
-        className="px-4 mb-12 bg-transparent"
-        onValueChange={setActiveTab}
-      >
-        <TabsList className="flex items-baseline justify-start mb-8 border-b border-b-neutral-4">
-          {[
-            {
-              title: "Forums",
-              value: "forums",
-              icon: <MessageSquare className="w-4 h-4 mr-2" />,
-            },
-            {
-              title: "Events",
-              value: "events",
-              icon: <Calendar className="w-4 h-4 mr-2" />,
-            },
-            {
-              title: "Study Groups",
-              value: "groups",
-              icon: <Users className="w-4 h-4 mr-2" />,
-            },
-            {
-              title: "AI Practice",
-              value: "practice",
-              icon: <Bot className="w-4 h-4 mr-2" />,
-            },
-          ].map(({ title, value, icon }) => (
-            <TabsTrigger
-              key={title}
-              title={title}
-              value={value}
-              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white bg-white text-black border-b border-gray-300"
-            >
-              {icon}
-              <span className="inline-block capitalize">{title}</span>
-            </TabsTrigger>
-          ))}
+      <Tabs defaultValue="forums" className="mb-12" onValueChange={setActiveTab}>
+        <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-8 bg-muted text-muted-foreground">
+          <TabsTrigger
+            value="forums"
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-muted text-muted-foreground border border-border"
+          >
+            <MessageSquare className="h-4 w-4 mr-2" />
+            Forums
+          </TabsTrigger>
+          <TabsTrigger
+            value="events"
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-muted text-muted-foreground border border-border"
+          >
+            <Calendar className="h-4 w-4 mr-2" />
+            Events
+          </TabsTrigger>
+          <TabsTrigger
+            value="groups"
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-muted text-muted-foreground border border-border"
+          >
+            <Users className="h-4 w-4 mr-2" />
+            Study Groups
+          </TabsTrigger>
+          <TabsTrigger
+            value="practice"
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-muted text-muted-foreground border border-border"
+          >
+            <Bot className="h-4 w-4 mr-2" />
+            AI Practice
+          </TabsTrigger>
         </TabsList>
 
         {/* Tabs Content */}

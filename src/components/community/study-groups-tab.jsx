@@ -1,22 +1,9 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardFooter, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import { studyGroups } from "@/data/mock-data-community";
-import {
-  Users,
-  BookOpen,
-  Mic,
-  ChevronRight,
-  BarChart2,
-  Zap,
-} from "lucide-react";
+import { Users, TrendingUp, Bot, Sparkles, BookOpen, Mic, ChevronRight } from "lucide-react";
 
 export const StudyGroupsTab = () => {
   return (
@@ -40,7 +27,10 @@ export const StudyGroupsTab = () => {
             >
               <CardHeader className="pb-2">
                 <div className="flex justify-between">
-                  <CardTitle className="text-white">{group.name}</CardTitle>
+                  <CardTitle>{group.name}</CardTitle>
+                  <Badge variant="outline" className="bg-blue-50 text-black">
+                    {group.language}
+                  </Badge>
                 </div>
                 <CardDescription className="text-neutral-1/50">
                   {group.description}
@@ -48,37 +38,20 @@ export const StudyGroupsTab = () => {
               </CardHeader>
               <CardContent className="py-2">
                 <div className="flex flex-wrap gap-2">
-                  <div className="flex w-full gap-4">
-                    <Badge
-                      variant="outline"
-                      className="border-none rounded pointer-events-none bg-light-blue-4 text-light-blue-1"
-                    >
-                      {group.language}
-                    </Badge>
-                    <div className="flex items-center text-sm text-neutral-1/50">
-                      <Users className="w-4 h-4 mr-1" />
-                      {group.members} members
-                    </div>
+                  <div className="flex items-center text-sm text-muted-foreground">
+                    <Users className="h-4 w-4 mr-1" />
+                    {group.members} members
                   </div>
-                  <Badge
-                    variant="outline"
-                    className="border-none rounded pointer-events-none text-neutral-2 bg-neutral-4"
-                  >
+                  <Badge variant="outline" className="bg-purple-50 text-black">
                     {group.level}
                   </Badge>
-                  <Badge
-                    variant="outline"
-                    className="border-none rounded pointer-events-none text-neutral-2 bg-neutral-4"
-                  >
+                  <Badge variant="outline" className="bg-green-50 text-black">
                     {group.meetingFrequency}
                   </Badge>
                 </div>
               </CardContent>
               <CardFooter className="pt-2">
-                <Button
-                  variant="clear"
-                  className="w-full border border-transparent bg-light-blue-1 hover:bg-transparent"
-                >
+                <Button className="w-full bg-[#3b82f6] text-white hover:bg-blue-600">
                   Join Group
                 </Button>
               </CardFooter>
@@ -87,10 +60,7 @@ export const StudyGroupsTab = () => {
         </div>
 
         <div className="mt-8">
-          <Button
-            variant="clear"
-            className="w-full border border-transparent bg-light-blue-1 hover:bg-transparent"
-          >
+          <Button className="w-full bg-[#3b82f6] text-white hover:bg-blue-600">
             Create New Group
           </Button>
         </div>
@@ -103,47 +73,42 @@ export const StudyGroupsTab = () => {
           </CardHeader>
 
           <CardContent className="space-y-4">
-            {[
-              {
-                icon: <Users className="size-4 text-light-blue-1" />,
-                title: "Collaborative Learning",
-                theme: "bg-[#164253]",
-                subtitle: "Learn with others and stay motivated",
-              },
-              {
-                icon: <BarChart2 className="size-4 text-[#12926d]" />,
-                title: "Consistent Progress",
-                theme: "bg-[#194143]",
-                subtitle: "Maintain a regular study rhythm",
-              },
-              {
-                icon: <BookOpen className="size-4 text-[#8759ef]" />,
-                title: "Shared AI Practice",
-                theme: "bg-[#312e59]",
-                subtitle: "Share techniques and tips for using Aurora",
-              },
-              {
-                icon: <Zap className="size-4 text-[#ed9a0b]" />,
-                title: "Group Challenges",
-                theme: "bg-[#473c2a]",
-                subtitle: "Participate in weekly challenges with Aurora AI",
-              },
-            ].map(({ title, subtitle, icon, theme }, index) => (
-              <div
-                key={`${title}-${index}`}
-                className={"flex items-center gap-3 rounded-lg"}
-              >
-                <span
-                  className={`flex items-center justify-center rounded-lg bg-[#114d60] size-10 aspect-square ${theme}`}
-                >
-                  {icon}
-                </span>
-                <div>
-                  <h4 className="text-sm font-medium">{title}</h4>
-                  <p className="text-xs text-neutral-1/70">{subtitle}</p>
-                </div>
+            <div className="flex items-start gap-3">
+              <div className="bg-blue-100 p-2 rounded-full">
+                <Users className="h-5 w-5 text-blue-600" />
               </div>
-            ))}
+              <div>
+                <h4 className="font-medium text-white">Collaborative Learning</h4>
+                <p className="text-sm text-muted-foreground">Learn with others and stay motivated</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="bg-green-100 p-2 rounded-full">
+                <TrendingUp className="h-5 w-5 text-green-600" />
+              </div>
+              <div>
+                <h4 className="font-medium text-white">Consistent Progress</h4>
+                <p className="text-sm text-muted-foreground">Maintain a regular study rhythm</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="bg-purple-100 p-2 rounded-full">
+                <Bot className="h-5 w-5 text-purple-600" />
+              </div>
+              <div>
+                <h4 className="font-medium text-white">Shared AI Practice</h4>
+                <p className="text-sm text-muted-foreground">Share techniques and tips for using Aurora</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="bg-amber-100 p-2 rounded-full">
+                <Sparkles className="h-5 w-5 text-amber-600" />
+              </div>
+              <div>
+                <h4 className="font-medium text-white">Group Challenges</h4>
+                <p className="text-sm text-muted-foreground">Participate in weekly challenges with Aurora AI</p>
+              </div>
+            </div>
           </CardContent>
           <CardFooter>
             <Button variant="clear" className="w-full border-none">
@@ -166,10 +131,8 @@ export const StudyGroupsTab = () => {
                     <BookOpen className="text-light-blue-1 size-4" />
                   </span>
                   <div>
-                    <h4 className="text-sm font-medium">Tech Vocabulary</h4>
-                    <p className="text-xs text-neutral-1/50">
-                      87 members • English
-                    </p>
+                    <h4 className="font-medium text-white">Tech Vocabulary</h4>
+                    <p className="text-xs text-muted-foreground">87 members • English</p>
                   </div>
                 </div>
                 <Button
@@ -189,12 +152,8 @@ export const StudyGroupsTab = () => {
                     <Mic className="text-purple-600 size-4" />
                   </span>
                   <div>
-                    <h4 className="text-sm font-medium">
-                      Advanced Pronunciation
-                    </h4>
-                    <p className="text-xs text-neutral-1/50">
-                      64 members • English
-                    </p>
+                    <h4 className="font-medium text-white">Advanced Pronunciation</h4>
+                    <p className="text-xs text-muted-foreground">64 members • English</p>
                   </div>
                 </div>
                 <Button
