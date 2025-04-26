@@ -46,6 +46,7 @@ import Categories from "@/pages/aurora-site/categories";
 import HomePage from "@/pages/aurora-site/home";
 
 // 🧩 Games & Challenges
+<<<<<<< HEAD
 import StoryGame from "@/pages/games/story-game";
 import WordMatching from "@/pages/games/word-matching";
 import GamePanel from "@/pages/games/game-panel";
@@ -53,6 +54,16 @@ import PracticeSystem from "@/components/practices/funny_practices/DragDropSente
 import IdiomChallenge from "@/components/practices/funny_practices/idiom-challenge";
 import DifficultySelector from "@/components/Games/memory-card/difficulty-selector";
 import GameBoard from "@/components/Games/memory-card/game-board";
+=======
+import StoryGame from "@/pages/games/story-game"
+import WordMatching from "@/pages/games/word-matching"
+import GamePanel from "@/pages/games/game-panel"
+// import DifficultySelector from "@/components/Games/memory-card/difficulty-selector"
+// import GameBoard from "@/components/Games/memory-card/game-board"
+// import WordScrambleGame from "@/components/Games/word-scramble/word-scramble-game";
+
+
+>>>>>>> c85edab (fix c onflicts)
 // 📝 Practices & Exercises
 //import PracticeSystem from "@/components/practices/exercises/drag-drop-sentence-builder";
 //import SentenceBuilder from "@/components/practices/exercises/sentence-builder";

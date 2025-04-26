@@ -34,9 +34,13 @@ const MainLayout = () => {
             isSidebarOpen ? "lg:ml-64" : ""
           }`}
         >
+<<<<<<< HEAD
           <div className="w-full">
             <Outlet />
           </div>
+=======
+          {children} 
+>>>>>>> c85edab (fix c onflicts)
         </main>
 
         {/* Footer */}
