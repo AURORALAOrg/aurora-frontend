@@ -55,11 +55,12 @@ import DifficultySelector from "@/components/Games/memory-card/difficulty-select
 import GameBoard from "@/components/Games/memory-card/game-board";
 // 📝 Practices & Exercises
 //import PracticeSystem from "@/components/practices/exercises/drag-drop-sentence-builder";
-import SentenceBuilder from "@/components/practices/exercises/sentence-builder";
+//import SentenceBuilder from "@/components/practices/exercises/sentence-builder";
+import SentenceBuilder from "@/components/practices/funny_practices/SentenceBuilder";
 
 // 🧠 Quizzes
-import FillInTheBlanksQuizPage from "@/pages/aurora-site/quizzes/fill-in-the-blanks-quiz";
-import Quiz from "@/pages/aurora-site/quizzes/quiz";
+import FillInTheBlanksQuizPage from "@/components/practices/funny_practices/FillInTheBlanksPage";
+import Quiz from "@/components/practices/funny_practices/QuizPage";
 
 // 🏛️ Grammar & Language
 import GrammarContent from "@/pages/aurora-site/grammar-content";
@@ -95,9 +96,9 @@ function App() {
                 <Route path="/certification-content" element={<CertificationContent />} />
                 <Route path="/module-details" element={<ModuleDetails />} />
                 <Route path="/practiceSystem" element={<PracticeSystem />} />
-                <Route path="/practice/sentence-builder" element={<SentenceBuilder />} />
-                <Route path="/practice/idiom-challenge" element={<IdiomChallenge />} />
-                <Route path="/practice/drag-drop-sentence-builder" element={<PracticeSystem />} />
+                <Route path="/practice/sentence-builder" element={<SentenceBuilder/>}/>
+                <Route path="/practice/idiom-challenge" element={<IdiomChallenge />}/>
+                <Route path="/practice/drag-drop-sentence-builder" element={<PracticeSystem/>}/>
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/story-game" element={<StoryGame />} />
                 <Route path="/games/word-matching/" element={<WordMatching />} />
@@ -105,7 +106,20 @@ function App() {
                 <Route path="/games/memory-card" element={<DifficultySelector />} />
                 <Route path="/games/memory-card/:levelId" element={<GameBoard />} />
                 <Route path="/quiz" element={<Quiz />} />
-                <Route path="/fill-in-the-blanks" element={<FillInTheBlanksQuizPage />} />
+                <Route path="/fill-in-the-blanks" element={<FillInTheBlanksQuizPage />}/>
+                <Route path="/grammar" element={<GrammarContent />} />
+                <Route path="/vocabulary" element={<VocabularyPage />} />
+                <Route path="/speaking" element={<SpeakingPage />} />
+                <Route path="/listening" element={<ListeningPage />} />
+                <Route path="/reading" element={<ReadingContent />} />
+                <Route path="/people" element={<CommunityInteractionPage />} />
+                <Route path="games/story-game" element={<StoryGame />} />
+                <Route path="/games/word-matching/" element={<WordMatching />}/>
+                <Route path="/games/word-scramble/" element={<WordScrambleGame />}/>
+                <Route path="/games" element={<GamePanel />} />
+                <Route path="/games/memory-card" element={<DifficultySelector />}/>
+                <Route path="/games/memory-card/:levelId" element={<GameBoard />}/>
+                <Route path="/quiz" element={<Quiz />} />
                 <Route path="/grammar" element={<GrammarContent />} />
                 <Route path="/vocabulary" element={<VocabularyPage />} />
                 <Route path="/speaking" element={<SpeakingPage />} />
