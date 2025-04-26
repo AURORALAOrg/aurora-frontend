@@ -28,7 +28,7 @@ export function ThemeProvider({ children }) {
       setResolvedTheme(systemTheme);
     } else {
       root.classList.toggle('dark', theme === 'dark');
-      root.classList.toggle('light', theme === 'light');
+      root.classList.toggle('light', theme === 'light'); 
       setResolvedTheme(theme);
     }
 
@@ -36,7 +36,7 @@ export function ThemeProvider({ children }) {
   }, [theme]);
 
   useEffect(() => {
-    if (theme !== 'system') return;
+    if (theme !== 'system') return; // Only add listener if theme is 'system'
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
