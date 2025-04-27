@@ -32,20 +32,70 @@ const Header = ({ onMenuClick }) => {
   }
 
   return (
-    <header className="h-16 bg-background border-b border-border shadow-sm transition-colors">
-      <div className="flex items-center justify-between h-full max-w-[1440px] mx-auto px-6">
-        <div className="flex items-center space-x-10">
-          <img
-            src={auroraBrain}
-            alt="Aurora Logo"
-            className="h-10 w-auto"
-          />
-          <nav className="hidden md:flex space-x-6">
-            {["Skills", "Grammar", "Vocabulary", "Business English", "Community"].map((item) => (
+    <>
+      <header className="border-b border-[#e5e7eb] sticky top-0 bg-white z-50">
+        <div className="container mx-auto px-2 sm:px-4 flex items-center justify-between h-16">
+          {/* Botón hamburguesa (izquierda) - Visible en móvil y tablet */}
+          <button
+            className="p-2 rounded-full hover:bg-gray-100 mr-4 items-center hover:border-transparent"
+            onClick={handleMenuToggle}
+            aria-label="Menú principal"
+          >
+            <Bot size={24} />
+          </button>
+
+          {/* Logo - Ajustado para responsive */}
+          <div
+            onClick={() => navigate("/")}
+            className="flex items-center cursor-pointer"
+          >
+            <div className="p-1 rounded">
+              <img
+                src={auroraLogo}
+                alt="Aurora Logo"
+                className="h-6 sm:h-7 md:h-8"
+              />
+            </div>
+          </div>
+
+          {/* Espacio flexible para centrar el logo en móvil/tablet */}
+          <div className="flex-1 lg:hidden"></div>
+
+          {/* Área de botones para dispositivos móviles y tablet pequeño */}
+          <div className="flex items-center space-x-2 lg:hidden">
+            {/* Buscador móvil (solo icono) */}
+            <button
+              className="p-2 rounded-full hover:bg-gray-100"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Buscar"
+            >
+              <Search size={20} />
+            </button>
+
+            {/* Botón para menú de usuario/app */}
+            <button
+              className="p-2 rounded-full hover:bg-gray-100"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Menú de usuario"
+            >
+              <Menu size={20} />
+            </button>
+          </div>
+
+          {/* Navegación para tablet grande y desktop */}
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-8">
+            {[
+              "Skills",
+              "Grammar",
+              "Vocabulary",
+              "Business English",
+              "Community",
+              "Question Creator",
+            ].map((item) => (
               <button
                 key={item}
                 onClick={() => handleNavClick(item)}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                className="text-xs  font-medium text-gray-700 py-2 border-radius-none border-transparent hover:border-transparent hover:border-radius-none hover:border-b-[#00b8d4]  hover:rounded-none hover:text-[#00b8d4] focus:outline-none transition-colors duration-200"
               >
                 {item}
               </button>
@@ -53,71 +103,88 @@ const Header = ({ onMenuClick }) => {
           </nav>
         </div>
 
-        <div className="flex items-center space-x-4">
-          {!isAuthenticated && !isLoadingUser ? (
-            <div className="flex gap-3 items-center">
-              <ThemeToggle />
+        {/* Panel de búsqueda expandible */}
+        {isOpen && (
+          <div
+            className="lg:hidden p-4 bg-white border-t border-gray-200 transition-all duration-300"
+            ref={searchRef}
+          >
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Search size={18} className="text-gray-400" />
+              </div>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                placeholder="Buscar contenido..."
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2"
+                autoFocus
+              />
               <button
-                onClick={() => navigate("/login")}
-                className="px-4 py-1.5 border border-border rounded-md text-sm hover:bg-secondary transition-colors"
+                className="absolute inset-y-0 right-0 flex items-center pr-3"
+                onClick={() => setIsOpen(false)}
               >
-                Log in
-              </button>
-              <button
-                onClick={() => navigate("/register")}
-                className="px-4 py-1.5 bg-blue-500 dark:bg-blue-600 text-white rounded-md text-sm hover:bg-blue-600 dark:hover:bg-blue-700 shadow-sm transition-colors"
-              >
-                Sign up
+                <X size={18} className="text-gray-400" />
               </button>
             </div>
-          ) : (
-            <div className="relative">
-              <ThemeToggle />
-              <button
-                onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="h-9 w-9 rounded-full bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-800 flex items-center justify-center ml-3 transition-colors"
-              >
-                <User className="h-5 w-5" />
-              </button>
-              {showProfileMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-card text-card-foreground border border-border rounded-lg shadow-lg z-50 transition-colors">
-                  <div className="px-4 py-3 border-b border-border">
-                    <p className="text-sm font-medium">{user?.firstName}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{user?.email}</p>
-                  </div>
-                  <div className="py-1">
-                    <button
-                      onClick={() => navigate("/profile")}
-                      className="px-4 py-2 text-sm text-foreground hover:bg-secondary w-full text-left transition-colors"
-                    >
-                      Your Profile
-                    </button>
-                    <button
-                      onClick={() => navigate("/learning-path")}
-                      className="px-4 py-2 text-sm text-foreground hover:bg-secondary w-full text-left transition-colors"
-                    >
-                      Learning Path
-                    </button>
-                  </div>
-                  {address && (
-                    <div className="px-4 py-2 border-t border-border">
-                      <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-                        <span>Wallet:</span>
-                        <span className="font-medium">{truncateAddress(address)}</span>
-                      </div>
-                    </div>
-                  )}
-                  <div className="border-t border-border">
-                    <button
-                      onClick={() => {
-                        logout()
-                        setShowProfileMenu(false)
-                      }}
-                      className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 w-full text-left transition-colors"
-                    >
-                      <LogOut className="h-4 w-4" />
-                      <span>Logout</span>
-                    </button>
+            {/* Resultados de búsqueda */}
+            {showFiltered && filteredOptions.length > 0 && (
+              <div className="mt-2 bg-white rounded-md z-50 max-h-40 overflow-y-auto">
+                {filteredOptions.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => handleSearchOptionClick(option)}
+                    className="text-left block w-full px-4 py-2 text-sm hover:bg-gray-100"
+                  >
+                    {option.charAt(0).toUpperCase() + option.slice(1)}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </header>
+
+      {/* Menú móvil y tablet */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 bg-white z-50 pt-16 overflow-y-auto lg:hidden">
+          <div className="p-4">
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100"
+              aria-label="Cerrar menú"
+            >
+              <X size={24} />
+            </button>
+
+            <nav className="flex flex-col space-y-4 mt-4">
+              {[
+                "Skills",
+                "Grammar",
+                "Vocabulary",
+                "Business English",
+                "Community",
+                "Question Creator"
+              ].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => handleNavClick(item)}
+                  className="text-lg font-medium text-gray-700 py-2 rounded-none border-transparent hover:border-transparent hover:rounded-none hover:border-b-[#00b8d4]  hover:rounded-none hover:text-[#00b8d4] focus:outline-none transition-colors duration-200"
+                >
+                  {item}
+                </button>
+              ))}
+            </nav>
+
+            <div className="mt-8 pt-4 border-t border-gray-200">
+              {isAuthenticated ? (
+                <div className="flex flex-col space-y-4">
+                  <div className="flex items-center space-x-2 py-2">
+                    <User size={20} />
+                    <span className="text-md font-medium">
+                      {user?.username || truncateAddress(address)}
+                    </span>
                   </div>
                 </div>
               )}
@@ -133,4 +200,4 @@ const Header = ({ onMenuClick }) => {
   );
 };
 
-export default Header
+export default Header;
