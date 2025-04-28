@@ -58,7 +58,7 @@ const BusinessEnglishPage = () => {
 
         <SectionCard className="bg-[#111827]">
           <p className="text-white font-bold text-2xl  lg:text-4xl  lg:max-w-[700px] text-center">
-            Why learn Business English with Us
+          Our Business English Courses
           </p>
           <ResponsiveCard className="grid grid-cols-1  lg:grid-cols-2">
             {businessEnglishCourses.map((course, i) => (

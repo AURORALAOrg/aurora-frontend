@@ -16,19 +16,19 @@ export const whyBusinessEnglish = [
     icon: <PencilLine className="text-[#00b8d4] h-[25px] w-[25px]" />,
     tag: "AI-Powered Personalization",
     content:
-      "Out AI analyze your communication style and adapts and adapts lessons to focus on your specific business need.",
+      "Our AI analyzes your communication style and adapts lessons to focus on your specific business needs.",
   },
   {
     icon: <BookOpen className="text-[#00b8d4] h-[25px] w-[25px]" />,
     tag: "Industry-Specific Content",
     content:
-      "Specialize vocabulary and scenarios for finance, marketing, tech, healthcare and more.",
+      "Specialized vocabulary and scenarios for finance, marketing, tech, healthcare and more.",
   },
   {
     icon: <Shield className="text-[#00b8d4] h-[25px] w-[25px]" />,
     tag: "Blockchain Certification",
     content:
-      "Earn verifiable certification on blockchain that showcase your business English your business English proficiency to employee",
+      "Earn verifiable certification on blockchain that showcases your business English proficiency to employers.",
   },
 ];
 
@@ -36,8 +36,7 @@ export const businessEnglishCourses = [
   {
     icon: <Mail className="text-[#00b8d4] h-[25px] w-[25px]" />,
     title: "Business Communication Essentials",
-    content: `Master emails, meetings, presentations, and phone calls in professional settings
-Beginner to Intermediate`,
+    content: `Master emails, meetings, presentations, and phone calls in professional settings`,
     type: "Beginner to Intermediate",
   },
   {
