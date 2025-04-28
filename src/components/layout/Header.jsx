@@ -1,42 +1,43 @@
 "use client";
 
 import {
-  Bell,
   Menu,
   Search,
-  Settings,
   LogIn,
   LogOut,
-  BookOpen,
-  Lightbulb,
-  Award,
   User,
   Bot,
   X,
+  Wallet,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useWallet } from "../../context/WalletContext";
+import { useNavigate } from "react-router-dom";
+import { useWallet } from "../../hooks/useWallet";
 import { useAuth } from "@/context/AuthContext";
 import { truncateAddress } from "../../utils/helpers";
-import ConnectWalletButton from "./ui/connect-wallet-button";
 import auroraLogo from "../../assets/auroraLogo.jpg";
 
 const Header = ({ onMenuClick }) => {
-  const { address } = useWallet();
-  const { user, logout, isAuthenticated, isLoadingUser } = useAuth();
+  const { 
+    address, 
+    walletType, 
+    isConnecting, 
+    error, 
+    handleConnect, 
+    handleDisconnect,
+    WALLET_TYPES
+  } = useWallet();
+  const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const searchRef = useRef(null);
 
-  const [notifications, setNotifications] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [showFiltered, setShowFiltered] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const unreadCount = notifications.filter((n) => !n.isRead).length;
+  const [showWalletModal, setShowWalletModal] = useState(false);
 
   const learningOptions = [
     "grammar",
@@ -79,7 +80,7 @@ const Header = ({ onMenuClick }) => {
 
     if (path) {
       navigate(path);
-      setIsMobileMenuOpen(false); // Cierra el menú móvil después de navegar
+      setIsMobileMenuOpen(false);
     } else console.warn("❗Ruta inválida desde Header:", key);
   };
 
@@ -103,11 +104,6 @@ const Header = ({ onMenuClick }) => {
     }
   };
 
-  const markAllAsRead = () => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
-  };
-
-  // Cierra el dropdown cuando se hace clic fuera de él
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -119,7 +115,6 @@ const Header = ({ onMenuClick }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Previene el scroll cuando el menú móvil está abierto
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -132,18 +127,50 @@ const Header = ({ onMenuClick }) => {
     };
   }, [isMobileMenuOpen]);
 
-  // Manejador del botón hamburguesa
   const handleMenuToggle = (event) => {
     if (onMenuClick && typeof onMenuClick === "function") {
       onMenuClick(event);
     }
   };
 
+  const handleWalletConnect = (walletType) => {
+    handleConnect(walletType);
+    setShowWalletModal(false);
+  };
+
+  const renderWalletButton = () => {
+    if (address) {
+      return (
+        <button
+          onClick={handleDisconnect}
+          className="text-sm font-medium text-gray-700 hover:text-gray-900 hover:border-transparent"
+        >
+          <LogOut size={16} className="inline mr-1" />
+          Disconnect
+        </button>
+      );
+    }
+    return (
+      <button
+        onClick={() => setShowWalletModal(true)}
+        disabled={isConnecting}
+        className="text-sm font-medium text-white bg-[#00b8d4] px-3 py-1.5 xl:px-4 xl:py-2 rounded hover:bg-[#00a5bd] transition-colors hover:border-transparent"
+      >
+        <LogIn size={16} className="inline mr-1" />
+        {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+      </button>
+    );
+  };
+
   return (
     <>
       <header className="border-b border-[#e5e7eb] sticky top-0 bg-white z-50">
+        {error && (
+          <div className="bg-red-100 text-red-800 p-2 text-center text-sm">
+            {error}
+          </div>
+        )}
         <div className="container mx-auto px-2 sm:px-4 flex items-center justify-between h-16">
-          {/* Botón hamburguesa (izquierda) - Visible en móvil y tablet */}
           <button
             className="p-2 rounded-full hover:bg-gray-100 mr-4 items-center hover:border-transparent"
             onClick={handleMenuToggle}
@@ -152,7 +179,6 @@ const Header = ({ onMenuClick }) => {
             <Bot size={24} />
           </button>
 
-          {/* Logo - Ajustado para responsive */}
           <div
             onClick={() => navigate("/")}
             className="flex items-center cursor-pointer"
@@ -166,12 +192,9 @@ const Header = ({ onMenuClick }) => {
             </div>
           </div>
 
-          {/* Espacio flexible para centrar el logo en móvil/tablet */}
           <div className="flex-1 lg:hidden"></div>
 
-          {/* Área de botones para dispositivos móviles y tablet pequeño */}
           <div className="flex items-center space-x-2 lg:hidden">
-            {/* Buscador móvil (solo icono) */}
             <button
               className="p-2 rounded-full hover:bg-gray-100"
               onClick={() => setIsOpen(!isOpen)}
@@ -180,7 +203,6 @@ const Header = ({ onMenuClick }) => {
               <Search size={20} />
             </button>
 
-            {/* Botón para menú de usuario/app */}
             <button
               className="p-2 rounded-full hover:bg-gray-100"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -190,7 +212,6 @@ const Header = ({ onMenuClick }) => {
             </button>
           </div>
 
-          {/* Navegación para tablet grande y desktop */}
           <nav className="hidden lg:flex items-center space-x-4 xl:space-x-8">
             {[
               "Skills",
@@ -210,7 +231,6 @@ const Header = ({ onMenuClick }) => {
             ))}
           </nav>
 
-          {/* Buscador (tablet grande y desktop) */}
           <div className="hidden lg:flex relative w-48 xl:w-64" ref={searchRef}>
             <div className="relative w-full">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -225,7 +245,6 @@ const Header = ({ onMenuClick }) => {
               />
             </div>
 
-            {/* Resultados de búsqueda */}
             {showFiltered && filteredOptions.length > 0 && (
               <div className="absolute top-full left-0 mt-1 w-full bg-white shadow-lg rounded-md z-50 max-h-60 overflow-y-auto">
                 {filteredOptions.map((option) => (
@@ -241,7 +260,6 @@ const Header = ({ onMenuClick }) => {
             )}
           </div>
 
-          {/* Botones de autenticación (tablet grande y desktop) */}
           <div className="hidden lg:flex items-center space-x-4">
             {isAuthenticated ? (
               <div className="flex items-center space-x-2 xl:space-x-4">
@@ -276,12 +294,18 @@ const Header = ({ onMenuClick }) => {
                 >
                   Sign up
                 </button>
+                {renderWalletButton()}
+                {address && (
+                  <div className="text-xs text-gray-500">
+                    {walletType && <span className="capitalize">{walletType}</span>}
+                    <span className="ml-1">{truncateAddress(address)}</span>
+                  </div>
+                )}
               </>
             )}
           </div>
         </div>
 
-        {/* Panel de búsqueda expandible */}
         {isOpen && (
           <div
             className="lg:hidden p-4 bg-white border-t border-gray-200 transition-all duration-300"
@@ -306,7 +330,6 @@ const Header = ({ onMenuClick }) => {
                 <X size={18} className="text-gray-400" />
               </button>
             </div>
-            {/* Resultados de búsqueda */}
             {showFiltered && filteredOptions.length > 0 && (
               <div className="mt-2 bg-white rounded-md z-50 max-h-40 overflow-y-auto">
                 {filteredOptions.map((option) => (
@@ -324,7 +347,6 @@ const Header = ({ onMenuClick }) => {
         )}
       </header>
 
-      {/* Menú móvil y tablet */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 bg-white z-50 pt-16 overflow-y-auto lg:hidden">
           <div className="p-4">
@@ -392,8 +414,93 @@ const Header = ({ onMenuClick }) => {
                   >
                     Sign up
                   </button>
+                  <button
+                    onClick={() => {
+                      handleConnect();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    disabled={isConnecting}
+                    className="w-full text-md font-medium text-white bg-[#00b8d4] py-3 rounded-md hover:bg-[#00a5bd] transition-colors"
+                  >
+                    <LogIn size={20} className="inline mr-2" />
+                    {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+                  </button>
+                  
+                  {address && (
+                    <div className="text-sm text-gray-500 mt-2 p-2 bg-gray-50 rounded">
+                      <div className="font-medium">Wallet Connected</div>
+                      <div>
+                        {walletType && <span className="capitalize">{walletType}</span>}
+                        <span className="ml-1">{truncateAddress(address)}</span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          handleDisconnect();
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="mt-2 text-red-600 text-sm"
+                      >
+                        Disconnect Wallet
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showWalletModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-medium">Connect Wallet</h3>
+              <button 
+                onClick={() => setShowWalletModal(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="space-y-3">
+              <button
+                onClick={() => handleWalletConnect(WALLET_TYPES.FREIGHTER)}
+                className="w-full flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <Wallet size={20} className="mr-3 text-blue-500" />
+                <div className="text-left">
+                  <div className="font-medium">Freighter</div>
+                  <div className="text-xs text-gray-500">Browser Extension</div>
+                </div>
+              </button>
+              
+              <button
+                onClick={() => handleWalletConnect(WALLET_TYPES.RABBIT)}
+                className="w-full flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <Wallet size={20} className="mr-3 text-purple-500" />
+                <div className="text-left">
+                  <div className="font-medium">Rabbit</div>
+                  <div className="text-xs text-gray-500">Browser Extension</div>
+                </div>
+              </button>
+              
+              <button
+                onClick={() => handleWalletConnect(WALLET_TYPES.LOBSTR)}
+                className="w-full flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <Wallet size={20} className="mr-3 text-green-500" />
+                <div className="text-left">
+                  <div className="font-medium">Lobstr</div>
+                  <div className="text-xs text-gray-500">Mobile Wallet</div>
+                </div>
+              </button>
+            </div>
+            
+            <div className="mt-4 text-xs text-gray-500 text-center">
+              Make sure you have one of these wallets installed
             </div>
           </div>
         </div>
