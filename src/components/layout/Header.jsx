@@ -1,14 +1,27 @@
 "use client";
 
-import { LogIn, LogOut, User } from "lucide-react"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { useWallet } from "../../context/WalletContext"
-import { useAuth } from "@/context/AuthContext"
-import { truncateAddress } from "../../utils/helpers"
-import ConnectWalletButton from "./ui/connect-wallet-button"
-import auroraBrain from "../../assets/auroraLogo.jpg"
-import { ThemeToggle } from "../ui/ThemeToggle"
+import {
+  Bell,
+  Menu,
+  Search,
+  Settings,
+  LogIn,
+  LogOut,
+  BookOpen,
+  Lightbulb,
+  Award,
+  User,
+  Bot,
+  X,
+} from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useWallet } from "../../context/WalletContext";
+import { useAuth } from "@/context/AuthContext";
+import { truncateAddress } from "../../utils/helpers";
+import ConnectWalletButton from "./ui/connect-wallet-button";
+import auroraLogo from "../../assets/auroraLogo.jpg";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const Header = ({ onMenuClick }) => {
   const { address } = useWallet()
@@ -33,7 +46,7 @@ const Header = ({ onMenuClick }) => {
 
   return (
     <>
-      <header className="border-b border-[#e5e7eb] sticky top-0 bg-white z-50">
+      <header className="border-b border-[#e5e7eb] sticky top-0 bg-white dark:bg-black z-50">
         <div className="container mx-auto px-2 sm:px-4 flex items-center justify-between h-16">
           {/* Botón hamburguesa (izquierda) - Visible en móvil y tablet */}
           <button
@@ -83,7 +96,7 @@ const Header = ({ onMenuClick }) => {
           </div>
 
           {/* Navegación para tablet grande y desktop */}
-          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-8">
+          <nav className="hidden lg:flex items-center  space-x-4 xl:space-x-8">
             {[
               "Skills",
               "Grammar",
@@ -95,12 +108,83 @@ const Header = ({ onMenuClick }) => {
               <button
                 key={item}
                 onClick={() => handleNavClick(item)}
-                className="text-xs  font-medium text-gray-700 py-2 border-radius-none border-transparent hover:border-transparent hover:border-radius-none hover:border-b-[#00b8d4]  hover:rounded-none hover:text-[#00b8d4] focus:outline-none transition-colors duration-200"
+                className="text-xs  font-medium text-gray-700 dark:text-white py-2  border-radius-none border-transparent hover:border-transparent hover:border-radius-none hover:border-b-[#00b8d4]  hover:rounded-none hover:text-[#00b8d4] focus:outline-none transition-colors duration-200"
               >
                 {item}
               </button>
             ))}
           </nav>
+
+          {/* Buscador (tablet grande y desktop) */}
+          <div className="hidden lg:flex relative w-48 xl:w-64" ref={searchRef}>
+            <div className="relative w-full">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Search size={18} className="text-gray-400" />
+              </div>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                placeholder="Buscar contenido..."
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2"
+              />
+            </div>
+
+            {/* Resultados de búsqueda */}
+            {showFiltered && filteredOptions.length > 0 && (
+              <div className="absolute top-full left-0 mt-1 w-full bg-white shadow-lg rounded-md z-50 max-h-60 overflow-y-auto">
+                {filteredOptions.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => handleSearchOptionClick(option)}
+                    className="text-left block w-full px-4 py-2 text-sm hover:bg-gray-100"
+                  >
+                    {option.charAt(0).toUpperCase() + option.slice(1)}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Botones de autenticación (tablet grande y desktop) */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-2 xl:space-x-4">
+                <button
+                  onClick={() => setShowProfileMenu(!showProfileMenu)}
+                  className="flex items-center space-x-2"
+                >
+                  <User size={16} />
+                  <span className="text-sm font-medium truncate max-w-[80px] xl:max-w-[150px] dark:text-white">
+                    {user?.username || truncateAddress(address)}
+                  </span>
+                </button>
+                <button
+                  onClick={logout}
+                  className="flex items-center space-x-1 text-sm font-medium text-gray-700 dark:text-white hover:text-gray-900"
+                >
+                  <LogOut size={16} />
+                  <span className="hidden xl:inline">Cerrar sesión</span>
+                </button>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={() => navigate("/login")}
+                  className="text-sm font-medium text-gray-700 dark:text-white hover:text-gray-900 hover:border-transparent"
+                >
+                  Log in
+                </button>
+                <button
+                  onClick={() => navigate("/signup")}
+                  className="text-sm font-medium text-white dark:text-white bg-[#00b8d4] px-3 py-1.5 xl:px-4 xl:py-2 rounded hover:bg-[#00a5bd] transition-colors hover:border-transparent"
+                >
+                  Sign up
+                </button>
+              </>
+            )}
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Panel de búsqueda expandible */}

@@ -37,7 +37,7 @@ const CallToActionPage = () => {
           Practice your English language skills with our AI-powered learning
           platform
         </p>
-        <div className="lg:max-w-[1024px] py-[48px] gap-[24px] lg:grid-cols-4  grid md:grid-cols-2  items-center justify-center">
+        <div className="w-full max-w-[300px] sm:max-w-[640px] md:max-w-[768px] dark:text-gray-500 lg:max-w-[1024px] py-6 md:py-[48px] gap-6 md:gap-[24px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-center justify-items-center">
           {skillContent.map((values, i) => {
             return <SkillCards {...values} key={i} />;
           })}
