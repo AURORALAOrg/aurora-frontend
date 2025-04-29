@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -21,7 +22,7 @@ import { useAuth } from "@/context/AuthContext";
 import { truncateAddress } from "../../utils/helpers";
 import ConnectWalletButton from "./ui/connect-wallet-button";
 import auroraLogo from "../../assets/auroraLogo.jpg";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+
 
 const Header = ({ onMenuClick }) => {
   const { address } = useWallet()
