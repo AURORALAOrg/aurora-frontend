@@ -34,36 +34,42 @@ export const whyBusinessEnglish = [
 
 export const businessEnglishCourses = [
   {
+    id:1,
     icon: <Mail className="text-[#00b8d4] h-[25px] w-[25px]" />,
     title: "Business Communication Essentials",
     content: `Master emails, meetings, presentations, and phone calls in professional settings`,
     type: "Beginner to Intermediate",
   },
   {
+    id:2,
     icon: <Mail className="text-[#00b8d4] h-[25px] w-[25px]" />,
     title: "Negotiation & Persuasion",
     content: `Develop skills to negotiate contracts, close deals, and persuade stakeholders effectively.`,
     type: "Intermediate to Advanced",
   },
   {
+    id:3,
     icon: <DollarSign className="text-[#00b8d4] h-[25px] w-[25px]" />,
     title: "Financial English",
     content: `Learn specialized vocabulary and communication patterns for banking, investing, and accounting.`,
     type: "Intermediate",
   },
   {
+    id:4,
     icon: <Users className="text-[#00b8d4] h-[25px] w-[25px]" />,
     title: "Leadership Communication",
     content: `Enhance your ability to inspire teams, deliver impactful speeches, and communicate vision.`,
     type: "Advanced",
   },
   {
+    id:5,
     icon: <Signal className="text-[#00b8d4] h-[25px] w-[25px]" />,
     title: "Marketing & Sales English",
     content: `Learn to craft compelling pitches, marketing copy, and customer-facing communications.`,
     type: "Intermediate",
   },
   {
+    id:6,
     icon: <Globe className="text-[#00b8d4] h-[25px] w-[25px]" />,
     title: "Cross-Cultural Business Communication",
     content: `Navigate cultural differences in international business settings with confidence`,

@@ -13,12 +13,11 @@ import ResponsiveCard from "@/components/common/ResponsiveCard";
 import { SectionCard } from "@/components/common/SectionCard";
 import { Button } from "@/components/ui/button";
 import { successStories } from "@/data/mock-data-community";
+import { Link } from "react-router-dom";
 
 import React from "react";
 
 const BusinessEnglishPage = () => {
-  console.log(successStories);
-  console.log();
   return (
     <div className="min-h-screen bg-gray-50 justify-center flex">
       <div className="flex w-full h-full flex-col overflow-y-scroll justify-center items-center">
@@ -58,11 +57,16 @@ const BusinessEnglishPage = () => {
 
         <SectionCard className="bg-[#111827]">
           <p className="text-white font-bold text-2xl  lg:text-4xl  lg:max-w-[700px] text-center">
-          Our Business English Courses
+            Our Business English Courses
           </p>
           <ResponsiveCard className="grid grid-cols-1  lg:grid-cols-2">
-            {businessEnglishCourses.map((course, i) => (
-              <BusinessEnglishCourseCard course={course} key={i} />
+            {businessEnglishCourses.map((course) => (
+              <Link
+                to={`/learning/business-english/:${course.id}`}
+                key={course.id}
+              >
+                <BusinessEnglishCourseCard course={course} />
+              </Link>
             ))}
           </ResponsiveCard>
         </SectionCard>
