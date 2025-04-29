@@ -62,7 +62,7 @@ const BusinessEnglishPage = () => {
           <ResponsiveCard className="grid grid-cols-1  lg:grid-cols-2">
             {businessEnglishCourses.map((course) => (
               <Link
-                to={`/learning/business-english/:${course.id}`}
+                to={`/learning/business-english/${course.id}`}
                 key={course.id}
               >
                 <BusinessEnglishCourseCard course={course} />
