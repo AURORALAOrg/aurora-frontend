@@ -71,7 +71,7 @@ const BusinessEnglishPage = () => {
           </ResponsiveCard>
         </SectionCard>
 
-        {/* Business English Skills section */}
+        {/* Business English Skills section unnecessary */}
 
         <SectionCard className="bg-[#1F2937]">
           <p className="text-white font-bold text-2xl  lg:text-4xl  lg:max-w-[700px] text-center">
@@ -86,11 +86,11 @@ const BusinessEnglishPage = () => {
 
         <SectionCard className="bg-[#111827]">
           <p className="text-white font-bold text-2xl  lg:text-4xl  lg:max-w-[700px] text-center">
-            Accesses Your Business English Level
+            Assess Your Business English Level
           </p>
           <p className="text-white lg:max-w-[700px] text-center">
-            Take our comprehensive Assessment to identify your strengths and
-            ares for improvement. Our all will create a personalize learning
+            Take our comprehensive Assessment to identify your strengths and 
+            areas for improvement. Our AI will create a personalized learning 
             path based on your results.
           </p>
           <Button className="bg-[#22d3ee] hover:bg-[#00b8d4]">
