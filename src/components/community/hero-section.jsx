@@ -1,9 +1,15 @@
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/context/ThemeContext"; // Import useTheme
 
 export const HeroSection = () => {
+  const { theme } = useTheme(); // Access the current theme
+
+  const backgroundStyles =
+    theme === "dark" ? "bg-black text-white" : "bg-white text-black"; // Dynamic background and text color
+
   return (
-    <div className="text-white">
-      <div className="container px-4 py-12 mx-auto">
+    <div className={`py-12 ${backgroundStyles}`}>
+      <div className="container px-4 mx-auto">
         <div className="flex flex-col items-center text-center">
           <h1 className="mb-4 text-4xl font-bold">AI Learning Community</h1>
           <p className="max-w-2xl mb-8 text-xl">
@@ -17,9 +23,7 @@ export const HeroSection = () => {
             >
               Start Practicing
             </Button>
-            <Button  variant="clear">
-              Explore Tools
-            </Button>
+            <Button variant="clear">Explore Tools</Button>
           </div>
         </div>
       </div>

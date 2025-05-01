@@ -2,15 +2,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { successStories } from "@/data/mock-data-community";
+import { useTheme } from "@/context/ThemeContext";
+
 export const SuccessStories = () => {
+  const { theme } = useTheme(); 
+
+  const textColor = theme === "dark" ? "text-white" : "text-black";
   return (
-    <div className="bg-background py-12">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-2">Success Stories with Aurora AI</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover how Aurora AI is transforming the way people learn English with real stories from students who have
-            significantly improved.
+    <div className="py-12 text-white">
+      <div className="container px-4 mx-auto">
+        <div className="mb-10 text-center">
+          <h2 className={`mb-2 text-3xl font-bold ${textColor}`}>
+            Success Stories with Aurora AI
+          </h2>
+          <p className={`max-w-2xl mx-auto ${textColor}`}>
+            Discover how Aurora AI is transforming the way people learn English
+            with real stories from students who have significantly improved.
           </p>
         </div>
 

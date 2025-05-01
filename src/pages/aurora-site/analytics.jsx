@@ -1,3 +1,4 @@
+import { useTheme } from "../../context/ThemeContext"; 
 import {
   Award,
   BarChart2,
@@ -14,18 +15,25 @@ import {
 } from "lucide-react";
 
 // Reused components from the original analytics file
-const StatCard = ({ title, value, icon: Icon, color }) => (
-  <div className={`p-4 rounded-lg ${color} text-white`}>
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-sm opacity-80">{title}</p>
-        <h3 className="text-2xl font-bold mt-1">{value}</h3>
-      </div>
-      <Icon className="w-6 h-6" />
-    </div>
-  </div>
-);
+const StatCard = ({ title, value, icon: Icon, color }) => {
+  const { theme } = useTheme(); // Access theme
+  const backgroundStyles =
+    theme === "dark"
+      ? "bg-[#1F2937] text-white" // Dark mode styles
+      : `${color} text-white`; // Use color in light mode
 
+  return (
+    <div className={`p-4 rounded-lg shadow-md ${backgroundStyles}`}>
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm opacity-80">{title}</p>
+          <h3 className="text-2xl font-bold mt-1">{value}</h3>
+        </div>
+        <Icon className="w-6 h-6" />
+      </div>
+    </div>
+  );
+};
 const SimpleLineChart = ({ data }) => {
   const maxValue = Math.max(...data.map((d) => d.value));
   const points = data.map((d, i) => ({
@@ -48,40 +56,52 @@ const SimpleLineChart = ({ data }) => {
   );
 };
 
-const ProgressBar = ({ value, label }) => (
-  <div className="mt-2">
-    <div className="flex justify-between text-sm text-gray-600 mb-1">
-      <span>{label}</span>
-      <span>{value}%</span>
-    </div>
-    <div className="h-2 bg-gray-200 rounded-full">
-      <div
-        className="h-full bg-blue-500 rounded-full"
-        style={{ width: `${value}%` }}
-      />
-    </div>
-  </div>
-);
+const ProgressBar = ({ value, label }) => {
+  const { theme } = useTheme(); // Access theme
+  const textColor = theme === "dark" ? "text-gray-300" : "text-gray-600"; // Dynamic text color
 
-const CourseCard = ({ title, description, slides, imageSrc }) => (
-  <div className="p-4 bg-white rounded-lg border flex items-start gap-4">
-    {/* Image */}
-    {imageSrc && (
-      <img
-        src={imageSrc}
-        alt={`${title} Image`}
-        className="w-16 h-20 rounded object-cover"
-      />
-    )}
-    <div className="flex-1">
-      <h3 className="font-medium text-gray-900">{title}</h3>
-      <p className="text-sm text-gray-500 mt-1">{description}</p>
-      <p className="text-sm text-gray-500 mt-2">{slides} Slides</p>
+  return (
+    <div className="mt-2">
+      <div className={`flex justify-between text-sm mb-1 ${textColor}`}>
+        <span>{label}</span>
+        <span>{value}%</span>
+      </div>
+      <div className="h-2 bg-gray-200 rounded-full">
+        <div
+          className="h-full bg-blue-500 rounded-full"
+          style={{ width: `${value}%` }}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-// Updated Sidebar component from the first file
+const CourseCard = ({ title, description, slides, imageSrc }) => {
+  const { theme } = useTheme(); 
+  const darkModeStyles =
+    theme === "dark"
+      ? "bg-[#1F2937] text-white border-gray-700"
+      : "bg-white text-gray-900 border-gray-200";
+
+  return (
+    <div className={`p-4 rounded-lg border flex items-start gap-4 ${darkModeStyles}`}>
+      {imageSrc && (
+        <img
+          src={imageSrc}
+          alt={`${title} Image`}
+          className="w-16 h-20 rounded object-cover"
+        />
+      )}
+      <div className="flex-1">
+        <h3 className="font-medium">{title}</h3>
+        <p className="text-sm mt-1">{description}</p>
+        <p className="text-sm mt-2">{slides} Slides</p>
+      </div>
+    </div>
+  );
+};
+
+
 const Sidebar = () => {
   const topNavItems = [
     {
@@ -179,14 +199,22 @@ const Sidebar = () => {
 };
 
 // Header component
-const Header = () => (
-  <header className="bg-white border-b p-4">
-    <div className="flex justify-between items-center">
-      <Menu className="w-6 h-6 text-gray-500" />
-      <LogOut className="w-6 h-6 text-gray-500" />
-    </div>
-  </header>
-);
+const Header = () => {
+  const { theme } = useTheme(); 
+  const darkModeStyles =
+    theme === "dark"
+      ? "bg-[#1F2937] text-white border-gray-700"
+      : "bg-white text-gray-900 border-gray-200";
+
+  return (
+    <header className={`p-4 border-b ${darkModeStyles}`}>
+      <div className="flex justify-between items-center">
+        <Menu className="w-6 h-6" />
+        <LogOut className="w-6 h-6" />
+      </div>
+    </header>
+  );
+};
 
 // Analytics Content
 const performanceData = [
@@ -200,6 +228,12 @@ const performanceData = [
 ];
 
 const AnalyticsContent = () => {
+  const { theme } = useTheme(); 
+  const darkModeStyles =
+    theme === "dark"
+      ? "bg-[#1F2937] text-white border-gray-700"
+      : "bg-white text-gray-900 border-gray-200";
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-3 gap-4">
@@ -209,7 +243,12 @@ const AnalyticsContent = () => {
           icon={FileText}
           color="bg-blue-500"
         />
-        <StatCard title="NFTs" value="2" icon={Image} color="bg-green-500" />
+        <StatCard
+         title="NFTs" 
+         value="2" 
+         icon={Image} 
+         color="bg-purple-500" 
+         />
         <StatCard
           title="Total learning time"
           value="40"
@@ -219,7 +258,7 @@ const AnalyticsContent = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white p-4 rounded-lg border">
+        <div className={`p-4 rounded-lg ${darkModeStyles}`}>
           <h2 className="font-medium mb-4">Progress</h2>
           <div className="flex justify-center">
             <div className="relative w-32 h-32">
@@ -255,18 +294,18 @@ const AnalyticsContent = () => {
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg border">
+        <div className={`p-4 rounded-lg ${darkModeStyles}`}>
           <h2 className="font-medium mb-4">Monthly performance</h2>
           <SimpleLineChart data={performanceData} />
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded-lg border">
+      <div className={`p-4  rounded-lg ${darkModeStyles}`}>
         <div className="flex justify-between items-center mb-4">
           <h2 className="font-medium">Latest results</h2>
           <button className="text-gray-100 bg-blue-600 text-sm">See all</button>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-4 ">
           <ProgressBar label="Unit 5 - Parts of the computer" value={50} />
           <ProgressBar label="Unit 2 - Parts of the computer" value={80} />
           <ProgressBar label="Unit 1 - Parts of the computer" value={50} />
@@ -305,8 +344,12 @@ const AnalyticsContent = () => {
 
 // Main Layout
 const MainLayout = ({ children }) => {
+  const { theme } = useTheme(); // Access theme
+  const darkModeStyles =
+    theme === "dark" ? "bg-[#111827] text-white" : "bg-gray-50 text-gray-900";
+
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className={`flex h-screen ${darkModeStyles}`}>
       <Sidebar />
       <div className="flex flex-col flex-1">
         <Header />

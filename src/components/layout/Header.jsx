@@ -22,13 +22,38 @@ import { useAuth } from "@/context/AuthContext";
 import { truncateAddress } from "../../utils/helpers";
 import ConnectWalletButton from "./ui/connect-wallet-button";
 import auroraLogo from "../../assets/auroraLogo.jpg";
-
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { useTheme } from "@/context/ThemeContext";
 
 const Header = ({ onMenuClick }) => {
-  const { address } = useWallet()
-  const { user, logout, isAuthenticated, isLoadingUser } = useAuth()
-  const navigate = useNavigate()
-  const [showProfileMenu, setShowProfileMenu] = useState(false)
+  const { theme } = useTheme();
+  const { address } = useWallet();
+  const { user, logout, isAuthenticated, isLoadingUser } = useAuth();
+  const navigate = useNavigate();
+  const searchRef = useRef(null);
+
+  const [notifications, setNotifications] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [showFiltered, setShowFiltered] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
+
+  const learningOptions = [
+    "grammar",
+    "vocabulary",
+    "speaking",
+    "listening",
+    "reading",
+    "games",
+    "courses",
+    "practice",
+    "challenges",
+    "achievements",
+  ];
 
   const routeMap = {
     skills: "/skills",
@@ -127,7 +152,11 @@ const Header = ({ onMenuClick }) => {
                 value={searchQuery}
                 onChange={handleSearchChange}
                 placeholder="Buscar contenido..."
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2"
+                className={`${
+                  theme === "dark"
+                    ? "bg-black text-white placeholder-gray-400 border-gray-600 focus:ring-blue-500 focus:border-blue-500"
+                    : "bg-gray-50 text-gray-900 placeholder-gray-500 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                } text-sm rounded-lg block w-full pl-10 p-2 border-2`}
               />
             </div>
 
@@ -203,7 +232,11 @@ const Header = ({ onMenuClick }) => {
                 value={searchQuery}
                 onChange={handleSearchChange}
                 placeholder="Buscar contenido..."
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2"
+                className={`${
+                  theme === "dark"
+                    ? "bg-black text-white placeholder-gray-400 border-gray-600 focus:ring-blue-500 focus:border-blue-500"
+                    : "bg-gray-50 text-gray-900 placeholder-gray-500 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                } text-sm rounded-lg block w-full pl-10 p-2`}
                 autoFocus
               />
               <button

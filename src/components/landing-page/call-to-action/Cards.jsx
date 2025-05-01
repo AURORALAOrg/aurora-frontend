@@ -1,41 +1,55 @@
 import React, { memo } from "react";
 import { Quote } from "lucide-react";
+import { useTheme } from "../../../context/ThemeContext"; 
 
-// Memoize components to prevent unnecessary re-renders
-export const SkillCards = memo(function SkillCards({ icons, tag, content }) {
+/* eslint-disable react/prop-types */
+export function SkillCards({ icons, tag, content }) {
+  const { theme } = useTheme(); 
+  const darkModeStyles =
+    theme === "dark"
+      ? "bg-[#111827] text-white hover:bg-[#0F172A] hover:shadow-xl hover:border-[#00B8D4] border border-transparent"
+      : "bg-white text-[#09090B]";
+
   return (
-    <div className="bg-white rounded-[8px] w-full lg:w-[238px] h-[172px] p-4 flex-col flex shadow-sm items-center justify-center">
-      {icons}
-
-      <strong className="font-bold  text-[#09090B] text-lg">{tag}</strong>
-      <p className="text-center  w-full flex flex-col font-normal text-lg lg:text-sm text-muted-foreground">
+    <div
+      className={`rounded-[8px] w-full h-auto min-h-[172px] p-4 sm:p-5 flex-col flex shadow-sm items-center justify-center transition-all duration-300 ${darkModeStyles}`}
+    >
+      <div className="mb-2 flex items-center justify-center">{icons}</div>
+      <strong className="font-bold text-base sm:text-lg text-center mt-1">
+        {tag}
+      </strong>
+      <p className="text-center w-full flex flex-col font-normal text-sm sm:text-base lg:text-sm mt-1">
         {content}
       </p>
     </div>
   );
 });
 
-export const CoursesCard = memo(function CoursesCard({ icons, tag, content }) {
+export function CoursesCard({ icons, tag, content }) {
+  const { theme } = useTheme(); 
+  const darkModeStyles =
+    theme === "dark"
+      ? "bg-[#1F2937] text-white hover:bg-[#111827] hover:shadow-xl hover:border-[#00B8D4] border border-transparent"
+      : "bg-[#FFFFFF] text-[#09090B]";
+
   return (
-    <article className="flex-col flex w-full h-auto min-h-[148px] p-4 sm:p-[24px] bg-[#FFFFFF] rounded-[8px] border-none shadow-sm mx-auto transition-all duration-300 hover:shadow-lg hover:-translate-y-2 border border-transparent hover:border-[#22D3EE] hover:bg-cyan-50 cursor-default">
-      <div className="flex flex-row gap-3 sm:gap-4 mb-4">
-        <div className="flex-shrink-0" aria-hidden="true">{icons}</div>
+    <div
+      className={`flex-col flex w-full lg:w-[434px] h-[148px] p-[24px] rounded-[8px] transition-all duration-300 ${darkModeStyles}`}
+    >
+      <div className="flex flex-row gap-4">
+        {icons}
         <div className="flex flex-col">
-          <h3 className="text-[#09090B] font-bold text-base sm:text-lg lg:text-base group-hover:text-[#22D3EE] transition-colors duration-300">
-            {tag}
-          </h3>
-          <p className="text-[#71717A] font-normal text-sm lg:text-sm mt-1 group-hover:text-[#111827] transition-colors duration-300">
-            {content}
-          </p>
+          <p className="capitalize font-bold text-xl lg:text-base">{tag}</p>
+          <p className="font-normal text-sm lg:text-sm mt-1">{content}</p>
         </div>
       </div>
       <button
         type="button"
-        className="bg-[#00B8D4] hover:bg-[#00a5c0] transition-colors text-[#FAFAFA] text-sm rounded-[6px] border-none px-4 py-2 mt-auto self-start w-full"
+        className="bg-[#00B8D4] hover:bg-[#00a5c0] w-full transition-colors text-[#FAFAFA] text-sm rounded-[6px] border-none px-4 py-2 mt-auto self-start"
       >
         Start Learning
       </button>
-    </article>
+    </div>
   );
 });
 
@@ -74,13 +88,17 @@ export const CTACard = memo(function CTACard({ children, styles }) {
   );
 });
 
-export const WhatOurUsersSay = memo(function WhatOurUsersSay({
-  name,
-  tag,
-  content,
-}) {
+export function WhatOurUsersSay({ name, tag, content }) {
+  const { theme } = useTheme(); 
+  const darkModeStyles =
+    theme === "dark"
+      ? "bg-[#111827] text-white hover:bg-[#0F172A] hover:shadow-xl hover:border-[#00B8D4] border border-transparent"
+      : "bg-[#FFFFFF] text-[#09090B]";
+
   return (
-    <article className="flex-col flex w-full h-auto min-h-[228px] p-4 sm:p-[24px] bg-[#FFFFFF] rounded-[8px] border-none shadow-sm mx-auto transition-all duration-300 hover:shadow-lg hover:-translate-y-2 border border-transparent hover:border-[#00B8D4] hover:bg-gray-50 cursor-default">
+    <div
+      className={`flex-col flex w-full sm:max-w-[320px] md:max-w-[360px] lg:w-[320px] h-auto min-h-[228px] p-4 sm:p-[24px] rounded-[8px] shadow-sm mx-auto transition-all duration-300 ${darkModeStyles}`}
+    >
       <div className="flex flex-row gap-3 sm:gap-4 w-full mb-4">
         <div
           className="w-[40px] h-[40px] flex-shrink-0 rounded-full bg-[#00B8D41A]/10 flex items-center justify-center"
@@ -89,13 +107,11 @@ export const WhatOurUsersSay = memo(function WhatOurUsersSay({
           <Quote className="text-[#00B8D4] w-5 h-5" />
         </div>
         <div className="flex flex-col w-full">
-          <h3 className="text-[#111827] font-semibold text-base group-hover:text-[#00B8D4] transition-colors duration-300">{name}</h3>
-          <p className="text-[#71717A] font-normal text-sm group-hover:text-[#111827] transition-colors duration-300">{tag}</p>
+          <p className="font-semibold text-base">{name}</p>
+          <p className="font-normal text-sm">{tag}</p>
         </div>
       </div>
-      <p className="text-[#4B5563] font-normal text-sm sm:text-base w-full group-hover:text-[#111827] transition-colors duration-300">
-        {content}
-      </p>
-    </article>
+      <p className="font-normal text-sm sm:text-base w-full">{content}</p>
+    </div>
   );
-});
+}

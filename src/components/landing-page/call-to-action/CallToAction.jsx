@@ -1,13 +1,25 @@
-import React from 'react';
-import HeroSection from '../hero-section';
-import SkillSection from '../skill-section';
-import CoursesSection from '../courses-section';
-import WhyChooseAurora from '../why-choose-aurora';
-import TestimonialsSection from '../testimonials-section';
-import CTASection from '../cta-section';
-import { skillContent } from './Content';
+import { useTheme } from "../../../context/ThemeContext";
+import { useState } from "react";
+import {
+  CoursesCard,
+  SkillCards,
+  WhatOurUsersSay,
+} from "./Cards";
+import {
+  courses,
+  skillContent,
+  whatOurUsersSay,
+} from "./Content";
+import "./responsive.css";
+import WhyChooseAurora from "../why-choose-aurora";
 
-const CallToActionPage = () => {
+function CallToActionPage() {
+  const [selectedLevel, setSelectedLevel] = useState("Beginner");
+  const { theme } = useTheme(); // Access the current theme
+
+  // Dark mode styles for cards
+  const darkModeCardStyles = theme === "dark" ? "bg-[#374151] text-white hover:bg-gray-700" : "";
+  
   return (
     <div className="flex w-full h-full flex-col overflow-y-scroll ">
       <div className="w-full flex-col justify-center gap-4 flex h-[582px] bg-[#030712] p-[3%]">
