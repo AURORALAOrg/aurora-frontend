@@ -112,120 +112,10 @@ const CourseCard = ({ title, description, slides, imageSrc, microBadge }) => (
   </div>
 );
 
-// Updated Sidebar component with dark theme
-const Sidebar = () => {
-  const topNavItems = [
-    {
-      icon: <BookOpen className="w-5 h-5" />,
-      label: "Learning content",
-      active: false,
-      subItems: [
-        { icon: <Folder className="w-5 h-5" />, label: "Categories", active: false },
-        {
-          icon: <Award className="w-5 h-5" />,
-          label: "Certifications Obtained",
-          active: false,
-        },
-      ],
-    },
-    { icon: <BarChart2 className="w-5 h-5" />, label: "Analytics", active: true },
-    { icon: <Users className="w-5 h-5" />, label: "People", active: false },
-  ];
-
-  return (
-    <div className="w-64 min-h-screen bg-[#0d1117] border-r border-gray-800">
-      <div className="p-4 flex flex-col h-full">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
-                stroke="#00b8d4"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <div>
-            <h2 className="font-medium text-white">Diego Duarte</h2>
-            <p className="text-sm text-gray-400">Student</p>
-          </div>
-        </div>
-
-        <nav className="flex flex-col gap-1 flex-1">
-          {topNavItems.map((item, index) => (
-            <div key={index} className="flex flex-col gap-1">
-              <button
-                className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors ${
-                  item.active
-                    ? "bg-gray-800 text-[#00b8d4]"
-                    : "text-gray-400 hover:bg-gray-800"
-                }`}
-                onClick={() => console.log(`Clicked ${item.label}`)}
-              >
-                {item.icon}
-                <span className="text-sm font-medium">{item.label}</span>
-              </button>
-              {item.subItems && (
-                <div>
-                  {item.subItems.map((subItem, subIndex) => (
-                    <button
-                      key={subIndex}
-                      className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors ml-2 ${
-                        subItem.active
-                          ? "bg-gray-800 text-[#00b8d4]"
-                          : "text-gray-400 hover:bg-gray-800"
-                      }`}
-                      onClick={() => console.log(`Clicked ${subItem.label}`)}
-                    >
-                      {subItem.icon}
-                      <span className="text-sm font-medium">
-                        {subItem.label}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
-
-        <div className="mt-auto space-y-3">
-          <button
-            className="flex items-center gap-3 px-4 py-2.5 w-full text-white bg-gradient-to-r from-[#00b8d4] to-[#0891b2] rounded-lg hover:opacity-90 transition-all shadow-md"
-            onClick={() => console.log('Opening Aurora chat')}
-          >
-            <MessageSquare className="w-5 h-5" />
-            <span className="text-sm font-medium">Talk with Aurora</span>
-          </button>
-
-          <button
-            className="flex items-center gap-3 px-3 py-2 w-full text-left text-gray-400 hover:bg-gray-800 rounded-lg transition-colors"
-            onClick={() => console.log("Clicked Settings")}
-          >
-            <Settings className="w-5 h-5" />
-            <span className="text-sm font-medium">Settings</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 // Updated dark-themed header component
 const Header = () => (
-  <header className="bg-[#0d1117] border-b border-gray-800 p-4">
-    <div className="flex justify-between items-center">
-      <Menu className="w-6 h-6 text-gray-400 cursor-pointer hover:text-white" />
-      <LogOut className="w-6 h-6 text-gray-400 cursor-pointer hover:text-white" />
-    </div>
+  <header>
   </header>
 );
 
@@ -372,7 +262,6 @@ const AnalyticsContent = () => {
 const MainLayout = ({ children }) => {
   return (
     <div className="flex h-screen bg-[#0d1117] text-white">
-      <Sidebar />
       <div className="flex flex-col flex-1">
         <Header />
         <main className="flex-1 overflow-auto">{children}</main>
