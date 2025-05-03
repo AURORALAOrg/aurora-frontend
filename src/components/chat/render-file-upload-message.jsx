@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import CustomAudioPlayer from "./custom-audio-player";
-import { FileIcon } from "lucide-react";
+import { FileIcon, AudioWaveformIcon } from "lucide-react";
 
 export default function RenderFileUploadMessage({ message }) {
   if (!message?.fileType) {
@@ -13,7 +13,7 @@ export default function RenderFileUploadMessage({ message }) {
   const fileExtension = message?.fileName?.split(".")?.pop() || "";
 
   return (
-    <div className="relative flex flex-wrap items-start gap-3 p-3 mb-2 text-white bg-[#2b6cb0] rounded-lg">
+    <div className="relative flex flex-wrap items-start gap-3 w-full">
       {isImage ? (
         <div className="flex min-w-full">
           <img
@@ -23,24 +23,24 @@ export default function RenderFileUploadMessage({ message }) {
           />
         </div>
       ) : isAudio ? (
-        <div className="relative flex items-center justify-center w-12 h-12 mb-auto text-2xl rounded-md bg-white/50">
-          🎵
+        <div className="relative flex items-center justify-center w-12 h-12 mb-auto rounded-md bg-dark-blue-1/50">
+          <AudioWaveformIcon className="w-5 h-5 text-light-blue-2" />
           <CustomAudioPlayer src={message.content} />
         </div>
       ) : isPDF ? (
-        <div className="flex items-center justify-center w-12 h-12 rounded-md bg-white/50">
-          <FileIcon className="w-5 h-5 text-blue-600" />
+        <div className="flex items-center justify-center w-12 h-12 rounded-md bg-dark-blue-1/50">
+          <FileIcon className="w-5 h-5 text-light-blue-2" />
         </div>
       ) : (
-        <div className="flex items-center justify-center w-12 h-12 rounded-md bg-white/50">
-          ❓
+        <div className="flex items-center justify-center w-12 h-12 rounded-md bg-dark-blue-1/50">
+          <FileIcon className="w-5 h-5 text-light-blue-2" />
         </div>
       )}
       <div className="flex-1">
         <p className="w-full text-xs font-semibold break-all line-clamp-2">
           {message?.fileName}
         </p>
-        <p className="self-start text-xs text-gray-300">
+        <p className="self-start text-xs text-neutral-5 mt-1">
           {fileExtension.toUpperCase()} •{" "}
           {(message?.fileSize / 1024).toFixed(1)} KB
         </p>

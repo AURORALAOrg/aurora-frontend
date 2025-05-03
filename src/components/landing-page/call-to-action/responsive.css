@@ -1,0 +1,210 @@
+/* Cross-browser compatibility styles for the landing page */
+
+/* Ensure proper box sizing across browsers */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Fix overflow scrolling for mobile browsers */
+html, body {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+}
+
+/* CTA buttons custom styling */
+.cta-button {
+  display: inline-block;
+  width: 160px;
+  text-align: center;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ensure that both CTA buttons are identical */
+.cta-button:first-child {
+  margin-right: 8px;
+}
+
+.cta-button:last-child {
+  margin-left: 8px;
+}
+
+/* Improved mobile layout */
+@media screen and (max-width: 639px) {
+  .grid {
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  button {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  
+  /* Ensure proper text alignment on mobile */
+  .text-center {
+    text-align: center !important;
+  }
+  
+  .text-left {
+    text-align: left !important;
+  }
+  
+  /* Hero section specific styles for mobile */
+  .w-full.flex-col.justify-center.gap-4.flex.min-h-\[450px\] p {
+    text-align: left !important;
+    width: 100% !important;
+  }
+}
+
+/* Smoothen transitions for better appearance across browsers */
+button {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+/* Fix for Firefox button styling */
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* Ensure consistent appearance of border radius */
+.rounded-6px, 
+.rounded-8px {
+  border-radius: 6px;
+}
+
+/* Fix for IE flex issues */
+.flex {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-col {
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+/* Ensure proper grid rendering in older browsers */
+@supports not (display: grid) {
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .grid > * {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .sm-grid-cols-2 > * {
+      width: calc(50% - 1rem);
+      margin-right: 1rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .md-grid-cols-2 > * {
+      width: calc(50% - 1rem);
+      margin-right: 1rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .lg-grid-cols-3 > * {
+      width: calc(33.333% - 1rem);
+      margin-right: 1rem;
+    }
+    
+    .lg-grid-cols-4 > * {
+      width: calc(25% - 1rem);
+      margin-right: 1rem;
+    }
+  }
+}
+
+/* Fix for Safari input styling */
+input, 
+button, 
+textarea, 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Optimize touch areas for mobile */
+button, 
+a {
+  min-height: 36px;
+  min-width: 36px;
+}
+
+/* Fix text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure consistent shadows across browsers */
+.shadow-sm {
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* biome-ignore lint/correctness/noUnknownMediaFeatureName: <explanation> */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Ensure proper tap highlighting on mobile */
+a, button {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+} 
+
+/* Center grid items on all screens */
+.justify-items-center > * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Fix width and centering for mobile devices */
+@media screen and (max-width: 639px) {
+  .mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  [class*="max-w-"] {
+    width: 100%;
+    max-width: 300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}

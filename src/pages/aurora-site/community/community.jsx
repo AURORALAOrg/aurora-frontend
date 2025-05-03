@@ -6,8 +6,8 @@ import { CallToAction } from "@/components/community/call-to-action"
 
 const CommunityPage = () => {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="bg-[#3b82f6] text-white">
+    <div className="min-h-screen bg-dark-blue-6">
+      <div className="text-white bg-dark-blue-5">
         <HeroSection />
         <StatsBar />
       </div>

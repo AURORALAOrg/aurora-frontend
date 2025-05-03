@@ -36,7 +36,7 @@ export const popularDiscussions = [
     id: 1,
     title: "How to use Aurora AI to improve my pronunciation?",
     author: "Maria G.",
-    authorAvatar: "/placeholder.svg?height=40&width=40",
+    authorAvatar: "/bot.webp?height=40&width=40",
     language: "English",
     replies: 24,
     likes: 36,
@@ -46,7 +46,7 @@ export const popularDiscussions = [
     id: 2,
     title: "Tips for practicing technical vocabulary with AI",
     author: "Carlos M.",
-    authorAvatar: "/placeholder.svg?height=40&width=40",
+    authorAvatar: "/avatar1.webp?height=40&width=40",
     language: "English",
     replies: 18,
     likes: 42,
@@ -56,13 +56,13 @@ export const popularDiscussions = [
     id: 3,
     title: "How to configure Aurora for my specific level?",
     author: "Ana L.",
-    authorAvatar: "/placeholder.svg?height=40&width=40",
+    authorAvatar: "/avatar3.webp?height=40&width=40",
     language: "General",
     replies: 56,
     likes: 89,
     timeAgo: "1 week ago",
   },
-]
+];
 
 export const studyGroups = [
   {
@@ -189,7 +189,7 @@ export const successStories = [
     id: 1,
     name: "Laura M.",
     location: "Spain",
-    avatar: "/placeholder.svg?height=80&width=80",
+    avatar: "/avatar1.webp?height=80&width=80",
     testimonial:
       "Thanks to daily conversations with Aurora AI, I overcame my fear of speaking English. In just 3 months, my fluency improved remarkably.",
   },
@@ -197,7 +197,7 @@ export const successStories = [
     id: 2,
     name: "Thomas K.",
     location: "Germany",
-    avatar: "/placeholder.svg?height=80&width=80",
+    avatar: "/avatar2.webp?height=80&width=80",
     testimonial:
       "Aurora's pronunciation analysis detected patterns that no teacher had noticed before. My accent improved dramatically.",
   },
@@ -205,8 +205,9 @@ export const successStories = [
     id: 3,
     name: "Mei L.",
     location: "China",
-    avatar: "/placeholder.svg?height=80&width=80",
-    testimonial: "Aurora's personalized study plans helped me prepare for my TOEFL exam. I scored 110!",
+    avatar: "/avatar3.webp?height=80&width=80",
+    testimonial:
+      "Aurora's personalized study plans helped me prepare for my TOEFL exam. I scored 110!",
   },
-]
+];
 

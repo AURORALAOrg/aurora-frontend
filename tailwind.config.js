@@ -14,7 +14,7 @@ module.exports = {
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           dark: "#D97706",
-          lightgray:"#D1D5DB",
+          lightgray: "#D1D5DB",
           foreground: "hsl(var(--secondary-foreground))",
         },
         tertiary: {
@@ -52,6 +52,29 @@ module.exports = {
           3: "hsl(var(--chart-3))",
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
+        },
+        green: "#34d399",
+        ["light-blue"]: {
+          1: "#00b8d4",
+          2: "#22d3ee",
+          3: "#ced2d8",
+          4: "#164253",
+        },
+        ["dark-blue"]: {
+          1: "#1f2937",
+          2: "#030712",
+          3: "#111827",
+          4: "#374151",
+          5: "#192332",
+          6: "#0f1521",
+        },
+        neutral: {
+          1: "#FFFFFF",
+          2: "#e6f8fb",
+          3: "#707079",
+          4: "#4a5462",
+          5: "#9096a0",
+          6: "#737373",
         },
       },
       borderRadius: {

@@ -5,7 +5,6 @@ import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import TestimonialsPage from "@/components/landing-page/testimonials/TestimonialsPage";
 
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -15,7 +14,7 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full overflow-hidden bg-gray-50">
+    <div className="flex w-full min-h-screen overflow-hidden bg-gray-50">
       {/* Sidebar */}
       <Sidebar
         isOpen={isSidebarOpen}
@@ -30,7 +29,7 @@ const MainLayout = () => {
 
         {/* Main Content */}
         <main
-          className={`flex-1 p-4 sm:p-6 overflow-y-auto transition-all duration-300 ease-in-out ${
+          className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out ${
             isSidebarOpen ? "lg:ml-64" : ""
           }`}
         >

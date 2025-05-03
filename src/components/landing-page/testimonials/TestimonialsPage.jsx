@@ -3,10 +3,10 @@ import TestimonialsSection from '@/pages/aurora-site/home/Testimonial';
 
 const TestimonialsPage = () => {
   return (
-    <div className="testimonials-page">
+    <section className="testimonials-page" aria-label="Testimonials Page">
       <h1 className="text-3xl font-bold mb-6">Testimonials</h1>
       <TestimonialsSection />
-    </div>
+    </section>
   );
 };
 

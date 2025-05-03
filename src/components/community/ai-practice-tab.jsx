@@ -1,8 +1,13 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardFooter, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { aiPracticeTools, aiFeatures } from "@/data/mock-data-community"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+  CardContent,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { aiPracticeTools, aiFeatures } from "@/data/mock-data-community";
 import {
   TrendingUp,
   Clock,
@@ -13,128 +18,197 @@ import {
   Bot,
   Laptop,
   Brain,
-  Sparkles,
   Zap,
-} from "lucide-react"
+  FileText,
+} from "lucide-react";
 
 export const AIPracticeTab = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 gap-8 text-white lg:grid-cols-3">
       <div className="lg:col-span-2">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold">Aurora AI Practice Tools</h2>
-          <Button variant="link" className="text-[#3b82f6]">
-            View all <ChevronRight className="h-4 w-4" />
+          <Button
+            variant="link"
+            className="text-light-blue-1 hover:border-transparent"
+          >
+            View all <ChevronRight className="w-4 h-4" />
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {aiPracticeTools.map((tool) => (
-            <Card key={tool.id} className="hover:shadow-md transition-shadow">
+            <Card
+              key={tool.id}
+              className="flex flex-col text-white transition-shadow hover:shadow-md bg-dark-blue-5 border-neutral-4"
+            >
               <CardHeader className="pb-2">
-                <div className="flex justify-between">
+                <div className="flex flex-col justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="bg-blue-50 p-2 rounded-full">
+                    <div
+                      className={`flex items-center justify-center rounded-lg bg-[#114d60] text-light-blue-1 size-10 aspect-square`}
+                    >
                       {/* Dynamically render the icon based on the tool.icon string */}
-                      {tool.icon === "Bot" && <Bot className="h-6 w-6 text-blue-500" />}
-                      {tool.icon === "Mic" && <Mic className="h-6 w-6 text-purple-500" />}
-                      {tool.icon === "PenTool" && <PenTool className="h-6 w-6 text-green-500" />}
-                      {tool.icon === "Laptop" && <Laptop className="h-6 w-6 text-amber-500" />}
+                      {tool.icon === "Bot" && <Bot className=" size-5" />}
+                      {tool.icon === "Mic" && <Mic className="size-5" />}
+                      {tool.icon === "PenTool" && (
+                        <PenTool className="size-5" />
+                      )}
+                      {tool.icon === "Laptop" && <Laptop className="size-5" />}
                     </div>
-                    <CardTitle>{tool.name}</CardTitle>
+                    <div className="flex flex-col gap-1">
+                      <CardTitle>{tool.name}</CardTitle>
+                      <Badge
+                        variant="outline"
+                        className="p-2 py-0.5 border-none rounded pointer-events-none w-fit text-neutral-2/80 bg-neutral-4"
+                      >
+                        {tool.level}
+                      </Badge>
+                    </div>
                   </div>
-                  <Badge variant="outline" className="bg-blue-50">
-                    {tool.level}
-                  </Badge>
                 </div>
               </CardHeader>
               <CardContent className="py-2">
-                <p className="text-gray-600 mb-3">{tool.description}</p>
-                <div className="flex flex-wrap gap-2 text-sm text-gray-500">
+                <p className="mb-3 text-sm text-neutral-1/50">
+                  {tool.description}
+                </p>
+                <div className="flex flex-wrap gap-2 text-sm text-neutral-1/50">
                   <div className="flex items-center">
-                    <TrendingUp className="h-4 w-4 mr-1" />
+                    <TrendingUp className="w-4 h-4 mr-1" />
                     {tool.popularity}% popularity
                   </div>
                   <div className="flex items-center">
-                    <Clock className="h-4 w-4 mr-1" />
+                    <Clock className="w-4 h-4 mr-1" />
                     {tool.lastUsed}
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="pt-2">
-                <Button className="w-full bg-[#3b82f6]">Start Practice</Button>
+              <CardFooter className="pt-2 mt-auto">
+                <Button
+                  variant="clear"
+                  className="w-full border border-transparent bg-light-blue-1 hover:bg-transparent"
+                >
+                  Start Practice
+                </Button>
               </CardFooter>
             </Card>
           ))}
         </div>
 
         <div className="mt-8">
-          <Button className="w-full bg-[#3b82f6]">Explore More Tools</Button>
+          <Button
+            variant="clear"
+            className="w-full border border-transparent bg-light-blue-1 hover:bg-transparent"
+          >
+            Explore More Tools
+          </Button>
         </div>
       </div>
 
       <div>
-        <Card>
+        <Card className="text-white bg-dark-blue-5 border-neutral-4">
           <CardHeader>
             <CardTitle>Aurora AI Capabilities</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {aiFeatures.map((feature, index) => (
               <div key={index} className="flex items-start gap-3">
-                <div className="bg-blue-50 p-2 rounded-full">
+                <span
+                  className={`flex items-center justify-center rounded-lg bg-[#114d60] size-10 aspect-square ${
+                    feature.icon === "Mic"
+                      ? "bg-[#164253]"
+                      : feature.icon === "Brain"
+                      ? "bg-[#312e59]"
+                      : feature.icon === "Sparkles"
+                      ? "bg-[#194143]"
+                      : feature.icon === "Zap"
+                      ? "bg-[#473c2a]"
+                      : ""
+                  }`}
+                >
                   {/* Dynamically render the icon based on the feature.icon string */}
-                  {feature.icon === "Mic" && <Mic className="h-5 w-5 text-blue-600" />}
-                  {feature.icon === "Brain" && <Brain className="h-5 w-5 text-purple-600" />}
-                  {feature.icon === "Sparkles" && <Sparkles className="h-5 w-5 text-green-600" />}
-                  {feature.icon === "Zap" && <Zap className="h-5 w-5 text-amber-600" />}
-                </div>
+                  {feature.icon === "Mic" && (
+                    <Mic className="size-5 text-light-blue-1" />
+                  )}
+                  {feature.icon === "Brain" && (
+                    <Brain className="text-purple-600 size-5" />
+                  )}
+                  {feature.icon === "Sparkles" && (
+                    <FileText className="text-[#12a979] size-5" />
+                  )}
+                  {feature.icon === "Zap" && (
+                    <Zap className="size-5 text-amber-600" />
+                  )}
+                </span>
                 <div>
-                  <h4 className="font-medium">{feature.name}</h4>
-                  <p className="text-sm text-gray-500">{feature.description}</p>
+                  <h4 className="text-sm font-medium">{feature.name}</h4>
+                  <p className="text-xs text-neutral-1/50">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             ))}
           </CardContent>
           <CardFooter>
-            <Button variant="outline" className="w-full">
+            <Button variant="clear" className="w-full border-none">
               View All Capabilities
             </Button>
           </CardFooter>
         </Card>
 
-        <Card className="mt-6">
+        <Card className="mt-6 text-white bg-dark-blue-5 border-neutral-4">
           <CardHeader>
             <CardTitle>Your Recent Activity</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="bg-blue-100 p-2 rounded-full">
-                  <MessageSquare className="h-4 w-4 text-blue-600" />
-                </div>
+                <span
+                  className={
+                    "flex items-center justify-center rounded-lg bg-light-blue-4 size-10 aspect-square"
+                  }
+                >
+                  <MessageSquare className="size-4 text-light-blue-1" />
+                </span>
                 <div>
-                  <h4 className="font-medium">Travel conversation</h4>
-                  <p className="text-xs text-gray-500">2 hours ago • 15 minutes</p>
+                  <h4 className="text-sm font-medium">Travel conversation</h4>
+                  <p className="text-xs text-neutral-1/50">
+                    2 hours ago • 15 minutes
+                  </p>
                 </div>
               </div>
-              <Separator />
+
               <div className="flex items-center gap-3">
-                <div className="bg-purple-100 p-2 rounded-full">
-                  <Mic className="h-4 w-4 text-purple-600" />
-                </div>
+                <span
+                  className={
+                    "flex items-center justify-center rounded-lg bg-[#312e59] size-10 aspect-square"
+                  }
+                >
+                  <Mic className="text-purple-600 size-4" />
+                </span>
                 <div>
-                  <h4 className="font-medium">Pronunciation practice</h4>
-                  <p className="text-xs text-gray-500">Yesterday • 10 minutes</p>
+                  <h4 className="text-sm font-medium">
+                    Pronunciation practice
+                  </h4>
+                  <p className="text-xs text-neutral-1/50">
+                    Yesterday • 10 minutes
+                  </p>
                 </div>
               </div>
-              <Separator />
+
               <div className="flex items-center gap-3">
-                <div className="bg-green-100 p-2 rounded-full">
-                  <PenTool className="h-4 w-4 text-green-600" />
-                </div>
+                <span
+                  className={
+                    "flex items-center justify-center rounded-lg bg-[#194143] size-10 aspect-square"
+                  }
+                >
+                  <PenTool className="text-sm text-[#10ae7b] size-4" />
+                </span>
                 <div>
                   <h4 className="font-medium">Writing correction</h4>
-                  <p className="text-xs text-gray-500">2 days ago • 20 minutes</p>
+                  <p className="text-xs text-neutral-1/50">
+                    2 days ago • 20 minutes
+                  </p>
                 </div>
               </div>
             </div>
@@ -142,6 +216,5 @@ export const AIPracticeTab = () => {
         </Card>
       </div>
     </div>
-  )
-}
-
+  );
+};

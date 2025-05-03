@@ -11,7 +11,7 @@ const Avatar = forwardRef(({ className, ...props }, ref) => (
 Avatar.displayName = "Avatar"
 
 const AvatarImage = forwardRef(({ className, ...props }, ref) => (
-  <img ref={ref} className={cn("aspect-square h-full w-full", className)} {...props} />
+  <img ref={ref} className={cn("aspect-square object-cover h-full w-full", className)} {...props} />
 ))
 AvatarImage.displayName = "AvatarImage"
 

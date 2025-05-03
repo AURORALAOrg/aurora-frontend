@@ -1,5 +1,3 @@
-
-
 "use client"
 
 import { useState } from "react"
@@ -60,106 +58,103 @@ const Footer = ({ customClass = "" }) => {
   }
 
   return (
-    <footer className={`bg-gray-900 text-white font-sans text-base px-10 ${customClass}`}>
-      {/* Main footer content with responsive padding */}
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-12 py-8">
+    <footer className={`bg-gray-900 text-white font-sans text-base ${customClass}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Top Section with Logo and Newsletter */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-2 border-b border-gray-700 pb-12 px-4">
-        
-        {/* Column: About Aurora */}
-        <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 border-b border-gray-700 pb-8">
+          {/* Column: About Aurora */}
+          <div className="space-y-4">
             <h3
               className="text-lg font-semibold cursor-pointer md:cursor-default" 
               onClick={() => toggleAccordion("acerca")}
             >
               About Aurora
             </h3>
-            <ul className={`${accordionOpen.acerca ? "block" : "hidden"} md:block mt-2 space-y-2`}> {/* 🍊 Lista plegable en móvil */}
+            <ul className={`${accordionOpen.acerca ? "block" : "hidden"} md:block space-y-2`}>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   About US
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   Our Team
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   Careers
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   Contact
                 </a>
               </li>
             </ul>
-        </div>
+          </div>
 
-        {/* Column: Resources */}
-        <div>
+          {/* Column: Resources */}
+          <div className="space-y-4">
             <h3
               className="text-lg font-semibold cursor-pointer md:cursor-default" 
               onClick={() => toggleAccordion("recursos")}
             >
               Resources
             </h3>
-            <ul className={`${accordionOpen.recursos ? "block" : "hidden"} md:block mt-2 space-y-2`}>
+            <ul className={`${accordionOpen.recursos ? "block" : "hidden"} md:block space-y-2`}>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   Guides
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   FAQ
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   Support
                 </a>
               </li>
             </ul>
-        </div>
+          </div>
 
-        {/* Column: Legal */}
-        <div>
+          {/* Column: Legal */}
+          <div className="space-y-4">
             <h3
               className="text-lg font-semibold cursor-pointer md:cursor-default"
               onClick={() => toggleAccordion("legal")}
             >
               Legal
             </h3>
-            <ul className={`${accordionOpen.legal ? "block" : "hidden"} md:block mt-2 space-y-2`}>
+            <ul className={`${accordionOpen.legal ? "block" : "hidden"} md:block space-y-2`}>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   Terms of Service
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm">
+                <a href="#" className="text-gray-400 hover:text-white no-underline text-sm block py-1">
                   Cookie Policy
                 </a>
               </li>
             </ul>
-        </div>
+          </div>
 
-        {/* Column: Subscribe */}
-         <div>
+          {/* Column: Subscribe */}
+          <div className="space-y-4">
             <h3
               className="text-lg font-semibold cursor-pointer md:cursor-default" 
               onClick={() => toggleAccordion("subscribe")}
@@ -168,64 +163,56 @@ const Footer = ({ customClass = "" }) => {
             </h3>
             <form
               onSubmit={handleSubscribe}
-              className={`${accordionOpen.subscribe ? "block" : "hidden"} md:block mt-2`}
+              className={`${accordionOpen.subscribe ? "block" : "hidden"} md:block space-y-4`}
             >
-              <h6 className="text-gray-400 text-xs py-2">Stay update with our latest news and offers</h6>
-              <div className="flex gap-4">
+              <p className="text-gray-400 text-sm">Stay updated with our latest news and offers</p>
+              <div className="flex flex-wrap xl:flex-nowrap flex-col sm:flex-row gap-2">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="flex-1 px-2 py-2 rounded-md text-gray-800 text-sm bg-gray-800/60"
+                  className="flex-1 px-4 py-2 rounded-md text-gray-800 text-sm bg-gray-800/60 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
-                
                 <button
                   type="submit"
-                  className="bg-blue-400 hover:bg-gray-600 px-2 py-2 rounded-md flex items-center text-sm">
-                  <span>Subscribe</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                >
+                  Subscribe
                 </button>
               </div>
             </form>
 
-          <div className="mt-8 flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-4">
-            <a href="#" aria-label="Facebook" className="text-gray-400 hover:text-white no-underline">
-              <Facebook className="w-5 h-5" />
-            </a>
-            <a href="#" aria-label="Twitter" className="text-gray-400 hover:text-white no-underline">
-              <Twitter className="w-5 h-5" />
-            </a>
-            <a href="#" aria-label="Instagram" className="text-gray-400 hover:text-white no-underline">
-              <Instagram className="w-5 h-5" />
-            </a>
-            <a href="#" aria-label="LinkedIn" className="text-gray-400 hover:text-white no-underline">
-              <Linkedin className="w-5 h-5" />
-            </a>
+            <div className="flex items-center space-x-4 mt-4">
+              <a href="#" aria-label="Facebook" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a href="#" aria-label="Twitter" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="#" aria-label="Instagram" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" aria-label="LinkedIn" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Linkedin className="w-5 h-5" />
+              </a>
             </div>
           </div>
-         </div> 
-        {/* Column: Final Subscribe */}
-
-       
         </div>
 
         {/* Lower section: logo and copyright */}
-        <div className="mt-8 flex flex-col md:flex-row items-center justify-between">
-          <div className="flex items-center mt-4 md:mt-0">
-            <div className="bg-white p-1">
-            <img src={auroraBrain} alt="Aurora Logo" className="w-10 h-10" />
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center">
+            <div className="bg-white p-1 rounded">
+              <img src={auroraBrain} alt="Aurora Logo" className="w-10 h-10" />
             </div>
-            {/* <span className="ml-2 font-bold text-xl">AURORA</span> */}
           </div>
-          <p className="mt-4 md:mt-0 text-sm text-gray-400">
+          <p className="text-sm text-gray-400 text-center sm:text-right">
             © {new Date().getFullYear()} AURORA Language Assistant. All rights reserved.
           </p>
         </div>
-
-        </div>
+      </div>
     </footer>
   )
 }
