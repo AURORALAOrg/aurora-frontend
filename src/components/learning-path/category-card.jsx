@@ -1,8 +1,8 @@
 const CategoryCard = ({ title, modules, color, icon, imageSrc }) => {
     return (
       <div className={`${color} rounded-xl overflow-hidden h-48 transition-transform hover:scale-105 cursor-pointer relative`}>
-        <div className="p-6 h-full flex flex-col justify-between">
-          <div className="flex items-center gap-3">
+        <div className="p-6 h-full">
+          <div className=" items-center gap-3">
             <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
               <div className="text-white">
                 {icon}

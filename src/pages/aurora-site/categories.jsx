@@ -1,10 +1,13 @@
 import React from 'react';
-import { BookOpen, BarChart2, Users, Settings, Folder, Award, MessageSquare, Bell, Search, MessagesSquare, Layout, Mic, Gamepad2 } from 'lucide-react';
+import {
+  BookOpen, BarChart2, Users, Settings, Folder, Award, MessageSquare, Bell,
+  Search, MessagesSquare, Layout, Mic, Gamepad2
+} from 'lucide-react';
 
 const Sidebar = () => {
   const topNavItems = [
-    { 
-      icon: <BookOpen className="w-5 h-5" />, 
+    {
+      icon: <BookOpen className="w-5 h-5" />,
       label: 'Learning content',
       subItems: [
         { icon: <Folder className="w-5 h-5" />, label: 'Categories' },
@@ -21,8 +24,9 @@ const Sidebar = () => {
         {/* Profile Section */}
         <div className="flex items-center gap-3 mb-8">
           <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z" stroke="#71717A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
+                stroke="#71717A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <div>
@@ -60,7 +64,6 @@ const Sidebar = () => {
         </nav>
 
         <div className="mt-auto space-y-3">
-          {/* Talk with Aurora Button */}
           <button
             className="flex items-center gap-3 px-4 py-2.5 w-full text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-sm"
             onClick={() => console.log('Opening Aurora chat')}
@@ -69,7 +72,6 @@ const Sidebar = () => {
             <span className="text-sm font-medium">Talk with Aurora</span>
           </button>
 
-          {/* Settings Button */}
           <button
             className="flex items-center gap-3 px-3 py-2 w-full text-left text-gray-600 hover:bg-blue-50 rounded-lg transition-colors"
             onClick={() => console.log('Clicked Settings')}
@@ -98,7 +100,7 @@ const Header = () => {
           />
         </div>
 
-        <button 
+        <button
           className="relative p-2 text-gray-400 hover:text-gray-500 rounded-full hover:bg-gray-100"
           onClick={() => console.log('Notifications clicked')}
         >
@@ -124,30 +126,22 @@ const MainLayout = ({ children }) => {
   );
 };
 
-const CategoryCard = ({ title, modules, color, icon, imageSrc }) => {
+const CategoryCard = ({ title, modules, color, icon }) => {
   return (
-    <div className={`${color} rounded-xl overflow-hidden h-48 transition-transform hover:scale-105 cursor-pointer relative`}>
+    <div className={`${color} rounded-xl overflow-hidden h-48 transition-transform hover:scale-105 cursor-pointer relative mx-8 mb-8`}>
       <div className="p-6 h-full flex flex-col justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+        <div className="items-center gap-3">
+          <div className="w-10 h-10 bg-[#00b8d4] rounded-lg flex items-center justify-center">
             <div className="text-white">
               {icon}
             </div>
           </div>
-          <h3 className="text-xl font-semibold text-white">{title}</h3>
+          <h3 className="text-xl font-semibold text-white mt-5">{title}</h3>
         </div>
         <div className="mt-auto">
           <p className="text-white/80 text-sm">{modules} Modules</p>
         </div>
       </div>
-      {/* Image */}
-      {imageSrc && (
-        <img
-          src={imageSrc}
-          alt={`${title} Illustration`}
-          className="absolute bottom-2 right-2 w-20 h-35 object-contain pointer-events-none"
-        />
-      )}
     </div>
   );
 };
@@ -157,66 +151,66 @@ const CategoriesPage = () => {
     {
       title: 'Grammar',
       modules: 2,
-      color: 'bg-blue-600',
+      color: 'bg-[#2f3a4b]',
       icon: <BookOpen className="w-6 h-6" />,
       imageSrc: '/src/assets/cat1.png',
     },
     {
       title: 'Listening',
       modules: 2,
-      color: 'bg-blue-600',
+      color: 'bg-[#2f3a4b]',
       icon: <MessagesSquare className="w-6 h-6" />,
       imageSrc: '/src/assets/cat2.png',
     },
     {
       title: 'Speaking',
       modules: 2,
-      color: 'bg-blue-600',
+      color: 'bg-[#2f3a4b]',
       icon: <Mic className="w-6 h-6" />,
       imageSrc: '/src/assets/cat3.png',
     },
     {
       title: 'Interviews',
       modules: 2,
-      color: 'bg-blue-600',
+      color: 'bg-[#2f3a4b]',
       icon: <Users className="w-6 h-6" />,
       imageSrc: '/src/assets/cat1.png',
     },
     {
       title: 'Words',
       modules: 2,
-      color: 'bg-blue-600',
+      color: 'bg-[#2f3a4b]',
       icon: <Layout className="w-6 h-6" />,
       imageSrc: '/src/assets/cat2.png',
     },
     {
       title: 'Games',
       modules: 2,
-      color: 'bg-blue-600',
+      color: 'bg-[#2f3a4b]',
       icon: <Gamepad2 className="w-6 h-6" />,
       imageSrc: '/src/assets/cat3.png',
     },
   ];
 
   return (
-      <div className="space-y-6">
-        <h1 className="text-2xl font-semibold text-gray-900">Categories</h1>
-        <div>
-          <h2 className="text-base text-gray-900 mb-4">{categories.length} Different categories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category, index) => (
-              <CategoryCard
-                key={index}
-                title={category.title}
-                modules={category.modules}
-                color={category.color}
-                icon={category.icon}
-                imageSrc={category.imageSrc} // Pasando la imagen personalizada
-              />
-            ))}
-          </div>
+    <div className="space-y-6 bg-[#111827]">
+      <h1 className="text-2xl font-semibold text-[#ffffff] ml-4">Categories</h1>
+      <div>
+        <h2 className="text-base text-[#ffffff] ml-4 mb-4">{categories.length} Different categories</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categories.map((category, index) => (
+            <CategoryCard
+              key={index}
+              title={category.title}
+              modules={category.modules}
+              color={category.color}
+              icon={category.icon}
+              imageSrc={category.imageSrc}
+            />
+          ))}
         </div>
       </div>
+    </div>
   );
 };
 

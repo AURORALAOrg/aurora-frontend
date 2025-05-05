@@ -106,10 +106,11 @@ const CertificationsObtained = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900 mb-1">Certificates</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 mb-1">Certifications</h1>
         <p className="text-base text-gray-600">{certifications.length} Certifications Obtained</p>
       </div>
 
+      {/* Grid layout for certifications */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {certifications.map((cert, index) => (
           <CertificationCard

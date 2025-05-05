@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import CertificationBanner from "@/components/english-level/english-banner";
 import LearningCard from "@/components/learning-path/learning-card";
@@ -11,26 +11,30 @@ const CertificationContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { title = "Default Title", description = "Default Description" } = location.state || {};
+  const { title = "Default Title", description = "Default Description" } =
+    location.state || {};
 
   const learningModules = [
     {
       title: "Basis of the computer",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       slides: 10,
       tags: ["Basic", "Present"],
       imageUrl: learningModuleImg,
     },
     {
       title: "Software Architecture",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       slides: 10,
       tags: ["Basic", "Present"],
       imageUrl: softwarearquitectureImg,
     },
     {
       title: "Operating Systems",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       slides: 10,
       tags: ["Basic", "Present"],
       imageUrl: operatingsystemsImg,
@@ -39,7 +43,6 @@ const CertificationContent = () => {
 
   return (
     <div className="flex">
-
       {/* Main Content */}
       <div className="flex-1 p-6">
         {/* Banner */}
