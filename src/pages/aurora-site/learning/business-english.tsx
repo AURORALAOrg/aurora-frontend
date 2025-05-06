@@ -96,12 +96,13 @@ const BusinessEnglishPage: React.FC = () => {
             courses designed for career advancement and international business success.
           </p>
           <div className="flex justify-center gap-4 mt-8">
-            <Link to="/learning/business-english/explore" className="bg-blue-400 hover:bg-blue-500 text-white font-medium px-6 py-2 rounded transition duration-300">
-              Explore Courses
-            </Link>
-            <Link to="/assessment/business-english" className="border border-slate-600 hover:border-blue-400 px-6 py-2 rounded transition duration-300">
-              Take Assessment
-            </Link>
+          <a href="#explore" className="bg-blue-400 hover:bg-blue-500 text-white font-medium px-6 py-2 rounded transition duration-300">
+  Explore Courses
+</a>
+<a href="#assessment" className="border border-slate-600 hover:border-blue-400 px-6 py-2 rounded transition duration-300">
+  Take Assessment
+</a>
+
           </div>
         </div>
       </section>

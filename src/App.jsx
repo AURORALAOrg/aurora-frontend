@@ -71,6 +71,9 @@ import GrammarContent from "@/pages/aurora-site/grammar-content";
 // ✨ Question Creator
 import QuestionCreator from "@/components/practices/question-creator/question-creator";
 
+// Demo Page
+import DemoPage from "@/pages/demo/demo-page";
+
 function App() {
   return (
     <Router>
@@ -86,6 +89,7 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/course-listing" element={<CourseListing />} />
+              <Route path="/demo" element={<DemoPage />} />
             </Route>
 
             {/* Protected routes with MainLayout */}
