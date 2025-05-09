@@ -7,13 +7,14 @@ const PracticeDropdown = () => {
 
    const handleNavClick = (key) => {
       const displayToPath = {
-         "Sentence Builder": "/sentence-builder",
-         "Word matching": "/word-matching",
-         "Memory Card": "/memory-card",
+         "Sentence Builder": "/practice/sentence-builder",
+         "Word matching": "/games/word-matching/",
+         "Memory Card": "/games/memory-card",
          "Story Game": "/story-game",
-         "Drag and Drop": "/drag-and-drop",
-         "Idiom Challenge": "/idiom-challenge",
-         "Multiple Choice": "/multiple-choice",
+         "Drag and Drop": "/practice/drag-drop-sentence-builder",
+         "Idiom Challenge": "/practice/idiom-challenge",
+         "Multiple Choice": "/practice/quiz",
+         "Fill in the Blanks":"/practice/fill-in-the-blanks",
       };
       const path = displayToPath[key];
 
@@ -46,7 +47,7 @@ const PracticeDropdown = () => {
          {dropdown && (
             <div className="absolute bg-white top-12 -left-6 w-48 h-52 rounded-md border overflow-y-auto hide-scrollbar transition-all duration-300 z-10">
                <ul className="p-4 flex flex-col justify-start items-start gap-2 overflow-y-auto hide-scrollbar font-medium text-gray-600">
-                  {["Sentence Builder", "Word matching", "Memory Card", "Story Game", "Drag and Drop", "Idiom Challenge", "Multiple Choice"].map((item) => (
+                  {["Sentence Builder", "Word matching", "Memory Card", "Story Game", "Drag and Drop", "Idiom Challenge", "Multiple Choice", "Fill in the Blanks"].map((item) => (
                      <button
                         key={item}
                         onClick={() => handleNavClick(item)}
