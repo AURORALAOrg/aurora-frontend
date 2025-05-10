@@ -155,14 +155,13 @@ function App() {
                 <Route path="/reading" element={<ReadingContent />} />
                 <Route path="/people" element={<CommunityInteractionPage />} />
                 <Route path="/question-creator" element={<QuestionCreator />} />
-                <Route path="/learning/business-english" element={<BusinessEnglishPage />} />
+                 <Route path="/learning/business-english" element={<BusinessEnglishPage />} />
                 <Route path="/learning/business-english/:lessonId" element={<LessonDetail />} />
-
 
               </Route>
             </Route>
 
-            {/* Redirect any unknown routes to login */}
+            {/* Redirect any unknown routes to login / catch-all route */}
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </AuthProvider>
