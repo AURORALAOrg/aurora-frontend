@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { courses } from '../call-to-action/Content';
-import { CoursesCard } from '../call-to-action/Cards';
+import { courses } from '../call-to-action/content';
+import { CoursesCard } from '../call-to-action/cards';
 
 const tabs = [
   'Beginner',

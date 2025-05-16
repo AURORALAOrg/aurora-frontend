@@ -61,9 +61,9 @@ import PracticeSystem from "@/components/practices/funny_practices/DragDropSente
 import IdiomChallenge from "@/components/practices/funny_practices/idiom-challenge";
 import SentenceBuilder from "@/components/practices/funny_practices/SentenceBuilder";
 
-// 🧠 Quizzes
-import FillInTheBlanksQuizPage from "@/pages/aurora-site/quizzes/fill-in-the-blanks-quiz";
-import Quiz from "@/pages/aurora-site/quizzes/quiz";
+//Quizzes
+import FillInTheBlanksQuizPage from "@/components/practices/funny_practices/FillInTheBlanksPage";
+ import Quiz from "@/components/practices/funny_practices/QuizPage";
 
 // 🏛️ Grammar & Language
 import GrammarContent from "@/pages/aurora-site/grammar-content";
@@ -94,60 +94,27 @@ function App() {
 
             {/* Protected routes with MainLayout */}
 
-            <Route element={<ProtectedRoute />}>
+            {/*<Route element={<ProtectedRoute />}>*/}
               <Route element={<MainLayout />}>
                 <Route path="/learning-content" element={<LearningContent />} />
-                <Route
-                  path="/wallet-connection"
-                  element={<WalletConnection />}
-                />
-                <Route
-                  path="/certifications-obtained"
-                  element={<CertificationsObtained />}
-                />
-
+                <Route path="/wallet-connection" element={<WalletConnection />}/>
+                <Route path="/certifications-obtained" element={<CertificationsObtained />}/>
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/aurora-chat" element={<AuroraChat />} />
-                <Route
-                  path="/certification-content"
-                  element={<CertificationContent />}
-                />
+                <Route path="/certification-content"element={<CertificationContent />}/>
                 <Route path="/module-details" element={<ModuleDetails />} />
                 <Route path="/practiceSystem" element={<PracticeSystem />} />
-                <Route
-                  path="/practice/sentence-builder"
-                  element={<SentenceBuilder />}
-                />
-                <Route
-                  path="/practice/idiom-challenge"
-                  element={<IdiomChallenge />}
-                />
-                <Route
-                  path="/games/memory-card/:levelId"
-                  element={<GameBoard />}
-                />
-                <Route path="/quiz" element={<Quiz />} />
-                <Route
-                  path="/fill-in-the-blanks"
-                  element={<FillInTheBlanksQuizPage />}
-                />
+
                 <Route path="/grammar" element={<GrammarContent />} />
                 <Route path="/vocabulary" element={<VocabularyPage />} />
                 <Route path="/speaking" element={<SpeakingPage />} />
                 <Route path="/listening" element={<ListeningPage />} />
                 <Route path="/reading" element={<ReadingContent />} />
-                <Route path="/people" element={<CommunityInteractionPage />} />
+                <Route path="/community" element={<CommunityInteractionPage />} />
                 <Route path="/question-creator" element={<QuestionCreator />} />
-                 <Route path="/learning/business-english" element={<BusinessEnglishPage />} />
-                <Route path="/learning/business-english/:lessonId" element={<LessonDetail />} />
 
-              </Route>
-            </Route>
-
-            {/* Redirect any unknown routes to login / catch-all route */}
-            <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </AuthProvider>
       </ToastContextProvider>

@@ -10,7 +10,7 @@ export const COURSES = [
     level: "Beginner",
     duration: "4 weeks",
     subject: "Speaking",
-    thumbnail: "/placeholder.svg",
+    thumbnail: "/courses/english-travel.png",
     icon: "Brain",
   },
   {
@@ -23,7 +23,7 @@ export const COURSES = [
     level: "Advanced",
     duration: "8 weeks",
     subject: "Business",
-    thumbnail: "/placeholder.svg",
+    thumbnail: "/courses/business-communication.png",
     icon: "BookOpen",
   },
   {
@@ -36,7 +36,7 @@ export const COURSES = [
     level: "Intermediate",
     duration: "5 weeks",
     subject: "Vocabulary",
-    thumbnail: "/placeholder.svg",
+    thumbnail: "/courses/everyday-idioms.png",
     icon: "BookOpen",
   },
   {
@@ -49,7 +49,7 @@ export const COURSES = [
     level: "Intermediate",
     duration: "6 weeks",
     subject: "Writing",
-    thumbnail: "/placeholder.svg",
+    thumbnail: "/courses/creative-storytelling.png",
     icon: "BookOpen",
   },
   {
@@ -62,7 +62,7 @@ export const COURSES = [
     level: "Advanced",
     duration: "8 weeks",
     subject: "Speaking",
-    thumbnail: "/placeholder.svg",
+    thumbnail: "/courses/public-speaking.png",
     icon: "Brain",
   },
   {
@@ -75,7 +75,7 @@ export const COURSES = [
     level: "Advanced",
     duration: "7 weeks",
     subject: "Grammar",
-    thumbnail: "/placeholder.svg",
+    thumbnail: "/courses/grammar-professionals.png",
     icon: "BookOpen",
   },
   {

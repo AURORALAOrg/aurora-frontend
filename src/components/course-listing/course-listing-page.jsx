@@ -5,7 +5,7 @@ import { COURSES } from "@/utils/data";
 import SearchBar from "./search-bar";
 import ActiveFilters from "./active-filters";
 import Pagination from "./pagination";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useDebounce } from "@/hooks/use-debounce";
 import { useCoursesFilter } from "@/hooks/use-courses-filter";
 import CourseFilters from "./course-filter";
 import CourseList from "./course-list";

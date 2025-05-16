@@ -1,6 +1,6 @@
 import React from "react";
-import { whyChooseAuruora } from "../call-to-action/Content";
-import { WhyChooseAuruora as FeatureCard } from "../call-to-action/Cards";
+import { whyChooseAuruora } from "../call-to-action/content";
+import { WhyChooseAuruora as FeatureCard } from "../call-to-action/cards";
 
 const WhyChooseAurora = () => {
   return (

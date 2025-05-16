@@ -22,7 +22,7 @@ import {
   Users,
 } from "lucide-react"
 
-import auroraBrain from "../../assets/auroraLogo.jpg"
+import auroraBrain from "/aurora-logo.png"
 
 const Footer = ({ customClass = "" }) => {
   const [email, setEmail] = useState("")
@@ -202,16 +202,16 @@ const Footer = ({ customClass = "" }) => {
         </div>
 
         {/* Lower section: logo and copyright */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center">
-            <div className="bg-white p-1 rounded">
-              <img src={auroraBrain} alt="Aurora Logo" className="w-10 h-10" />
-            </div>
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center">
+          <div className="p-1 rounded">
+            <img src={auroraBrain} alt="Aurora Logo" className="w-10 h-10" />
           </div>
-          <p className="text-sm text-gray-400 text-center sm:text-right">
-            © {new Date().getFullYear()} AURORA Language Assistant. All rights reserved.
-          </p>
         </div>
+        <p className="text-sm text-gray-400 text-center sm:text-right">
+          © {new Date().getFullYear()} AURORA Language Assistant. All rights reserved.
+        </p>
+      </div>
       </div>
     </footer>
   )

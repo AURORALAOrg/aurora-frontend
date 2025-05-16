@@ -1,9 +1,6 @@
-import React from "react";
+
 import { useLocation } from "react-router-dom";
 import { BookOpen, FilePlus } from "lucide-react";
-
-// import Sidebar from "@/components/layout/sidebar";
-import Sidebar from "@/components/layout/Sidebar";
 
 import certificationBanner from "@/assets/certification_banner.png";
 

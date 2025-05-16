@@ -1,7 +1,5 @@
 
-import React from "react";
-
-import CallToActionPage from "@/components/landing-page/call-to-action/CallToAction";
+import CallToActionPage from "@/components/landing-page/call-to-action/call-to-action";
 
 const HomePage = () => {
   return (
