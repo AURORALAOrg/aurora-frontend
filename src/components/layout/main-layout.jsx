@@ -16,15 +16,15 @@ const MainLayout = () => {
   return (
     <div className="flex w-full min-h-screen overflow-hidden bg-[#0d1117] relative">
       {/* Contenedor exclusivo para sidebar y fondo de sidebar */}
-      <div className="absolute top-0 left-0 bottom-0 w-64 z-40">
+      <div className="absolute top-0 left-0 bottom-0 z-40">
         {isSidebarOpen && (
           <div className="absolute inset-0 bg-[#0d1117]" />
-        )}
-        <Sidebar
+        )} 
+         <Sidebar
           isOpen={isSidebarOpen}
           onClose={toggleSidebar}
           headerHeight="64px"
-        />
+        />        
       </div>
 
       {/* Contenido principal */}

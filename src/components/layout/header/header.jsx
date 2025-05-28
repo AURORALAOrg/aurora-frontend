@@ -8,6 +8,7 @@ import SearchBar from "./search-bar";
 import AuthButtons from "./auth-buttons";
 import MobileTopButtons from "./mobile-top-buttons";
 import { Lightbulb, LineChart, Bell, Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = ({ onMenuClick }) => {
    const header = useHeader(onMenuClick);
@@ -50,15 +51,15 @@ const Header = ({ onMenuClick }) => {
                      </div>
                      <Lightbulb size={16} className="text-yellow-400" />
                   </div>
-                  <button className="p-1 rounded-full hover:bg-[#1f2937]">
+                  <Link to='/analytics' className="p-1 rounded-full hover:bg-[#1f2937]">
                      <LineChart size={20} className="text-gray-300" />
-                  </button>
-                  <button className="p-1 rounded-full hover:bg-[#1f2937]">
+                  </Link>
+                  <Link to='/settings' className="p-1 rounded-full hover:bg-[#1f2937]">
                      <Settings size={20} className="text-gray-300" />
-                  </button>
-                  <button className="p-1 rounded-full hover:bg-[#1f2937]">
+                  </Link>
+                  <Link to="/notifications" className="p-1 rounded-full hover:bg-[#1f2937]">
                      <Bell size={20} className="text-gray-300" />
-                  </button>
+                  </Link>
                   <AuthButtons {...header} />
                </div>
             </div>
