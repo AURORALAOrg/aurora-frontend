@@ -34,6 +34,7 @@ import Notifications from "@/pages/aurora-site/notifications";
 import SettingsPage from "@/pages/aurora-site/settings";
 import WalletConnection from "@/pages/aurora-site/wallet/wallet-connection";
 
+
 // 🌐 Community & Interaction
 import AuroraChat from "@/pages/aurora-site/aurora-chat";
 import CommunityInteractionPage from "@/pages/aurora-site/community/community";
@@ -44,6 +45,7 @@ import Categories from "@/pages/aurora-site/categories";
 
 // 🏠 Main Pages
 import HomePage from "@/pages/aurora-site/home";
+import BusinessEnglishPage from "./pages/learning/business-english";
 
 // 🧩 Games & Challenges
 import StoryGame from "@/pages/games/story-game";
@@ -69,7 +71,6 @@ import GrammarContent from "@/pages/aurora-site/grammar-content";
 
 // ✨ Question Creator
 import QuestionCreator from "@/components/practices/question-creator/question-creator";
-import BusinessEnglishPage from "./pages/learning/business-english";
 
 function App() {
   return (
@@ -85,41 +86,45 @@ function App() {
             {/* Public route */}
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
-              <Route path="/business-english" element={<BusinessEnglishPage/>}/>
+              <Route path="/course-listing" element={<CourseListing />} />
+              <Route path="/learning/business-english" element={<BusinessEnglishPage />}/>
+              <Route path="/learning/business-english/:lessonId" element={<></>}/>
             </Route>
 
             {/* Protected routes with MainLayout */}
-            
+
+            {/*<Route element={<ProtectedRoute />}>*/}
               <Route element={<MainLayout />}>
                 <Route path="/learning-content" element={<LearningContent />} />
-                <Route path="/wallet-connection" element={<WalletConnection />} />
-                <Route path="/certifications-obtained" element={<CertificationsObtained />} />
+                <Route path="/wallet-connection" element={<WalletConnection />}/>
+                <Route path="/certifications-obtained" element={<CertificationsObtained />}/>
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/aurora-chat" element={<AuroraChat />} />
-                <Route path="/certification-content" element={<CertificationContent />} />
+                <Route path="/certification-content"element={<CertificationContent />}/>
                 <Route path="/module-details" element={<ModuleDetails />} />
                 <Route path="/practiceSystem" element={<PracticeSystem />} />
-                <Route path="/practice/sentence-builder" element={<SentenceBuilder />} />
-                <Route path="/practice/idiom-challenge" element={<IdiomChallenge />} />
+                <Route path="/practice/sentence-builder" element={<SentenceBuilder />}/>
+                <Route path="/practice/idiom-challenge" element={<IdiomChallenge />}/>
                 <Route path="/practice/drag-drop-sentence-builder" element={<PracticeSystem />} />
                 <Route path="/notifications" element={<Notifications />} />
-                <Route path="/story-game" element={<StoryGame />} />
+                <Route path="/games/story-game" element={<StoryGame />} />
+                <Route path="/games/word-scramble" element={<WordScramble />} />
                 <Route path="/games/word-matching/" element={<WordMatching />} />
                 <Route path="/games" element={<GamePanel />} />
-                <Route path="/games/memory-card" element={<DifficultySelector />} />
+                <Route path="/games/memory-card" element={<DifficultySelector />}/>
                 <Route path="/games/memory-card/:levelId" element={<GameBoard />} />
                 <Route path="/practice/quiz" element={<Quiz />} />
-                <Route path="/practice/fill-in-the-blanks" element={<FillInTheBlanksQuizPage />} />
+                <Route path="/practice/fill-in-the-blanks"element={<FillInTheBlanksQuizPage />}/>
                 <Route path="/grammar" element={<GrammarContent />} />
                 <Route path="/vocabulary" element={<VocabularyPage />} />
                 <Route path="/speaking" element={<SpeakingPage />} />
                 <Route path="/listening" element={<ListeningPage />} />
                 <Route path="/reading" element={<ReadingContent />} />
-                <Route path="/people" element={<CommunityInteractionPage />} />
+                <Route path="/community" element={<CommunityInteractionPage />} />
                 <Route path="/question-creator" element={<QuestionCreator />} />
-              
+              {/*</Route>*/}
             </Route>
 
             {/* Redirect any unknown routes to login */}
