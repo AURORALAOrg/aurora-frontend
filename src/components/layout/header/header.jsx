@@ -51,13 +51,13 @@ const Header = ({ onMenuClick }) => {
                      </div>
                      <Lightbulb size={16} className="text-yellow-400" />
                   </div>
-                  <Link to='/analytics' className="p-1 rounded-full hover:bg-[#1f2937]">
+                  <Link to='/analytics' className="p-1 rounded-full hover:bg-[#1f2937]" aria-label="View analytics">
                      <LineChart size={20} className="text-gray-300" />
                   </Link>
-                  <Link to='/settings' className="p-1 rounded-full hover:bg-[#1f2937]">
+                  <Link to='/settings' className="p-1 rounded-full hover:bg-[#1f2937]" aria-label="Open settings">
                      <Settings size={20} className="text-gray-300" />
                   </Link>
-                  <Link to="/notifications" className="p-1 rounded-full hover:bg-[#1f2937]">
+                  <Link to="/notifications" className="p-1 rounded-full hover:bg-[#1f2937]" aria-label="View notifications">
                      <Bell size={20} className="text-gray-300" />
                   </Link>
                   <AuthButtons {...header} />
