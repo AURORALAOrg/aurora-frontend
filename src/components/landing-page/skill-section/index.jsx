@@ -1,6 +1,6 @@
 import React from 'react';
-import { skillContent } from '../call-to-action/content';
-import { SkillCards } from '../call-to-action/cards';
+import { skillContent } from '../call-to-action/Content';
+import { SkillCards } from '../call-to-action/Cards';
 
 const SkillSection = () => {
   return (

@@ -2,24 +2,10 @@
 
 import { useState } from "react"
 import {
-  Brain,
-  BookOpen,
-  Mail,
-  Phone,
-  MapPin,
-  Globe,
-  ChevronDown,
   Facebook,
   Twitter,
   Instagram,
   Linkedin,
-  Youtube,
-  ArrowRight,
-  Award,
-  HelpCircle,
-  FileText,
-  Shield,
-  Users,
 } from "lucide-react"
 
 import auroraBrain from "/aurora-logo.png"

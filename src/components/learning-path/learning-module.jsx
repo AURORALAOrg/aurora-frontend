@@ -1,5 +1,5 @@
 import React from 'react';
-import MainLayout from '../components/layout/MainLayout';
+import MainLayout from '../layout/main-layout';
 
 const CertificationCard = ({ title, description, variant = 'blue' }) => {
   return (

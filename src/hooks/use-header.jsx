@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useWallet } from "@/context/WalletContext";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import PracticeDropdown from "@/components/ui/practice-drop-down.jsx";
 
 const useHeader = (onMenuClick) => {
    const { address } = useWallet();
@@ -125,6 +126,7 @@ const useHeader = (onMenuClick) => {
       showFiltered,
       setShowFiltered,
       showProfileMenu,
+      PracticeDropdown,
       setShowProfileMenu,
       isMobileMenuOpen,
       setIsMobileMenuOpen,

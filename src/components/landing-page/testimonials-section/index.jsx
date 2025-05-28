@@ -1,6 +1,6 @@
 import React from 'react';
-import { whatOurUsersSay } from '../call-to-action/content';
-import { WhatOurUsersSay } from '../call-to-action/cards';
+import { whatOurUsersSay } from '../call-to-action/Content';
+import { WhatOurUsersSay } from '../call-to-action/Cards';
 
 const TestimonialsSection = () => {
   return (

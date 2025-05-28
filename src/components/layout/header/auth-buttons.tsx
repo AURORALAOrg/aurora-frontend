@@ -26,7 +26,7 @@ const AuthButtons = ({ isAuthenticated, user, address, logout, navigate, showPro
             Log in
          </button>
          <button
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/register")}
             className="text-sm font-medium text-white bg-[#00b8d4] px-3 py-1.5 xl:px-4 xl:py-2 rounded hover:bg-[#22d3ee] transition-colors"
          >
             Sign up

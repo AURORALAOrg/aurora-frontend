@@ -1,8 +1,8 @@
 import React from 'react';
-import CertificationBanner from '../components/english-level/english-banner'; 
-import LearningModule from '../components/learning-path/learning-module'; 
-import learningModuleImg from "../assets/learning_module.png"; 
-import certificationBanner from "../assets/certification_banner.png"; 
+import CertificationBanner from '@/components/english-level/english-banner'; 
+import LearningModule from '@/components/learning-path/learning-module'; 
+import learningModuleImg from "@/assets/learning_module.png"; 
+import certificationBanner from "@/assets/certification_banner.png"; 
 
 const Certification = () => {
   const learningModules = [

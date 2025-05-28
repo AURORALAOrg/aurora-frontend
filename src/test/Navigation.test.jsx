@@ -7,11 +7,11 @@ test('use jsdom in this test file', () => {
 });
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Sidebar from '../components/layout/sidebar';
+import Sidebar from '../components/layout/Sidebar';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import HomePage from '../pages/aurora-site/home';
-import Header from '../components/layout/header';
+import Header from '../components/layout/header/header';
 
 test('initiating the onboarding process of new user', async () => {
     render(<HomePage />, { wrapper: BrowserRouter })

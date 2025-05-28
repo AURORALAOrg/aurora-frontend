@@ -49,6 +49,7 @@ import HomePage from "@/pages/aurora-site/home";
 
 // 🧩 Games & Challenges
 import StoryGame from "@/pages/games/story-game";
+import WordScramble from "@/components/Games/word-scramble/word-scramble-game.jsx"
 import WordMatching from "@/pages/games/word-matching";
 import GamePanel from "@/pages/games/game-panel";
 import DifficultySelector from "@/components/Games/memory-card/difficulty-selector";

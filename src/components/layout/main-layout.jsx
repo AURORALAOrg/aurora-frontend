@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Footer from "./footer";
+import Footer from "./Footer";
 import Header from "./header/header";
-import Sidebar from "./sidebar";
+import Sidebar from "./Sidebar";
 
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

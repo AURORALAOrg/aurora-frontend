@@ -1,5 +1,5 @@
 import React from 'react';
-import { callToAction } from '../call-to-action/content';
+import { callToAction } from '../call-to-action/Content';
 import CTAHeroButton from '@/components/ui/buttons/CTAHeroButton';
 
 const CTASection = () => {

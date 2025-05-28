@@ -1,5 +1,5 @@
 import CTAHeroButton from '../../ui/buttons/CTAHeroButton';
-import { heroContent } from '../call-to-action/content';
+import { heroContent } from '../call-to-action/Content';
 
 
 const HeroSection = () => {
