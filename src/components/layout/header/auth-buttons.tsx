@@ -1,8 +1,12 @@
 import React from "react";
 import { LogOut, User } from "lucide-react";
 import { truncateAddress } from "@/utils/helpers";
+import { useWallet } from '@/components/auth/hooks/useWallet.hook';
+import { useGlobalAuthenticationStore } from '@/components/auth/store/data';
 
-const AuthButtons = ({ isAuthenticated, user, address, logout, navigate, showProfileMenu, setShowProfileMenu }) => {
+const AuthButtons = ({ isAuthenticated, user, logout, navigate, showProfileMenu, setShowProfileMenu }) => {
+   const address = useGlobalAuthenticationStore((state) => state.address);
+
    if (isAuthenticated) {
       return (
          <div className="hidden lg:flex items-center space-x-2 xl:space-x-4">
@@ -22,6 +26,9 @@ const AuthButtons = ({ isAuthenticated, user, address, logout, navigate, showPro
 
    return (
       <div className="hidden lg:flex items-center space-x-4">
+         <button className="text-sm font-medium text-gray-300 hover:text-white">
+            Connect Wallet
+         </button>
          <button onClick={() => navigate("/login")} className="text-sm font-medium text-gray-300 hover:text-white">
             Log in
          </button>

@@ -1,18 +1,9 @@
 import React from "react";
 import { Menu, Search } from "lucide-react";
-import { useWallet } from '@/components/auth/hooks/useWallet.hook';
-
 const MobileTopButtons = ({ onMenuClick, setIsOpen, isOpen, setIsMobileMenuOpen, isMobileMenuOpen }) => {
-   
-   const { handleConnect, handleDisconnect } = useWallet();
 
    return (
       <div className="flex items-center lg:hidden space-x-2">
-         <button
-              onClick={handleConnect}
-            >
-              Connect Wallet
-         </button>
          <button className="p-2 rounded-full hover:bg-[#1f2937] mr-2" onClick={onMenuClick} aria-label="Main menu">
             <Menu size={20} className="text-white" />
          </button>
