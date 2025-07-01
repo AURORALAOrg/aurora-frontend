@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./header/header";
@@ -13,13 +13,31 @@ const MainLayout = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  // Cerrar el sidebar cuando se hace clic fuera de él
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const sidebar = document.querySelector('.sidebar-container');
+      if (sidebar && !sidebar.contains(event.target) && isSidebarOpen) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isSidebarOpen]);
+
   return (
     <div className="flex w-full min-h-screen overflow-hidden bg-[#0d1117] relative">
-      {/* Contenedor exclusivo para sidebar y fondo de sidebar */}
-      <div className="absolute top-0 left-0 bottom-0 w-64 z-40">
-        {isSidebarOpen && (
-          <div className="absolute inset-0 bg-[#0d1117]" />
-        )}
+      {/* Overlay para cuando el sidebar está abierto */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={toggleSidebar}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div className="sidebar-container fixed top-0 left-0 h-full z-50">
         <Sidebar
           isOpen={isSidebarOpen}
           onClose={toggleSidebar}
@@ -28,14 +46,12 @@ const MainLayout = () => {
       </div>
 
       {/* Contenido principal */}
-      <div className="flex flex-col flex-1 w-full transition-all duration-300 ease-in-out relative z-0">
+      <div className={`flex flex-col flex-1 w-full transition-all duration-300 ease-in-out ${
+        isSidebarOpen ? 'ml-64' : ''
+      }`}>
         <Header onMenuClick={toggleSidebar} />
 
-        <main
-          className={`flex-1 overflow-y-auto transition-all duration-300 ease-in-out ${
-            isSidebarOpen ? "lg:ml-64" : ""
-          }`}
-        >
+        <main className="flex-1 overflow-y-auto">
           <div className="w-full">
             <Outlet />
           </div>
@@ -43,7 +59,7 @@ const MainLayout = () => {
 
         <Footer
           customClass={`transition-all duration-300 ease-in-out ${
-            isSidebarOpen ? "lg:ml-64" : ""
+            isSidebarOpen ? 'ml-64' : ''
           }`}
         />
       </div>

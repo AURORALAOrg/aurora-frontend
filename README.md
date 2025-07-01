@@ -17,5 +17,6 @@
 
 3. **Start Development Server**
    ```bash
+    cp .env.example .env
     npm run dev
 The app will be available at http://localhost:5173/

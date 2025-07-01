@@ -1,0 +1,14 @@
+# Rust build artifacts
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Soroban specific
+/test_snapshots/
+
+# IDE and OS specific files
+.DS_Store
+.idea/
+.vscode/ 
+.stellar/
+.stellar/

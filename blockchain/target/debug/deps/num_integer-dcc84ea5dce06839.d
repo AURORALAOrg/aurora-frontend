@@ -1,0 +1,9 @@
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/libnum_integer-dcc84ea5dce06839.rmeta: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/roots.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/average.rs
+
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/libnum_integer-dcc84ea5dce06839.rlib: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/roots.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/average.rs
+
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/num_integer-dcc84ea5dce06839.d: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/roots.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/average.rs
+
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/lib.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/roots.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/average.rs:

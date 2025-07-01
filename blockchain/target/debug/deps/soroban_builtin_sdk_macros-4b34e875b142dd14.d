@@ -1,0 +1,7 @@
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/libsoroban_builtin_sdk_macros-4b34e875b142dd14.dylib: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-22.1.3/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-22.1.3/src/derive_fn.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-22.1.3/src/derive_type.rs
+
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/soroban_builtin_sdk_macros-4b34e875b142dd14.d: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-22.1.3/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-22.1.3/src/derive_fn.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-22.1.3/src/derive_type.rs
+
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-22.1.3/src/lib.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-22.1.3/src/derive_fn.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-builtin-sdk-macros-22.1.3/src/derive_type.rs:

@@ -1,0 +1,7 @@
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/libark_ff_asm-a620b30800362800.dylib: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-ff-asm-0.4.2/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-ff-asm-0.4.2/src/context/mod.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-ff-asm-0.4.2/src/context/data_structures.rs
+
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/ark_ff_asm-a620b30800362800.d: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-ff-asm-0.4.2/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-ff-asm-0.4.2/src/context/mod.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-ff-asm-0.4.2/src/context/data_structures.rs
+
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-ff-asm-0.4.2/src/lib.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-ff-asm-0.4.2/src/context/mod.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-ff-asm-0.4.2/src/context/data_structures.rs:

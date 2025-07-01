@@ -1,0 +1,9 @@
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/libsoroban_spec_rust-784f41ba678ebd31.rmeta: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/trait.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/types.rs
+
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/libsoroban_spec_rust-784f41ba678ebd31.rlib: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/trait.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/types.rs
+
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/soroban_spec_rust-784f41ba678ebd31.d: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/trait.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/types.rs
+
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/lib.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/trait.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/soroban-spec-rust-22.0.7/src/types.rs:

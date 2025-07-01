@@ -1,0 +1,7 @@
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/libark_serialize_derive-0a7cae46b83aaaaa.dylib: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-serialize-derive-0.4.2/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-serialize-derive-0.4.2/src/serialize.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-serialize-derive-0.4.2/src/deserialize.rs
+
+/Users/christopherfernandez/Desktop/Smart_Contract/tests_AURORA/nuevo/meter_preguntas/AURORA-Frontend/blockchain/target/debug/deps/ark_serialize_derive-0a7cae46b83aaaaa.d: /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-serialize-derive-0.4.2/src/lib.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-serialize-derive-0.4.2/src/serialize.rs /Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-serialize-derive-0.4.2/src/deserialize.rs
+
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-serialize-derive-0.4.2/src/lib.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-serialize-derive-0.4.2/src/serialize.rs:
+/Users/christopherfernandez/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ark-serialize-derive-0.4.2/src/deserialize.rs:
