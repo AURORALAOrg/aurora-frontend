@@ -11,7 +11,7 @@ module.exports = {
           ebony: "#111828",
           foreground: "hsl(var(--primary-foreground))",
         },
-        gray:{
+        gray: {
           850: "#0F1623",
         },
         secondary: {

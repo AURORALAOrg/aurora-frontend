@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
-import { Settings, Volume2, Mic } from 'lucide-react';
 
+import { useState, useEffect } from "react";
+import { Settings, Volume2 } from "lucide-react";
 const VoiceSettings = ({ isOpen, onClose }) => {
   const [voices, setVoices] = useState([]);
-  const [selectedVoice, setSelectedVoice] = useState('');
+  const [selectedVoice, setSelectedVoice] = useState("");
   const [rate, setRate] = useState(0.9);
   const [pitch, setPitch] = useState(1);
   const [volume, setVolume] = useState(1);
 
   useEffect(() => {
+
     if ('speechSynthesis' in window) {
       const loadVoices = () => {
         const availableVoices = window.speechSynthesis.getVoices();
@@ -17,6 +18,7 @@ const VoiceSettings = ({ isOpen, onClose }) => {
         );
         setVoices(englishVoices);
         
+
         // Set default voice
         if (englishVoices.length > 0 && !selectedVoice) {
           setSelectedVoice(englishVoices[0].name);
@@ -24,7 +26,7 @@ const VoiceSettings = ({ isOpen, onClose }) => {
       };
 
       loadVoices();
-      
+
       // Some browsers load voices asynchronously
       if (window.speechSynthesis.onvoiceschanged !== undefined) {
         window.speechSynthesis.onvoiceschanged = loadVoices;
@@ -33,11 +35,13 @@ const VoiceSettings = ({ isOpen, onClose }) => {
   }, [selectedVoice]);
 
   const testVoice = () => {
+
     if ('speechSynthesis' in window && selectedVoice) {
       const utterance = new SpeechSynthesisUtterance(
         "Hello! This is a test of the voice settings."
       );
       utterance.voice = voices.find(v => v.name === selectedVoice);
+
       utterance.rate = rate;
       utterance.pitch = pitch;
       utterance.volume = volume;
@@ -50,18 +54,22 @@ const VoiceSettings = ({ isOpen, onClose }) => {
       voice: selectedVoice,
       rate,
       pitch,
+
       volume
     };
     localStorage.setItem('voiceSettings', JSON.stringify(settings));
+
     onClose();
   };
 
   useEffect(() => {
     // Load saved settings
+
     const saved = localStorage.getItem('voiceSettings');
     if (saved) {
       const settings = JSON.parse(saved);
       setSelectedVoice(settings.voice || '');
+
       setRate(settings.rate || 0.9);
       setPitch(settings.pitch || 1);
       setVolume(settings.volume || 1);
@@ -183,4 +191,6 @@ const VoiceSettings = ({ isOpen, onClose }) => {
   );
 };
 
+
 export default VoiceSettings; 
+
