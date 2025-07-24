@@ -84,6 +84,7 @@ import QuestionCreator from "@/components/practices/question-creator/question-cr
 import PublicProfile from "@/pages/public-profile/public-profile";
 
 import LeaderboardPage from "@/pages/aurora-site/community/leaderboard";
+import MyRequestsPage from "@/pages/aurora-site/my-requests";
 
 
 function App() {
@@ -104,6 +105,7 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/course-listing" element={<CourseListing />} />
+              <Route path="/my-requests" element={<MyRequestsPage />} />
 
             </Route>
 
