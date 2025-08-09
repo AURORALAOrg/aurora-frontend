@@ -14,6 +14,7 @@ const practiceOptions = [
 
 const NavDesktop = ({ onNavClick }: NavDesktopProps) => {
   const items = [
+    "course-navigation",
     "course-listing",
     "practiceSystem",
     "analytics",
@@ -23,6 +24,7 @@ const NavDesktop = ({ onNavClick }: NavDesktopProps) => {
   ];
 
   const displayMap = {
+    "course-navigation": "Course Navigation",
     "course-listing": "Courses",
     practiceSystem: "Practices",
     analytics: "Analytics",

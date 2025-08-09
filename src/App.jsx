@@ -29,6 +29,7 @@ import CertificationContent from "@/pages/aurora-site/english-level/english-leve
 import CertificationsObtained from "@/pages/aurora-site/english-level/english-level-obtained";
 import ModuleDetails from "@/pages/aurora-site/modules/module-details";
 import CourseListing from "./pages/aurora-site/course-listing/course-listing-page";
+import CourseNavigation from "./pages/aurora-site/course-navigation";
 
 // ⚙️ System & Settings
 import Notifications from "@/pages/aurora-site/notifications";
@@ -81,7 +82,6 @@ import LeaderboardPage from "@/pages/aurora-site/community/leaderboard";
 import CertificatePage from "@/pages/aurora-site/certificate";
 import MyRequestsPage from "@/pages/aurora-site/my-requests";
 
-
 function App() {
   return (
     <Router>
@@ -100,6 +100,7 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/course-listing" element={<CourseListing />} />
+              <Route path="/course-navigation" element={<CourseNavigation />} />
               <Route path="/my-requests" element={<MyRequestsPage />} />
             </Route>
 

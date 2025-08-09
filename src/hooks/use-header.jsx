@@ -46,6 +46,7 @@ const useHeader = (onMenuClick) => {
     "question creator": "/question-creator",
     login: "/login",
     signup: "/signup",
+    "course-navigation": "/course-navigation",
     "course-listing": "/course-listing",
     practicesystem: "/practiceSystem",
     analytics: "/analytics",
