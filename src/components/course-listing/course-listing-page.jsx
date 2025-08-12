@@ -9,6 +9,8 @@ import { useDebounce } from "@/hooks/use-debounce";
 import { useCoursesFilter } from "@/hooks/use-courses-filter";
 import CourseFilters from "./course-filter";
 import CourseList from "./course-list";
+import ExploreCoursesSection from "./course-list";
+import { CourseProgressProvider } from "@/context/CourseProgressContext";
 
 // Number of courses to display per page
 const ITEMS_PER_PAGE = 6;
@@ -26,6 +28,7 @@ export default function CourseListingPage() {
   });
   const [sortOption, setSortOption] = useState("featured");
   const [showFilters, setShowFilters] = useState(false);
+  const [activeTab, setActiveTab] = useState("structured"); // "structured" or "all"
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
   // Pagination state
@@ -85,69 +88,103 @@ export default function CourseListingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F1624] text-white">
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold mb-2">Explore Our Courses</h1>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Find the perfect course to match your learning goals
-          </p>
-        </div>
+    <CourseProgressProvider>
+      <div className="min-h-screen bg-[#0F1624] text-white">
+        <main className="container mx-auto px-4 py-8">
+          <div className="mb-8 text-center">
+            <h1 className="text-4xl font-bold mb-2">Explore Our Courses</h1>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Find the perfect course to match your learning goals
+            </p>
+          </div>
 
-        <div className="mb-8">
-          <SearchBar
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            hasActiveFilters={hasActiveFilters}
-            showFilters={showFilters}
-            setShowFilters={setShowFilters}
-            sortOption={sortOption}
-            setSortOption={setSortOption}
-            viewMode={viewMode}
-            setViewMode={setViewMode}
-          />
+          {/* Tab Navigation */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-gray-800/30 rounded-lg p-1">
+              <button
+                onClick={() => setActiveTab("structured")}
+                className={`px-6 py-3 rounded-md font-medium transition-all duration-200 ${
+                  activeTab === "structured"
+                    ? "bg-cyan-500 text-white shadow-lg"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                Structured Learning Paths
+              </button>
+              <button
+                onClick={() => setActiveTab("all")}
+                className={`px-6 py-3 rounded-md font-medium transition-all duration-200 ${
+                  activeTab === "all"
+                    ? "bg-cyan-500 text-white shadow-lg"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                All Courses
+              </button>
+            </div>
+          </div>
 
-          {showFilters && (
-            <CourseFilters
-              filters={filters}
-              setFilters={setFilters}
-              toggleFilter={toggleFilter}
-              clearFilters={clearFilters}
-              hasActiveFilters={hasActiveFilters}
-            />
+          {activeTab === "structured" ? (
+            <ExploreCoursesSection />
+          ) : (
+            <>
+              <div className="mb-8">
+                <SearchBar
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                  hasActiveFilters={hasActiveFilters}
+                  showFilters={showFilters}
+                  setShowFilters={setShowFilters}
+                  sortOption={sortOption}
+                  setSortOption={setSortOption}
+                  viewMode={viewMode}
+                  setViewMode={setViewMode}
+                />
+
+                {showFilters && (
+                  <CourseFilters
+                    filters={filters}
+                    setFilters={setFilters}
+                    toggleFilter={toggleFilter}
+                    clearFilters={clearFilters}
+                    hasActiveFilters={hasActiveFilters}
+                  />
+                )}
+
+                {hasActiveFilters && (
+                  <ActiveFilters
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    filters={filters}
+                    toggleFilter={toggleFilter}
+                    setFilters={setFilters}
+                  />
+                )}
+              </div>
+
+              <div id="course-results">
+                <CourseList
+                  isLoading={isLoading}
+                  filteredCourses={filteredCourses}
+                  currentCourses={getCurrentCourses()}
+                  viewMode={viewMode}
+                  currentPage={currentPage}
+                  itemsPerPage={ITEMS_PER_PAGE}
+                  clearFilters={clearFilters}
+                />
+
+                {filteredCourses.length > 0 && !isLoading && (
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    goToPage={goToPage}
+                  />
+                )}
+              </div>
+            </>
           )}
-
-          {hasActiveFilters && (
-            <ActiveFilters
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              filters={filters}
-              toggleFilter={toggleFilter}
-              setFilters={setFilters}
-            />
-          )}
-        </div>
-
-        <div id="course-results">
-          <CourseList
-            isLoading={isLoading}
-            filteredCourses={filteredCourses}
-            currentCourses={getCurrentCourses()}
-            viewMode={viewMode}
-            currentPage={currentPage}
-            itemsPerPage={ITEMS_PER_PAGE}
-            clearFilters={clearFilters}
-          />
-
-          {filteredCourses.length > 0 && !isLoading && (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              goToPage={goToPage}
-            />
-          )}
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </CourseProgressProvider>
   );
 }
