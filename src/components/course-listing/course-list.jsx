@@ -19,9 +19,12 @@ export default function ExploreCoursesSection() {
   } = useCourseFiltering();
 
   const handleCourseComplete = (courseId) => {
-    markCourseComplete(courseId);
-
-    console.log("Course completed:", courseId);
+    try {
+      markCourseComplete(courseId);
+    } catch (error) {
+      // Consider showing a user-friendly error message
+      console.error("Failed to mark course as complete:", error);
+    }
   };
 
   return (

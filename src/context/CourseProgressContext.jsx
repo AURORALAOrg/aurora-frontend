@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const CourseProgressContext = createContext();
 
@@ -15,25 +15,49 @@ export const useCourseProgress = () => {
 };
 
 export const CourseProgressProvider = ({ children }) => {
-  const [userProgress, setUserProgress] = useState({
-    completedCourses: ["greetings-intro"],
-    points: 150,
-    unlockedCourses: ["greetings-intro", "ordering-food"],
+  const [userProgress, setUserProgress] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const raw = localStorage.getItem("userProgress");
+        if (raw) return JSON.parse(raw);
+      } catch {
+        console.error("Error parsing user progress from localStorage");
+      }
+    }
+    return {
+      completedCourses: [],
+      points: 0,
+      unlockedCourses: [],
+    };
   });
 
+  useEffect(() => {
+    try {
+      localStorage.setItem("userProgress", JSON.stringify(userProgress));
+    } catch {
+      console.error("Error saving user progress to localStorage");
+    }
+  }, [userProgress]);
+
   const markCourseComplete = (courseId) => {
-    setUserProgress((prev) => ({
-      ...prev,
-      completedCourses: [...prev.completedCourses, courseId],
-      points: prev.points + 50,
-    }));
+    setUserProgress((prev) => {  
+           if (prev.completedCourses.includes(courseId)) return prev;  
+           return {  
+             ...prev,  
+             completedCourses: Array.from(new Set([...prev.completedCourses, courseId])),  
+             points: prev.points + 50,  
+            };  
+          }); 
   };
 
   const unlockNextCourse = (courseId) => {
-    setUserProgress((prev) => ({
-      ...prev,
-      unlockedCourses: [...prev.unlockedCourses, courseId],
-    }));
+    setUserProgress((prev) => {  
+            if (prev.unlockedCourses.includes(courseId)) return prev;  
+           return {  
+             ...prev,  
+             unlockedCourses: Array.from(new Set([...prev.unlockedCourses, courseId])),  
+           };  
+         });  
   };
 
   const getCourseProgress = (courseId) => {
@@ -50,7 +74,9 @@ export const CourseProgressProvider = ({ children }) => {
     return {
       completed: completedInArea,
       total: courses.length,
-      percentage: Math.round((completedInArea / courses.length) * 100),
+      percentage: courses.length  
+        ? Math.round((completedInArea / courses.length) * 100)  
+        : 0,  
     };
   };
 

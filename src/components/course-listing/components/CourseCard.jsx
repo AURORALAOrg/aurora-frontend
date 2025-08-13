@@ -5,10 +5,10 @@ import { Lock, Play, CheckCircle, BookOpen, Clock } from "lucide-react";
 import { useCourseProgress } from "@/context/CourseProgressContext";
 import { CourseCompletionReward } from "./CourseCompletionReward";
 
-export const CourseCard = ({ course, area, onCourseComplete }) => {
+export const CourseCard = ({ course, onCourseComplete }) => {
   const [showReward, setShowReward] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const { getCourseProgress, markCourseComplete, unlockNextCourse } =
+  const { getCourseProgress } =
     useCourseProgress();
 
   const { isCompleted, isUnlocked } = getCourseProgress(course.id);
@@ -83,8 +83,9 @@ export const CourseCard = ({ course, area, onCourseComplete }) => {
                 <Lock className="w-8 h-8 text-gray-400 mx-auto mb-2" />
                 <p className="text-sm text-gray-400">
                   Complete &quot;
-                  {course.prerequisite}
-                  &quot; first
+                  {course.prerequisite 
+                   ? `Complete "${course.prerequisite}" first`  
+                   : "Course locked"}  
                 </p>
               </div>
             </div>
@@ -146,7 +147,7 @@ export const CourseCard = ({ course, area, onCourseComplete }) => {
             <div className="mb-4">
               <p className="text-xs text-gray-400 mb-2">You&apos;ll learn:</p>
               <ul className="text-xs text-gray-300 space-y-1">
-                {course.objectives.slice(0, 2).map((objective, index) => (
+              {course.objectives?.slice(0, 2).map((objective, index) => ( 
                   <li key={index} className="flex items-center gap-2">
                     <div className="w-1 h-1 bg-cyan-400 rounded-full" />
                     {objective}

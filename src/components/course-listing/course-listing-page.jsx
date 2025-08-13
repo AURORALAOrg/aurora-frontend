@@ -8,8 +8,7 @@ import Pagination from "./pagination";
 import { useDebounce } from "@/hooks/use-debounce";
 import { useCoursesFilter } from "@/hooks/use-courses-filter";
 import CourseFilters from "./course-filter";
-import CourseList from "./course-list";
-import ExploreCoursesSection from "./course-list";
+import ExploreCoursesSection, { CourseList } from "./course-list"; 
 import { CourseProgressProvider } from "@/context/CourseProgressContext";
 
 // Number of courses to display per page

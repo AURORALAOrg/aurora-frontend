@@ -4,7 +4,7 @@ import { useCourseProgress } from "@/context/CourseProgressContext";
 import { CourseCard } from "./CourseCard";
 
 export const LearningAreaSection = ({ area, areaData, onCourseComplete }) => {
-  const IconComponent = areaData.icon;
+  const IconComponent = areaData.icon || (() => null); 
   const { getAreaProgress } = useCourseProgress();
   const progress = getAreaProgress(areaData.courses);
 
