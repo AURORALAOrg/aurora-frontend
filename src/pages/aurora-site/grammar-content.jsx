@@ -1,5 +1,6 @@
 import React from "react";
 import { FileText, CheckCircle, Lock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const GrammarPage = () => {
   const grammarTopics = [
@@ -64,8 +65,16 @@ const GrammarPage = () => {
                   style={{ width: `${topic.progress}%` }}
                 />
               </div>
-              <div className="text-right mt-1">
+              <div className="flex items-center justify-between mt-2">
                 <span className="text-xs text-neutral-2">{topic.progress}%</span>
+                {topic.unlocked && topic.id === "present-simple" && (
+                  <Link
+                    to="/present-simple-course"
+                    className="text-xs bg-light-blue-1 text-white px-3 py-1 rounded hover:bg-light-blue-2 transition-colors"
+                  >
+                    Start Course
+                  </Link>
+                )}
               </div>
             </div>
           ))}
