@@ -3,6 +3,7 @@ import { AiFillTrophy } from "react-icons/ai";
 import { FaSyncAlt } from "react-icons/fa";
 
 const CompletionScreen = ({ score, total, onRestart }) => {
+  const percentage = Math.round((score / total) * 100);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6 rounded-lg shadow-lg">
       <AiFillTrophy className="text-yellow-500 text-6xl mb-4" />
