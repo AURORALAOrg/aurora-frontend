@@ -133,7 +133,7 @@ export const placementQuestions = {
         id: 3,
         question: "Listen to this sentence: 'I want to go home.' How many words do you hear?",
         options: ["4 words", "5 words", "6 words", "7 words"],
-        answer: 2,
+        answer: 1,
         audio: "/audio/listening/gohome.mp3"
       },
       {

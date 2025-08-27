@@ -1,7 +1,6 @@
 // src/pages/PlacementTest.js
 import { placementQuestions } from "@/components/placementQuestion/placementQuestion";
-import React, { useState, useEffect, useRef } from "react";
-
+import { useState, useEffect, useRef } from "react";
 const PlacementTest = () => {
     const [current, setCurrent] = useState(0);
     const [score, setScore] = useState(0);
