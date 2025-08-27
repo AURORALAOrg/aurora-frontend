@@ -84,6 +84,7 @@ import CertificatePage from "@/pages/aurora-site/certificate";
 import MyRequestsPage from "@/pages/aurora-site/my-requests";
 import EscrowClassesPage from "@/pages/aurora-site/escrow/classes";
 import TeacherSignupPage from "@/pages/teacher-signup";
+import PlacementTest from "./pages/placementTest";
 
 function App() {
   return (
@@ -143,6 +144,8 @@ function App() {
               <Route path="/games/word-scramble" element={<WordScramble />} />
               <Route path="/games/word-matching/" element={<WordMatching />} />
               <Route path="/games" element={<GamePanel />} />
+              <Route path="/placement-test" element={<PlacementTest />} />
+
               <Route
                 path="/games/memory-card"
                 element={<DifficultySelector />}
