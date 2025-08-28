@@ -17,6 +17,7 @@ import VerifyEmailPage from "@/pages/auth/verify-email";
 
 // 📚 Learning & Education
 import ListeningPage from "@/pages/aurora-site/learning/listening-content";
+import BasicListeningCoursePage from "@/components/listening-courses/basic-listening/BasicListeningCoursePage";
 import ReadingContent from "@/pages/aurora-site/learning/reading-content";
 import SpeakingPage from "@/pages/aurora-site/learning/speaking-content";
 import VocabularyPage from "@/pages/aurora-site/learning/vocabulary-content";
@@ -169,6 +170,8 @@ function App() {
               <Route path="/vocabulary" element={<VocabularyPage />} />
               <Route path="/speaking" element={<SpeakingPage />} />
               <Route path="/listening" element={<ListeningPage />} />
+              <Route path="/listening-course" element={<BasicListeningCoursePage />} />
+              <Route path="/listening-course/:lessonId" element={<BasicListeningCoursePage />} />
               <Route path="/reading" element={<ReadingContent />} />
               <Route
                 path="/cultural-assessment"

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Headphones, CheckCircle, Lock } from 'lucide-react';
+import { Headphones, CheckCircle, Lock, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const ListeningPage = () => {
     const listeningTopics = [
@@ -15,10 +16,46 @@ const ListeningPage = () => {
 
     return (
         <div className="min-h-screen bg-[#111827] text-neutral-1 p-6">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-4xl mx-auto">
                 <div className="mb-8 text-center">
                     <h1 className="text-3xl font-bold mb-2">Listening Practice</h1>
                     <p className="text-neutral-2">Enhance your listening comprehension from simple dialogues to complex audio</p>
+                </div>
+
+                {/* Featured Course */}
+                <div className="mb-8">
+                    <div className="bg-gradient-to-r from-light-blue-1/10 to-purple-600/10 border border-light-blue-1/20 rounded-lg p-6">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-12 h-12 rounded-lg bg-light-blue-1/20 flex items-center justify-center">
+                                <BookOpen className="w-6 h-6 text-light-blue-1" />
+                            </div>
+                            <div>
+                                <h2 className="text-xl font-semibold text-neutral-1">Basic Listening Comprehension Course</h2>
+                                <p className="text-neutral-2">Master fundamental listening skills with graduated difficulty for Spanish-speaking beginners</p>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div className="text-sm">
+                                <span className="text-neutral-3">Level:</span>
+                                <span className="text-neutral-1 ml-2">Beginner</span>
+                            </div>
+                            <div className="text-sm">
+                                <span className="text-neutral-3">Duration:</span>
+                                <span className="text-neutral-1 ml-2">2-3 hours</span>
+                            </div>
+                            <div className="text-sm">
+                                <span className="text-neutral-3">Lessons:</span>
+                                <span className="text-neutral-1 ml-2">4 lessons</span>
+                            </div>
+                        </div>
+                        <Link 
+                            to="/listening-course"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-light-blue-1 hover:bg-light-blue-1/80 text-white rounded-lg transition-colors"
+                        >
+                            <Headphones className="w-4 h-4" />
+                            Start Course
+                        </Link>
+                    </div>
                 </div>
 
                 <div className="space-y-3">
