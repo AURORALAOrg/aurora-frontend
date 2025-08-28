@@ -17,6 +17,7 @@ import VerifyEmailPage from "@/pages/auth/verify-email";
 
 // 📚 Learning & Education
 import ListeningPage from "@/pages/aurora-site/learning/listening-content";
+import BasicListeningCoursePage from "@/components/listening-courses/basic-listening/BasicListeningCoursePage";
 import ReadingContent from "@/pages/aurora-site/learning/reading-content";
 import SpeakingPage from "@/pages/aurora-site/learning/speaking-content";
 import VocabularyPage from "@/pages/aurora-site/learning/vocabulary-content";
@@ -72,6 +73,7 @@ import Quiz from "@/components/practices/funny_practices/QuizPage";
 // 🏛️ Grammar & Language
 import GrammarContent from "@/pages/aurora-site/grammar-content";
 import PresentSimpleCoursePage from "@/pages/aurora-site/present-simple-course";
+import PastSimpleCoursePage from "@/pages/aurora-site/past-simple-course";
 
 // ✨ Question Creator
 import QuestionCreator from "@/components/practices/question-creator/question-creator";
@@ -161,9 +163,15 @@ function App() {
                 path="/present-simple-course"
                 element={<PresentSimpleCoursePage />}
               />
+              <Route
+                path="/past-simple-course"
+                element={<PastSimpleCoursePage />}
+              />
               <Route path="/vocabulary" element={<VocabularyPage />} />
               <Route path="/speaking" element={<SpeakingPage />} />
               <Route path="/listening" element={<ListeningPage />} />
+              <Route path="/listening-course" element={<BasicListeningCoursePage />} />
+              <Route path="/listening-course/:lessonId" element={<BasicListeningCoursePage />} />
               <Route path="/reading" element={<ReadingContent />} />
               <Route
                 path="/cultural-assessment"
