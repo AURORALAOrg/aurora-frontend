@@ -82,6 +82,12 @@ import PublicProfile from "@/pages/public-profile/public-profile";
 import LeaderboardPage from "@/pages/aurora-site/community/leaderboard";
 import CertificatePage from "@/pages/aurora-site/certificate";
 import MyRequestsPage from "@/pages/aurora-site/my-requests";
+
+// 🎧 Audio Assessments (from feature/audio-assessments branch)
+import PronunciationAssessmentPage from "@/pages/aurora-site/assessment/pronunciation-assessment";
+import ListeningComprehensionPage from "@/pages/aurora-site/assessment/listening-comprehension";
+
+// 👨‍🏫 Teacher Features (from main branch)
 import EscrowClassesPage from "@/pages/aurora-site/escrow/classes";
 import TeacherSignupPage from "@/pages/teacher-signup";
 
@@ -187,6 +193,12 @@ function App() {
               <Route path="/team" element={<GitHubProfiles />} />
               <Route path="/nft-interact" element={<NFTInteract />} />
               <Route path="/certificate" element={<CertificatePage />} />
+              
+              {/* Audio Assessment Routes (from feature/audio-assessments) */}
+              <Route path="/assessment/pronunciation" element={<PronunciationAssessmentPage />} />
+              <Route path="/assessment/listening" element={<ListeningComprehensionPage />} />
+              
+              {/* Teacher Routes (from main) */}
               <Route path="/teacher-signup" element={<TeacherSignupPage />} />
 
               {/*</Route>*/}
