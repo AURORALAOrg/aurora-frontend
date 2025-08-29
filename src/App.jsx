@@ -64,6 +64,7 @@ import GameBoard from "@/components/games/memory-card/game-board";
 import PracticeSystem from "@/components/practices/funny_practices/DragDropSentenceBuilder";
 import IdiomChallenge from "@/components/practices/funny_practices/idiom-challenge";
 import SentenceBuilder from "@/components/practices/funny_practices/SentenceBuilder";
+import DirectionsCourse from "@/components/practices/directions-course/directions-course";
 
 //Quizzes
 import FillInTheBlanksQuizPage from "@/components/practices/funny_practices/FillInTheBlanksPage";
@@ -155,6 +156,10 @@ function App() {
               <Route
                 path="/practice/fill-in-the-blanks"
                 element={<FillInTheBlanksQuizPage />}
+              />
+              <Route 
+                path="/practice/directions-course" 
+                element={<DirectionsCourse />} 
               />
               <Route path="/grammar" element={<GrammarContent />} />
               <Route
