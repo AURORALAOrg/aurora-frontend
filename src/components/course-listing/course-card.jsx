@@ -84,6 +84,7 @@ export default function CourseCard({ course, viewMode }) {
                 "Creative Storytelling": "/courses/creative-storytelling",
                 "Public Speaking Mastery": "/courses/public-speaking",
                 "Cultural Insights": "/cultural-assessment",
+                "Social Media & Modern Communication": "/social-media-course",
               };
 
               // Navigate to the appropriate route if defined, otherwise stay on the page
