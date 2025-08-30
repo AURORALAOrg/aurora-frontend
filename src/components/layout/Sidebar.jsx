@@ -28,8 +28,7 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   const handleNavClick = (page) => {
     setCurrentPage(page);
-    navigate(`/${page}`);
-    if (onClose) onClose();
+    onClose();
   };
 
   const categories = [
@@ -104,19 +103,32 @@ const Sidebar = ({ isOpen, onClose }) => {
         style={{ height: "calc(100% - 64px)" }}
       >
         <nav className="flex flex-col gap-2 flex-1 p-4">
-          <NavLink to="/">
-            <button
-              onClick={() => handleNavClick("/")}
-              style={{
-                backgroundColor:
-                  currentPage === "/" ? "#1f2937" : "transparent",
-                color: "#FFFFFF",
-              }}
-              className="flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors hover:bg-[#374151]"
-            >
-              <Home className="w-5 h-5 text-[#ced2d8]" />
-              <span className="text-sm font-medium">Home</span>
-            </button>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors hover:bg-[#374151] ${
+                isActive ? "bg-[#1f2937]" : "bg-transparent"
+              }`
+            }
+            style={{ color: "#FFFFFF" }}
+            onClick={onClose}
+          >
+            <Home className="w-5 h-5 text-[#ced2d8]" />
+            <span className="text-sm font-medium">Home</span>
+          </NavLink>
+
+          <NavLink
+            to="/course-navigation"
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors hover:bg-[#374151] ${
+                isActive ? "bg-[#1f2937]" : "bg-transparent"
+              }`
+            }
+            style={{ color: "#FFFFFF" }}
+            onClick={onClose}
+          >
+            <BookOpen className="w-5 h-5 text-[#ced2d8]" />
+            <span className="text-sm font-medium">Course Navigation</span>
           </NavLink>
 
           <div className="mb-2">
@@ -147,24 +159,19 @@ const Sidebar = ({ isOpen, onClose }) => {
                   </h2>
                   <div className="flex flex-col gap-1">
                     {categories.map((item, index) => (
-                      <NavLink key={index} to={item.label.toLowerCase()}>
-                        <button
-                          onClick={() =>
-                            handleNavClick(
-                              `category-${item.label.toLowerCase()}`
-                            )
-                          }
-                          className="flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors hover:bg-[#374151]"
-                          style={{
-                            backgroundColor: "#1f2937",
-                            color: "#FFFFFF",
-                          }}
-                        >
-                          {item.icon}
-                          <span className="text-sm">
-                            {item.display || item.label}
-                          </span>
-                        </button>
+                      <NavLink
+                        key={index}
+                        to={item.label.toLowerCase()}
+                        className={({ isActive }) =>
+                          `flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors hover:bg-[#374151] ${
+                            isActive ? "bg-[#23272f]" : "bg-[#1f2937]"
+                          }`
+                        }
+                        style={{ color: "#FFFFFF" }}
+                        onClick={onClose}
+                      >
+                        {item.icon}
+                        <span className="text-sm">{item.label}</span>
                       </NavLink>
                     ))}
                   </div>
@@ -289,24 +296,23 @@ const Sidebar = ({ isOpen, onClose }) => {
         </nav>
 
         <div className="py-16 space-y-3 flex flex-col px-4">
-          <NavLink to="aurora-chat">
-            <button
-              onClick={() => handleNavClick("aurora-chat")}
-              className="flex items-center gap-3 px-4 py-2.5 w-full rounded-lg transition-colors shadow-sm"
-              style={{
-                backgroundColor: "#00b8d4",
-                color: "#FFFFFF",
-              }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor = "#22d3ee")
-              }
-              onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor = "#00b8d4")
-              }
-            >
-              <MessageSquare className="w-5 h-5" />
-              <span className="text-sm font-medium">Talk with Aurora</span>
-            </button>
+          <NavLink
+            to="aurora-chat"
+            className="flex items-center gap-3 px-4 py-2.5 w-full rounded-lg transition-colors shadow-sm"
+            style={{
+              backgroundColor: "#00b8d4",
+              color: "#FFFFFF",
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = "#22d3ee")
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = "#00b8d4")
+            }
+            onClick={onClose}
+          >
+            <MessageSquare className="w-5 h-5" />
+            <span className="text-sm font-medium">Talk with Aurora</span>
           </NavLink>
         </div>
       </div>

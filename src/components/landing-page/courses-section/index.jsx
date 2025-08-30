@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { courses } from '../call-to-action/Content';
 import { CoursesCard } from '../call-to-action/Cards';
+import { Headphones } from 'lucide-react';
 
 const studentTabs = [
   'Beginner',
@@ -128,7 +129,22 @@ const CoursesSection = ({ selectedRole }) => {
     }
   };
 
-  const defaultContent = courses;
+  const defaultContent = {
+    ...courses,
+    cards: {
+      ...courses.cards,
+      Beginner: [
+        courses.cards.Beginner[0], // Basic Conversation
+        courses.cards.Beginner[1], // Grammar Foundations  
+        courses.cards.Beginner[2], // Cultural Insights
+        {
+          icons: <Headphones className="text-[#00B8D4] h-12 w-12" aria-hidden="true" />,
+          tag: "Pronunciation and Listening",
+          content: "Develop clear pronunciation and listening skills",
+        },
+      ]
+    }
+  };
 
   const currentContent = selectedRole === 'student' ? studentContent : 
                         selectedRole === 'teacher' ? teacherContent : 
@@ -153,7 +169,7 @@ const CoursesSection = ({ selectedRole }) => {
           role='tabpanel'
           id={`${activeTab.toLowerCase()}-panel`}
           aria-labelledby={`${activeTab}-tab`}
-          className="lg:grid-cols-3 grid md:grid-cols-2 lg:flex gap-4 items-stretch justify-center w-full" 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch justify-center w-full" 
         >
           {currentContent?.cards[activeTab].map((contents, i) => (
             <CoursesCard key={`${activeTab}-course-${i}`} {...contents} />
