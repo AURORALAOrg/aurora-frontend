@@ -5,6 +5,7 @@ import {
   CirclePlay,
   Globe,
   GraduationCap,
+  Headphones,
   MessageCircle,
   Users,
 } from "lucide-react";
@@ -75,6 +76,11 @@ export const courses = {
         tag: "Cultural Insights",
         content: "Learn about cultures while learning language",
       },
+      {
+        icons: <Headphones className="text-[#00B8D4] h-12 w-12" aria-hidden="true" />,
+        tag: "Pronunciation and Listening",
+        content: "Develop clear pronunciation and listening skills",
+      },
     ],
     Intermediate: [
       {
@@ -92,6 +98,11 @@ export const courses = {
         tag: "Writing Workshop",
         content: "Develop your writing skills",
       },
+      {
+        icons: <Headphones className="text-[#00B8D4] h-12 w-12" aria-hidden="true" />,
+        tag: "Pronunciation and Listening",
+        content: "Refine pronunciation and comprehension skills",
+      },
     ],
     Advanced: [
       {
@@ -108,6 +119,11 @@ export const courses = {
         icons: <GraduationCap className="text-[#00B8D4] h-12 w-12" aria-hidden="true" />,
         tag: "Academic English",
         content: "Prepare for academic enviroments",
+      },
+      {
+        icons: <Headphones className="text-[#00B8D4] h-12 w-12" aria-hidden="true" />,
+        tag: "Pronunciation and Listening",
+        content: "Perfect accent and advanced listening comprehension",
       },
     ] ,
     Business: [

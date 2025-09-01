@@ -5,7 +5,9 @@ import {
   DIFFICULTY_SETTINGS,
   WORD_PAIRS,
 } from "./mock-data-word-matching/word-matching";
-import Card from "@/components/Games/word-matching/Card";
+import Card from "@/components/games/word-matching/Card";
+
+
 import ScoreDisplay from "./score-display";
 
 const levelToDifficulty = {
@@ -16,6 +18,7 @@ const levelToDifficulty = {
   C1: "Expert", // 16 pairs, 20s
   C2: "Master", // 20 pairs, 15s
 };
+
 const getDifficultySettings = (level) => {
   const difficulty = levelToDifficulty[level] || "Medium";
   return DIFFICULTY_SETTINGS[difficulty];

@@ -7,8 +7,11 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 export default function CourseCard({ course, viewMode }) {
+  const navigate = useNavigate();
+
   return (
     <Card
       className={`bg-gray-900 border-gray-800 overflow-hidden transition-all hover:border-gray-700 ${
@@ -68,7 +71,27 @@ export default function CourseCard({ course, viewMode }) {
             <p className="text-[#00C2CB] font-bold">${course.price}</p>
             <p className="text-xs text-gray-400">By {course.instructor}</p>
           </div>
-          <Button className="bg-[#00C2CB] hover:bg-[#00A8B0] mt-2 sm:mt-0 flex justify-center sm:block">
+          <Button
+            className="bg-[#00C2CB] hover:bg-[#00A8B0] mt-2 sm:mt-0 flex justify-center sm:block"
+            onClick={() => {
+              // Map courses to their routes
+              const courseRoutes = {
+                "Conversation Assessment": "/conversation-assessment",
+                "English for Travel": "/courses/english-travel",
+                "Advanced Business Communication":
+                  "/courses/business-communication",
+                "Everyday Idioms": "/courses/everyday-idioms",
+                "Creative Storytelling": "/courses/creative-storytelling",
+                "Public Speaking Mastery": "/courses/public-speaking",
+                "Cultural Insights": "/cultural-assessment",
+              };
+
+              // Navigate to the appropriate route if defined, otherwise stay on the page
+              if (courseRoutes[course.title]) {
+                navigate(courseRoutes[course.title]);
+              }
+            }}
+          >
             Start Learning
           </Button>
         </CardFooter>

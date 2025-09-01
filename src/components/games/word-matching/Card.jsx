@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
 
 const Card = ({ card, isFlipped, isMatched, onClick }) => {
