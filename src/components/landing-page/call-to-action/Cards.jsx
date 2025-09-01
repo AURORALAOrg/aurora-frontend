@@ -1,11 +1,13 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { Quote } from "lucide-react";
 
 // Memoize components to prevent unnecessary re-renders
 export const SkillCards = memo(function SkillCards({ icons, tag, content }) {
   return (
     <article className="bg-white rounded-[8px] w-full h-auto min-h-[172px] p-4 sm:p-5 flex-col flex shadow-sm items-center justify-center transition-all duration-300 hover:shadow-lg hover:-translate-y-2 border border-transparent hover:border-[#00B8D4] hover:bg-gray-50 cursor-default">
-      <div className="mb-2 flex items-center justify-center" aria-hidden="true">{icons}</div>
+      <div className="mb-2 flex items-center justify-center" aria-hidden="true">
+        {icons}
+      </div>
       <h3 className="font-bold text-[#09090B] group-hover:text-[#00B8D4] text-base sm:text-lg text-center mt-1 transition-colors duration-300">
         {tag}
       </h3>
@@ -20,7 +22,9 @@ export const CoursesCard = memo(function CoursesCard({ icons, tag, content }) {
   return (
     <article className="flex flex-col items-center text-center w-full h-auto min-h-[220px] p-6 bg-gray-800/30 backdrop-blur-sm rounded-lg border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-2 cursor-default">
       <div className="flex flex-col items-center text-center gap-2 sm:gap-2 mb-4">
-        <div className="w-12 h-12 text-cyan-400" aria-hidden="true">{icons}</div>
+        <div className="w-12 h-12 text-cyan-400" aria-hidden="true">
+          {icons}
+        </div>
         <div className="flex flex-col">
           <h3 className="text-white font-semibold mb-1 text-base sm:text-lg lg:text-base group-hover:text-[#22D3EE] transition-colors duration-300">
             {tag}
@@ -30,12 +34,14 @@ export const CoursesCard = memo(function CoursesCard({ icons, tag, content }) {
           </p>
         </div>
       </div>
-      <button
-        type="button"
-        className="bg-cyan-500 hover:bg-cyan-500/90 transition-colors text-[#FAFAFA] text-sm rounded-[6px] border-none px-4 py-2 mt-auto self-start w-full"
-      >
-        Start Learning
-      </button>
+      <a href="/course-navigation">
+        <button
+          type="button"
+          className="bg-cyan-500 hover:bg-cyan-500/80 transition-colors text-[#FAFAFA] text-sm rounded-[6px] border-none px-4 py-2 mt-auto self-start w-full"
+        >
+          Start Learning
+        </button>
+      </a>
     </article>
   );
 });
@@ -67,8 +73,10 @@ export const WhyChooseAuruora = memo(function WhyChooseAuruora({
 export const CTACard = memo(function CTACard({ children, styles }) {
   return (
     <div
-      className={`flex flex-col items-center justify-center ${styles ?? "w-full max-w-[320px] bg-[#1F2937] rounded-[8px] p-4 sm:p-[24px] h-auto min-h-[220px]"
-        } shadow-sm mx-auto transition-all duration-300 hover:shadow-lg hover:-translate-y-2 border border-transparent hover:border-[#00B8D4] hover:bg-[#111827] cursor-default`}
+      className={`flex flex-col items-center justify-center ${
+        styles ??
+        "w-full max-w-[320px] bg-[#1F2937] rounded-[8px] p-4 sm:p-[24px] h-auto min-h-[220px]"
+      } shadow-sm mx-auto transition-all duration-300 hover:shadow-lg hover:-translate-y-2 border border-transparent hover:border-[#00B8D4] hover:bg-[#111827] cursor-default`}
     >
       {children}
     </div>
@@ -90,8 +98,12 @@ export const WhatOurUsersSay = memo(function WhatOurUsersSay({
           <Quote className="text-[#00B8D4] w-5 h-5" />
         </div>
         <div className="flex flex-col w-full">
-          <h3 className="text-gray-900 font-bold text-base group-hover:text-[#00B8D4] transition-colors duration-300">{name}</h3>
-          <p className="text-cyan-500 font-medium text-sm group-hover:text-[#111827] transition-colors duration-300">{tag}</p>
+          <h3 className="text-gray-900 font-bold text-base group-hover:text-[#00B8D4] transition-colors duration-300">
+            {name}
+          </h3>
+          <p className="text-cyan-500 font-medium text-sm group-hover:text-[#111827] transition-colors duration-300">
+            {tag}
+          </p>
         </div>
       </div>
       <p className="text-gray-600 font-normal text-sm sm:text-base w-full group-hover:text-[#111827] transition-colors duration-300">

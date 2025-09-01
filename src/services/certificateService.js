@@ -4,6 +4,8 @@
 // Note: Real blockchain integration will require proper Stellar SDK imports
 // For now, we're using mock data to demonstrate the functionality
 
+import logger from "@/lib/logger";
+
 // Aurora Certification NFT Contract Address
 const AURORA_CERT_CONTRACT = "CAE3EUNCU6XA7KH4XYPSIA6TYPUQQYVGPGSBUFOHO2KEIGCP";
 
@@ -21,7 +23,7 @@ class CertificateService {
       if (!walletAddress || typeof walletAddress !== "string") {
         throw new Error("Invalid wallet address");
       }
-      console.log("Fetching certificates for wallet:", walletAddress);
+      logger.info("Fetching certificates for wallet", { walletAddress });
       // TODO: Replace mock implementation with actual Stellar blockchain queries  
       // In a real implementation, this would query the blockchain
       // For now, we'll return mock data
@@ -89,7 +91,7 @@ class CertificateService {
   // Verify certificate ownership on blockchain
   async verifyCertificateOwnership(walletAddress, tokenId) {
     try {
-      console.log("Verifying certificate ownership:", {
+      logger.info("Verifying certificate ownership", {
         walletAddress,
         tokenId,
       });
@@ -117,7 +119,7 @@ class CertificateService {
   // Fetch certificate metadata from blockchain
   async fetchCertificateMetadata(tokenId) {
     try {
-      console.log("Fetching metadata for token:", tokenId);
+      logger.info("Fetching metadata for token", { tokenId });
 
       // In a real implementation, this would query the NFT's metadata URI
       const mockMetadata = {
@@ -154,7 +156,7 @@ class CertificateService {
   // Download certificate as PDF/PNG
   async downloadCertificate(certificate) {
     try {
-      console.log("Downloading certificate:", certificate.title);
+      logger.info("Downloading certificate", { title: certificate.title });
 
       // In a real implementation, this would generate a PDF/PNG
       // For now, we'll simulate the download process
@@ -219,7 +221,7 @@ class CertificateService {
   // Verify certificate authenticity on blockchain
   async verifyCertificateAuthenticity(tokenId, contractAddress) {
     try {
-      console.log("Verifying certificate authenticity:", {
+      logger.info("Verifying certificate authenticity", {
         tokenId,
         contractAddress,
       });

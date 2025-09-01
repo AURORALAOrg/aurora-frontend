@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import logger from "@/lib/logger"
 
 const API_BASE_URL = "http://localhost:8000/api/v1"
 
@@ -25,11 +26,11 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log("🌀 Ejecutando useEffect de AuthProvider...")
+    logger.auth("Executing AuthProvider useEffect")
 
     const token = localStorage.getItem("authenticationToken")
     if (token) {
-      console.log("🔐 Token encontrado en localStorage:", token)
+      logger.auth("Token found in localStorage")
 
       axios
         .get(`${API_BASE_URL}/auth/me`, {
@@ -38,16 +39,16 @@ export const AuthProvider = ({ children }) => {
         .then((res) => {
           const user = res.data.data.user
           setUser(user)
-          console.log("✅ Usuario cargado desde /me:", user)
+          logger.auth("User loaded from /me", user)
         })
         .catch((err) => {
-          console.error("❌ Error al cargar /me:", err)
+          logger.error("Error loading /me", err)
           localStorage.removeItem("authenticationToken")
           setUser(null)
         })
         .finally(() => setIsLoadingUser(false))
     } else {
-      console.log("🚫 No se encontró token en localStorage")
+      logger.auth("No token found in localStorage")
       setIsLoadingUser(false)
     }
   }, [])
@@ -65,11 +66,11 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         localStorage.setItem("authenticationToken", token)
         setUser(user)
-        console.log("🔓 Login exitoso - token guardado:", token)
-        console.log("👤 Usuario seteado:", user)
+        logger.auth("Login successful - token saved")
+        logger.auth("User set", user)
       }
     } catch (err) {
-      console.error("❌ Login error:", err)
+      logger.error("Login error", err)
       setError(err.response?.data?.message || "Failed to login. Please try again.")
       throw err
     }

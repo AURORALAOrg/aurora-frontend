@@ -13,6 +13,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Loader2, Eye, EyeOff } from "lucide-react"
 import PasswordStrengthIndicator from "@/components/auth/password-strength-indicator"
+import logger from "@/lib/logger"
 
 // Define validation schema
 const registerSchema = z
@@ -68,7 +69,7 @@ export default function RegisterForm() {
       setFormError(null)
 
       const { confirmPassword, ...userData } = data
-      console.log(confirmPassword)
+      logger.auth("Registration attempt", { email: userData.email })
 
       await registerUser(userData)
     } catch (error) {

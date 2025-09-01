@@ -1,0 +1,67 @@
+[
+  {
+    "id": "PS1",
+    "question": "Choose the correct sentence",
+    "options": [
+      "He go to school every day.",
+      "He goes to school every day.",
+      "He going to school every day.",
+      "He gone to school every day."
+    ],
+    "answer_index": 1,
+    "answer": "He goes to school every day.",
+    "explanation": "In the Present Simple tense, with third person singular (he/she/it), we add -s to the verb."
+  },
+  {
+    "id": "PS2",
+    "question": "Choose the correct negative form",
+    "options": [
+      "She don't like apples.",
+      "She doesn't likes apples.",
+      "She doesn't like apples.",
+      "She not like apples."
+    ],
+    "answer_index": 2,
+    "answer": "She doesn't like apples.",
+    "explanation": "In negative sentences with 'does not', the main verb stays in base form: 'She doesn't like...'."
+  },
+  {
+    "id": "PS3",
+    "question": "Choose the correct question form",
+    "options": [
+      "Do he play football?",
+      "Does he plays football?",
+      "Does he play football?",
+      "He does play football?"
+    ],
+    "answer_index": 2,
+    "answer": "Does he play football?",
+    "explanation": "Questions in Present Simple use 'Does' + subject + base verb: 'Does he play...'."
+  },
+  {
+    "id": "PS4",
+    "question": "Choose the correct sentence with 'to be'",
+    "options": [
+      "They is happy.",
+      "They are happy.",
+      "They am happy.",
+      "They be happy."
+    ],
+    "answer_index": 1,
+    "answer": "They are happy.",
+    "explanation": "With 'they', the correct form of 'to be' is 'are': 'They are happy.'"
+  },
+  {
+    "id": "PS5",
+    "question": "Choose the correct possessive form",
+    "options": [
+      "This is the childrens book.",
+      "This is the children's book.",
+      "This is the childrens's book.",
+      "This is the child book."
+    ],
+    "answer_index": 1,
+    "answer": "This is the children's book.",
+    "explanation": "The correct possessive form of 'children' is 'children's'."
+  }
+]

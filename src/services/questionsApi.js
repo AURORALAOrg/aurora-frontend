@@ -1,3 +1,5 @@
+import logger from "@/lib/logger";
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const questionsApi = {
@@ -13,7 +15,7 @@ export const questionsApi = {
       });
 
       if (!response.ok) {
-        console.log(response);
+        logger.error("Failed to create question", { response: response.status, statusText: response.statusText });
         throw new Error("Failed to create question");
       }
 

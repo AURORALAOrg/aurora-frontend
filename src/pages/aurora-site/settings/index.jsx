@@ -9,6 +9,7 @@ import {
   Shield,
 } from "lucide-react";
 import { useState } from "react";
+import logger from "@/lib/logger";
 
 const SettingsPage = () => {
   const [notifications, setNotifications] = useState(true);
@@ -107,7 +108,7 @@ const SettingsPage = () => {
           control: (
             <button
               className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              onClick={() => console.log("Setup 2FA")}
+              onClick={() => logger.info("Setup 2FA clicked")}
             >
               Setup
             </button>
