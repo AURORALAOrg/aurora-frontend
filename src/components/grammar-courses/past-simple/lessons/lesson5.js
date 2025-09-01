@@ -81,7 +81,7 @@ export const lesson5Data = {
         {
           question: "Put story in order: 'Then, I started cooking.' 'First, I went to the supermarket.' 'Finally, I served dinner.' 'After that, I prepared the ingredients.'",
           options: ["First, I went to the supermarket. Then, I started cooking. After that, I prepared the ingredients. Finally, I served dinner.", "First, I went to the supermarket. Then, I prepared the ingredients. After that, I started cooking. Finally, I served dinner.", "First, I started cooking. Then, I went to the supermarket. After that, I prepared the ingredients. Finally, I served dinner.", "First, I prepared the ingredients. Then, I went to the supermarket. After that, I started cooking. Finally, I served dinner."],
-          correctAnswer: "First, I went to the supermarket. Then, Iprepared the ingredients. After that, Istarted cooking. Finally, Iserved dinner.",
+          correctAnswer: "First, I went to the supermarket. Then, I prepared the ingredients. After that, I started cooking. Finally, I served dinner.",
           explanation: "The correct order shows the cooking process: buy ingredients → prepare → cook → serve."
         }
       ]

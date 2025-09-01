@@ -139,6 +139,12 @@ export const lesson3Data = {
           options: ["Yes, they did.", "Yes, they studied.", "Yes, they do.", "Yes, they have."],
           correctAnswer: "Yes, they did.",
           explanation: "The correct answer is 'Yes, they did.' Use 'did' for positive short answers in past simple."
+        },
+        {
+          question: "Did he finish the report? (No)",
+          options: ["No, he didn't.", "No, he doesn't.", "No, he didn't finish.", "No, he hasn't."],
+          correctAnswer: "No, he didn't.",
+          explanation: "The correct answer is 'No, he didn't.' Use 'didn't' for negative short answers in past simple."
         }
       ]
     }

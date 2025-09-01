@@ -5,8 +5,10 @@ import {
   MessagesSquare,
   Layout,
   Mic,
-  Gamepad2
+  Gamepad2,
+  Navigation
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const MainLayout = ({ children }) => {
   return (
@@ -20,9 +22,13 @@ const MainLayout = ({ children }) => {
   );
 };
 
-const CategoryCard = ({ title, modules, color, icon }) => {
+const CategoryCard = ({ title, modules, color, icon, onClick }) => {
   return (
-    <div className={`${color} rounded-xl overflow-hidden h-48 transition-transform hover:scale-105 cursor-pointer`}>
+    <button 
+      type="button"
+      className={`${color} rounded-xl overflow-hidden h-48 transition-transform hover:scale-105 cursor-pointer w-full text-left`}
+      onClick={onClick}
+    >
       <div className="p-6 h-full flex flex-col justify-between">
         <div className="items-center gap-3">
           <div className="w-10 h-10 bg-[#00b8d4] rounded-lg flex items-center justify-center">
@@ -36,11 +42,13 @@ const CategoryCard = ({ title, modules, color, icon }) => {
           <p className="text-white/80 text-sm">{modules} Modules</p>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 
 const CategoriesPage = () => {
+  const navigate = useNavigate();
+
   const categories = [
     {
       title: 'Grammar',
@@ -78,6 +86,13 @@ const CategoriesPage = () => {
       color: 'bg-[#2f3a4b]',
       icon: <Gamepad2 className="w-6 h-6" />,
     },
+    {
+      title: 'Directions & Navigation',
+      modules: 4,
+      color: 'bg-[#2f3a4b]',
+      icon: <Navigation className="w-6 h-6" />,
+      onClick: () => navigate('/practice/directions-course')
+    },
   ];
 
   return (
@@ -97,6 +112,7 @@ const CategoriesPage = () => {
                 modules={category.modules}
                 color={category.color}
                 icon={category.icon}
+                onClick={category.onClick}
               />
             ))}
           </div>
