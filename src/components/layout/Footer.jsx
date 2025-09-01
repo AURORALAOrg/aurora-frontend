@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom"
 
 import auroraBrain from "/aurora-logo.png"
+import logger from "@/lib/logger"
 
 const Footer = ({ customClass = "" }) => {
   const [email, setEmail] = useState("")
@@ -32,10 +33,10 @@ const Footer = ({ customClass = "" }) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      console.log("Invalid email");
+      logger.warn("Invalid email subscription attempt", { email });
       return;
     }
-    console.log("Subscribed with:", email);
+    logger.info("Newsletter subscription", { email });
     setEmail("");
   }
 

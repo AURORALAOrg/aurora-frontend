@@ -10,6 +10,7 @@ import {
   scValToNative,
   Contract
 } from '@stellar/stellar-sdk';
+import logger from '@/lib/logger';
 
 // Alternative import approach for SorobanRpc in case of issues
 import * as StellarSdk from '@stellar/stellar-sdk';
@@ -77,7 +78,7 @@ const NFTInteract = () => {
   
   // Helper function to create SorobanRpc server with fallback
   const createSorobanServer = async (rpcUrl = RPC_URL) => {
-    console.log("🔍 createSorobanServer debug info:", {
+    logger.debug("createSorobanServer debug info", {
       SorobanRpc: typeof SorobanRpc,
       SorobanRpcKeys: SorobanRpc ? Object.keys(SorobanRpc) : null,
       hasServer: SorobanRpc ? 'Server' in SorobanRpc : false,
@@ -92,28 +93,28 @@ const NFTInteract = () => {
     });
     
     if (SorobanRpc && SorobanRpc.Server) {
-      console.log("✅ Using direct SorobanRpc.Server import");
+      logger.debug("Using direct SorobanRpc.Server import");
       return new SorobanRpc.Server(rpcUrl);
     } else if (StellarSdk && StellarSdk.rpc && StellarSdk.rpc.Server) {
-                console.log("✅ Using rpc.Server");
+      logger.debug("Using rpc.Server");
       return new StellarSdk.rpc.Server(rpcUrl);
     } else if (StellarSdk && StellarSdk.SorobanRpc && StellarSdk.SorobanRpc.Server) {
-              console.log("✅ Using SorobanRpc.Server fallback");
+      logger.debug("Using SorobanRpc.Server fallback");
       return new StellarSdk.SorobanRpc.Server(rpcUrl);
     } else {
       // Try dynamic import as last resort
       try {
-        console.log("🔄 Trying dynamic import of SorobanRpc...");
+        logger.debug("Trying dynamic import of SorobanRpc");
         const { SorobanRpc: DynamicSorobanRpc } = await import('@stellar/stellar-sdk/rpc');
         if (DynamicSorobanRpc && DynamicSorobanRpc.Server) {
-          console.log("✅ Using dynamic SorobanRpc.Server import");
+          logger.debug("Using dynamic SorobanRpc.Server import");
           return new DynamicSorobanRpc.Server(rpcUrl);
         }
       } catch (dynamicError) {
-        console.log("❌ Dynamic import failed:", dynamicError.message);
+        logger.debug("Dynamic import failed", { error: dynamicError.message });
       }
       
-      console.error("❌ No SorobanRpc server available:", {
+      logger.error("No SorobanRpc server available", {
         SorobanRpc: typeof SorobanRpc,
         StellarSdk: typeof StellarSdk,
         allImports: { SorobanRpc, StellarSdk }
@@ -125,11 +126,11 @@ const NFTInteract = () => {
   // Manual transaction builder
   const buildManualMintTransaction = async (to, tokenId) => {
     try {
-      console.log("🛠️ Building manual mint transaction...");
+      logger.transaction("Building manual mint transaction");
       
       const server = await createSorobanServer();
       
-      console.log("🔍 Contract class debug:", {
+      logger.debug("Contract class debug", {
         Contract: typeof Contract,
         ContractKeys: Contract ? Object.keys(Contract) : null,
         ContractMethods: Contract ? Object.getOwnPropertyNames(Contract).filter(name => typeof Contract[name] === 'function') : []
@@ -137,11 +138,11 @@ const NFTInteract = () => {
       
       // Try using the Contract class approach (more modern)
       if (Contract) {
-        console.log("✅ Using Contract class approach");
+        logger.debug("Using Contract class approach");
         
         const contract = new Contract(contractId);
         
-        console.log("🔧 Building contract call transaction...");
+        logger.transaction("Building contract call transaction");
         const builtTransaction = contract.call(
           'mint',
           Address.fromString(to).toScVal(),
@@ -159,11 +160,11 @@ const NFTInteract = () => {
           .setTimeout(300)
           .build();
         
-        console.log("✅ Contract transaction built");
+        logger.transaction("Contract transaction built");
         
         // Prepare the transaction for Soroban
         const preparedTx = await server.prepareTransaction(transaction);
-        console.log("✅ Transaction prepared for Soroban");
+        logger.transaction("Transaction prepared for Soroban");
         
         return preparedTx;
       } else {
@@ -171,7 +172,7 @@ const NFTInteract = () => {
       }
       
     } catch (error) {
-      console.error("❌ Error building manual transaction:", error);
+      logger.error("Error building manual transaction", error);
       throw new Error(`Failed to build manual transaction: ${error.message}`);
     }
   };
@@ -179,12 +180,12 @@ const NFTInteract = () => {
   // Manual transaction builder for set_token_uri
   const buildManualSetTokenUriTransaction = async (tokenId, tokenUri) => {
     try {
-      console.log("🛠️ Building manual set_token_uri transaction...");
+      logger.transaction("Building manual set_token_uri transaction");
       
       const server = await createSorobanServer();
       
       if (Contract) {
-        console.log("✅ Using Contract class for set_token_uri");
+        logger.debug("Using Contract class for set_token_uri");
         
         const contract = new Contract(contractId);
         
@@ -205,11 +206,11 @@ const NFTInteract = () => {
           .setTimeout(300)
           .build();
         
-        console.log("✅ Contract set_token_uri transaction built");
+        logger.transaction("Contract set_token_uri transaction built");
         
         // Prepare the transaction for Soroban
         const preparedTx = await server.prepareTransaction(transaction);
-        console.log("✅ set_token_uri transaction prepared for Soroban");
+        logger.transaction("set_token_uri transaction prepared for Soroban");
         
         return preparedTx;
       } else {
@@ -217,7 +218,7 @@ const NFTInteract = () => {
       }
       
     } catch (error) {
-      console.error("❌ Error building manual set_token_uri transaction:", error);
+      logger.error("Error building manual set_token_uri transaction", error);
       throw new Error(`Failed to build manual set_token_uri transaction: ${error.message}`);
     }
   };
@@ -232,7 +233,7 @@ const NFTInteract = () => {
   // Create custom sign transaction function for Soroban
   const createSorobanSignTransaction = () => {
     return async (xdr) => {
-      console.log("🔐 Custom Soroban sign transaction called", { 
+      logger.transaction("Custom Soroban sign transaction called", { 
         xdrType: typeof xdr,
         xdrLength: xdr ? xdr.length : 0,
         xdrPreview: xdr ? xdr.substring(0, 100) + '...' : 'null',
@@ -246,8 +247,8 @@ const NFTInteract = () => {
         if (!window.rabet) {
           throw new Error("Rabbit wallet not installed");
         }
-        console.log("📝 Using Rabbit wallet direct signing");
-        console.log("🔍 Input XDR for Rabbit:", { 
+        logger.wallet("Using Rabbit wallet direct signing");
+        logger.debug("Input XDR for Rabbit", { 
           xdr: xdr,
           type: typeof xdr, 
           length: xdr ? xdr.length : 0,
@@ -255,7 +256,7 @@ const NFTInteract = () => {
         });
         
         const result = await window.rabet.sign(xdr, "testnet");
-        console.log("🔍 Complete Rabbit sign result:", {
+        logger.debug("Complete Rabbit sign result", {
           result: result,
           resultType: typeof result,
           resultKeys: result ? Object.keys(result) : null,
@@ -263,7 +264,7 @@ const NFTInteract = () => {
         });
         
         const signedXdr = result.xdr || result.signedXDR || result.signedTxXdr || result.result || result;
-        console.log("🔍 Rabbit extracted XDR:", { 
+        logger.debug("Rabbit extracted XDR", { 
           signedXdr: signedXdr,
           type: typeof signedXdr, 
           length: signedXdr ? signedXdr.length : 0,
@@ -274,7 +275,7 @@ const NFTInteract = () => {
         
         // Validate XDR format
         if (typeof signedXdr !== 'string' || !signedXdr.trim()) {
-          console.error("❌ Rabbit XDR validation failed:", {
+          logger.error("Rabbit XDR validation failed", {
             expectedType: 'string',
             actualType: typeof signedXdr,
             value: signedXdr,
@@ -287,13 +288,13 @@ const NFTInteract = () => {
         if (typeof signedXdr !== 'string' || !signedXdr.trim()) {
           throw new Error(`Invalid XDR format received from Rabbit wallet`);
         }
-        console.log("✅ Rabbit XDR validation successful");
+        logger.debug("Rabbit XDR validation successful");
         
         return signedXdr;
       } else {
         // For StellarWalletsKit (Freighter, etc.)
         if (!kit) {
-          console.error("❌ Kit is null or undefined:", { 
+          logger.error("Kit is null or undefined", { 
             kit, 
             walletType, 
             walletAddress,
@@ -304,14 +305,14 @@ const NFTInteract = () => {
 
         const allKitProps = Object.getOwnPropertyNames(kit);
         const kitMethods = allKitProps.filter(name => typeof kit[name] === 'function');
-        console.log("🔍 Available kit methods:", kitMethods);
-        console.log("🔍 All kit properties:", allKitProps);
+        logger.debug("Available kit methods", kitMethods);
+        logger.debug("All kit properties", allKitProps);
         
         // Try different signing methods with more detailed error handling
         try {
           if (typeof kit.signTx === 'function') {
-            console.log("📝 Using kit.signTx method");
-            console.log("📤 Sending to wallet:", {
+            logger.wallet("Using kit.signTx method");
+            logger.debug("Sending to wallet", {
               xdr: xdr,
               xdrType: typeof xdr,
               xdrLength: xdr ? xdr.length : 0,
@@ -326,7 +327,7 @@ const NFTInteract = () => {
               network: "TESTNET",
             });
             
-            console.log("🔍 Complete kit.signTx result:", {
+            logger.debug("Complete kit.signTx result", {
               result: result,
               resultType: typeof result,
               resultKeys: result ? Object.keys(result) : null,
@@ -334,7 +335,7 @@ const NFTInteract = () => {
             });
             
             const signedXdr = result.signedXDR || result.signedTxXdr || result.xdr || result.result || result;
-            console.log("🔍 Extracted signed XDR:", { 
+            logger.debug("Extracted signed XDR", { 
               signedXdr: signedXdr,
               type: typeof signedXdr, 
               length: signedXdr ? signedXdr.length : 0,
@@ -345,7 +346,7 @@ const NFTInteract = () => {
             
             // Validate XDR format
             if (typeof signedXdr !== 'string' || !signedXdr.trim()) {
-              console.error("❌ XDR validation failed:", {
+              logger.error("XDR validation failed", {
                 expectedType: 'string',
                 actualType: typeof signedXdr,
                 value: signedXdr,
@@ -358,18 +359,18 @@ const NFTInteract = () => {
             if (typeof signedXdr !== 'string' || !signedXdr.trim()) {
               throw new Error(`Invalid XDR format received from wallet`);
             }
-            console.log("✅ XDR validation successful");
+            logger.debug("XDR validation successful");
             
             return signedXdr;
           } else if (typeof kit.signTransaction === 'function') {
-            console.log("📝 Using kit.signTransaction method");
+            logger.wallet("Using kit.signTransaction method");
             const result = await kit.signTransaction(xdr, {
               publicKey: walletAddress,
               network: "TESTNET",
             });
-            console.log("🔍 Kit signTransaction result:", result);
+            logger.debug("Kit signTransaction result", result);
             const signedXdr = result.signedXDR || result.signedTxXdr || result.xdr || result;
-            console.log("🔍 Extracted signed XDR:", { 
+            logger.debug("Extracted signed XDR", { 
               type: typeof signedXdr, 
               length: signedXdr ? signedXdr.length : 0,
               preview: signedXdr ? signedXdr.substring(0, 100) + '...' : 'null'
@@ -382,15 +383,15 @@ const NFTInteract = () => {
             
             return signedXdr;
           } else if (typeof kit.sign === 'function') {
-            console.log("📝 Using kit.sign method");
+            logger.wallet("Using kit.sign method");
             const result = await kit.sign({
               xdr: xdr,
               publicKey: walletAddress,
               network: "TESTNET",
             });
-            console.log("🔍 Kit sign result:", result);
+            logger.debug("Kit sign result", result);
             const signedXdr = result.signedXDR || result.signedTxXdr || result.xdr || result;
-            console.log("🔍 Extracted signed XDR:", { 
+            logger.debug("Extracted signed XDR", { 
               type: typeof signedXdr, 
               length: signedXdr ? signedXdr.length : 0,
               preview: signedXdr ? signedXdr.substring(0, 100) + '...' : 'null'
@@ -404,12 +405,12 @@ const NFTInteract = () => {
             return signedXdr;
           } else {
             // Fallback: use the original signTransaction from context
-            console.log("📝 Using fallback signTransaction from context");
+            logger.wallet("Using fallback signTransaction from context");
             if (!signTransaction) {
               throw new Error(`No signing method available. Kit methods: [${kitMethods.join(', ')}], signTransaction: ${!!signTransaction}`);
             }
             const result = await signTransaction(xdr);
-            console.log("🔍 Fallback signTransaction result:", result);
+            logger.debug("Fallback signTransaction result", result);
             
             // Validate XDR format
             if (typeof result !== 'string' || !result.trim()) {
@@ -419,12 +420,12 @@ const NFTInteract = () => {
             return result;
           }
         } catch (kitError) {
-          console.error("❌ Kit signing error:", kitError);
+          logger.error("Kit signing error", kitError);
           // Try fallback if kit method fails
           if (signTransaction) {
-            console.log("🔄 Trying fallback signTransaction after kit error...");
+            logger.debug("Trying fallback signTransaction after kit error");
             const result = await signTransaction(xdr);
-            console.log("🔍 Fallback after error result:", result);
+            logger.debug("Fallback after error result", result);
             
             // Validate XDR format
             if (typeof result !== 'string' || !result.trim()) {
@@ -473,7 +474,7 @@ const NFTInteract = () => {
     }
 
     if (!isAdmin) {
-      console.log("🔍 Admin check failed:", {
+      logger.debug("Admin check failed", {
         walletAddress,
         adminAddress,
         isAdmin,
@@ -501,7 +502,7 @@ const NFTInteract = () => {
     setLastResult("");
 
     try {
-      console.log("🎨 Starting mint process...", { 
+      logger.nft("Starting mint process", { 
         to: mintRecipient, 
         tokenId: mintTokenId,
         tokenUri: mintTokenUri,
@@ -513,30 +514,30 @@ const NFTInteract = () => {
         kitAvailable: kit ? true : false
       });
 
-      console.log("✅ Minting NFT manually...");
+      logger.nft("Minting NFT manually");
 
       // Convert token ID to positive BigInt
       const tokenIdBigInt = BigInt(Math.abs(parseInt(mintTokenId, 10)));
       
-      console.log("📝 Building mint transaction manually...", {
+      logger.transaction("Building mint transaction manually", {
         to: mintRecipient,
         token_id: tokenIdBigInt.toString()
       });
 
       // ✅ Direct manual transaction building
-      console.log("🚀 Using pure manual approach...");
+      logger.transaction("Using pure manual approach");
       
       let result;
       try {
         const manualTx = await buildManualMintTransaction(mintRecipient, Number(tokenIdBigInt));
-        console.log("✅ Manual transaction built successfully, signing...");
+        logger.transaction("Manual transaction built successfully, signing");
         
         const customSignTransaction = createSorobanSignTransaction();
         const signedXdr = await customSignTransaction(manualTx.toXDR());
-        console.log("✅ Manual transaction signed successfully");
+        logger.transaction("Manual transaction signed successfully");
         
         // Parse and submit
-        console.log("🔍 Transaction debug info:", {
+        logger.debug("Transaction debug info", {
           Transaction: typeof Transaction,
           TransactionKeys: Transaction ? Object.keys(Transaction) : null,
           TransactionMethods: Transaction ? Object.getOwnPropertyNames(Transaction).filter(name => typeof Transaction[name] === 'function') : [],
@@ -548,25 +549,25 @@ const NFTInteract = () => {
         // Try different ways to access Transaction.fromXDR
         let signedTransaction;
         if (Transaction && typeof Transaction.fromXDR === 'function') {
-          console.log("✅ Using direct Transaction.fromXDR");
+          logger.debug("Using direct Transaction.fromXDR");
           signedTransaction = Transaction.fromXDR(signedXdr, Networks.TESTNET);
         } else if (StellarSdk && StellarSdk.Transaction && typeof StellarSdk.Transaction.fromXDR === 'function') {
-          console.log("✅ Using Transaction.fromXDR");
+          logger.debug("Using Transaction.fromXDR");
           signedTransaction = StellarSdk.Transaction.fromXDR(signedXdr, Networks.TESTNET);
         } else {
           throw new Error("Transaction.fromXDR not available in any import");
         }
-        console.log("📤 Submitting manually built and signed transaction...");
+        logger.transaction("Submitting manually built and signed transaction");
         
         const server = await createSorobanServer();
         const submitResult = await server.sendTransaction(signedTransaction);
-        console.log("✅ Manual transaction submitted successfully:", submitResult);
+        logger.transaction("Manual transaction submitted successfully", submitResult);
         
         result = submitResult;
         
         // Set token URI if provided
         if (mintTokenUri) {
-          console.log("📝 Setting token URI manually...");
+          logger.transaction("Setting token URI manually");
           const manualUriTx = await buildManualSetTokenUriTransaction(Number(tokenIdBigInt), mintTokenUri);
           const signedUriXdr = await customSignTransaction(manualUriTx.toXDR());
           // Parse URI transaction using the same approach
@@ -579,22 +580,23 @@ const NFTInteract = () => {
             throw new Error("Transaction.fromXDR not available for URI transaction");
           }
           await server.sendTransaction(signedUriTransaction);
-          console.log("✅ Manual URI transaction completed successfully");
+          logger.transaction("Manual URI transaction completed successfully");
         }
         
       } catch (manualError) {
-        console.error("❌ Manual transaction failed:");
-        console.error("📋 Error details:", manualError);
-        console.error("📋 Error message:", manualError?.message || 'No message');
-        console.error("📋 Error name:", manualError?.name || 'No name');
-        console.error("📋 Error stack:", manualError?.stack || 'No stack');
-        console.error("📋 Full error object:", JSON.stringify(manualError, Object.getOwnPropertyNames(manualError), 2));
+        logger.error("Manual transaction failed", manualError);
+        logger.error("Error details", {
+          message: manualError?.message || 'No message',
+          name: manualError?.name || 'No name',
+          stack: manualError?.stack || 'No stack',
+          fullError: JSON.stringify(manualError, Object.getOwnPropertyNames(manualError), 2)
+        });
         
         // If manual transaction building fails, throw the error
         throw new Error(`Manual transaction failed: ${manualError.message}`);
       }
 
-      console.log("✅ Mint successful!", result);
+      logger.nft("Mint successful", result);
       setLastResult(`✅ Mint successful! Token ID: ${mintTokenId}`);
       showToast({ title: "Success", description: `NFT #${mintTokenId} minted successfully!`, variant: "default" });
       
@@ -602,7 +604,7 @@ const NFTInteract = () => {
       await Promise.all([fetchUserNFTs(), fetchContractInfo()]);
       
     } catch (error) {
-      console.error("❌ Mint error:", error);
+      logger.error("Mint error", error);
       
       // Handle specific error cases
       let errorMessage = "Failed to mint NFT";
@@ -767,7 +769,7 @@ const NFTInteract = () => {
     setLastResult("");
 
     try {
-      console.log("🔄 Starting transfer process...", { 
+      logger.transaction("Starting transfer process", { 
         from: transferFrom, 
         to: transferTo,
         tokenId: transferTokenId,
@@ -775,7 +777,7 @@ const NFTInteract = () => {
         walletType
       });
 
-      console.log("📝 Building transfer transaction manually...");
+      logger.transaction("Building transfer transaction manually");
       
       // ✅ Manual transfer transaction building
       const server = await createSorobanServer();
@@ -797,7 +799,7 @@ const NFTInteract = () => {
       }).addOperation(transferOp).setTimeout(300).build();
       
       // Sign transaction
-      console.log("✍️ Signing transfer transaction manually...");
+      logger.transaction("Signing transfer transaction manually");
       const customSignTransaction = createSorobanSignTransaction();
       const signedXdr = await customSignTransaction(transaction.toXDR());
       
@@ -812,10 +814,10 @@ const NFTInteract = () => {
       }
       
       // Submit transaction
-      console.log("📤 Submitting transfer transaction...");
+      logger.transaction("Submitting transfer transaction");
       const result = await server.sendTransaction(signedTransaction);
       
-      console.log("✅ Transfer successful!", result);
+      logger.transaction("Transfer successful", result);
       setLastResult(`✅ Transfer successful! Token ID: ${transferTokenId}`);
       showToast({ title: "Success", description: `NFT #${transferTokenId} transferred successfully!`, variant: "default" });
       
@@ -823,7 +825,7 @@ const NFTInteract = () => {
       await Promise.all([fetchUserNFTs(), fetchContractInfo()]);
       
     } catch (error) {
-      console.error("❌ Transfer error:", error);
+      logger.error("Transfer error", error);
       const errorMessage = error.message || "Failed to transfer NFT";
       setLastResult(`❌ Error: ${errorMessage}`);
       showToast({ title: "Error", description: errorMessage, variant: "destructive" });
@@ -841,7 +843,7 @@ const NFTInteract = () => {
 
     setIsLoading(true);
     try {
-      console.log("👤 Querying token owner manually...");
+      logger.nft("Querying token owner manually");
       
       // ✅ Manual owner query
       const server = await createSorobanServer();
@@ -863,7 +865,7 @@ const NFTInteract = () => {
       setLastResult(`✅ Token #${queryTokenId} owner: ${owner}`);
       showToast({ title: "Success", description: `Owner found: ${owner}`, variant: "default" });
     } catch (error) {
-      console.error("❌ Query owner error:", error);
+      logger.error("Query owner error", error);
       const errorMessage = error.message || "Failed to query token owner";
       setLastResult(`❌ Error: ${errorMessage}`);
       showToast({ title: "Error", description: errorMessage, variant: "destructive" });
@@ -882,7 +884,7 @@ const NFTInteract = () => {
 
     setIsLoading(true);
     try {
-      console.log("💰 Querying balance manually...");
+      logger.nft("Querying balance manually");
       
       // ✅ Manual balance query
       const server = await createSorobanServer();
@@ -904,7 +906,7 @@ const NFTInteract = () => {
       setLastResult(`✅ Address ${queryOwner} owns ${balance} NFTs`);
       showToast({ title: "Success", description: `Balance: ${balance} NFTs`, variant: "default" });
     } catch (error) {
-      console.error("❌ Query balance error:", error);
+      logger.error("Query balance error", error);
       const errorMessage = error.message || "Failed to query balance";
       setLastResult(`❌ Error: ${errorMessage}`);
       showToast({ title: "Error", description: errorMessage, variant: "destructive" });
@@ -923,7 +925,7 @@ const NFTInteract = () => {
 
     setIsLoading(true);
     try {
-      console.log("🔗 Querying token URI manually...");
+      logger.nft("Querying token URI manually");
       
       // ✅ Manual token URI query
       const server = await createSorobanServer();
@@ -945,7 +947,7 @@ const NFTInteract = () => {
       setLastResult(`✅ Token #${queryTokenId} URI: ${uri}`);
       showToast({ title: "Success", description: "Token URI retrieved", variant: "default" });
     } catch (error) {
-      console.error("❌ Get token URI error:", error);
+      logger.error("Get token URI error", error);
       const errorMessage = error.message || "Failed to get token URI";
       setLastResult(`❌ Error: ${errorMessage}`);
       showToast({ title: "Error", description: errorMessage, variant: "destructive" });
@@ -959,7 +961,7 @@ const NFTInteract = () => {
 
   // Debug wallet connection state
   useEffect(() => {
-    console.log("🔄 Wallet state changed:", {
+    logger.debug("Wallet state changed", {
       walletAddress,
       walletType,
       isReady,
@@ -971,7 +973,7 @@ const NFTInteract = () => {
 
   // Debug admin status
   useEffect(() => {
-    console.log("🔍 Admin Debug:", { 
+    logger.debug("Admin Debug", { 
       walletAddress, 
       adminAddress, 
       isAdmin: walletAddress === adminAddress,
@@ -994,12 +996,12 @@ const NFTInteract = () => {
         throw new Error("Please connect your wallet first to load contract information");
       }
 
-      console.log("🔍 Attempting to create contract client...", {
+      logger.contract("Attempting to create contract client", {
         contractId,
         walletAddress
       });
 
-      console.log("📋 Fetching contract info manually...", { contractId });
+      logger.contract("Fetching contract info manually", { contractId });
       
       // ✅ Manual contract queries
       const server = await createSorobanServer();
@@ -1046,7 +1048,7 @@ const NFTInteract = () => {
       setAdminAddress(adminAddr);
       setIsInitialized(true);
 
-      console.log("✅ Contract info loaded:", { 
+      logger.contract("Contract info loaded", { 
         name, 
         symbol,
         admin: adminAddr,
@@ -1062,7 +1064,7 @@ const NFTInteract = () => {
       });
 
     } catch (error) {
-      console.error("❌ Error fetching contract info:", error);
+      logger.error("Error fetching contract info", error);
       setIsInitialized(false);
       showToast({ 
         title: "Error", 
@@ -1078,7 +1080,7 @@ const NFTInteract = () => {
     if (!walletAddress) return;
 
     try {
-      console.log("🖼️ Fetching user NFTs manually...");
+      logger.nft("Fetching user NFTs manually");
       
       // ✅ Manual balance query
       const server = await createSorobanServer();
@@ -1097,29 +1099,29 @@ const NFTInteract = () => {
       const balance = balanceResult.result?.retval ? scValToNative(balanceResult.result.retval) : 0;
       
       setUserBalance(parseInt(balance) || 0);
-      console.log("✅ User balance:", balance);
+      logger.nft("User balance", balance);
     } catch (error) {
-      console.error("❌ Error fetching user NFTs:", error);
+      logger.error("Error fetching user NFTs", error);
     }
   };
 
   // Load contract data when wallet connects and contract ID is set
   useEffect(() => {
     if (walletAddress && contractId && isValidContractId(contractId)) {
-      console.log("🔗 Wallet connected, loading contract data...", { walletAddress, contractId });
+      logger.debug("Wallet connected, loading contract data", { walletAddress, contractId });
       // Add a small delay to ensure wallet is fully ready
       const timer = setTimeout(async () => {
         try {
           await Promise.all([fetchContractInfo(), fetchUserNFTs()]);
-          console.log("✅ Contract data loaded successfully");
+          logger.debug("Contract data loaded successfully");
         } catch (error) {
-          console.error("❌ Error loading contract data:", error);
+          logger.error("Error loading contract data", error);
         }
       }, 500);
       
       return () => clearTimeout(timer);
     } else {
-      console.log("⏳ Waiting for wallet connection and contract ID...", { 
+      logger.debug("Waiting for wallet connection and contract ID", { 
         walletAddress: !!walletAddress, 
         contractId: !!contractId
       });
@@ -1155,7 +1157,7 @@ const NFTInteract = () => {
                 />
                 <Button 
                   onClick={async () => {
-                    console.log("🔄 Load Contract button clicked", { 
+                    logger.debug("Load Contract button clicked", { 
                       contractId, 
                       walletAddress: !!walletAddress
                     });
@@ -1176,12 +1178,12 @@ const NFTInteract = () => {
                     
                     setIsLoading(true);
                     try {
-                      console.log("🔄 Starting manual contract load...", { contractId, walletAddress });
+                      logger.debug("Starting manual contract load", { contractId, walletAddress });
                       await fetchContractInfo();
                       await fetchUserNFTs();
-                      console.log("✅ Manual contract load completed");
+                      logger.debug("Manual contract load completed");
                     } catch (error) {
-                      console.error("❌ Manual contract load failed:", error);
+                      logger.error("Manual contract load failed", error);
                       // Error handling is already done in fetchContractInfo
                     } finally {
                       setIsLoading(false);

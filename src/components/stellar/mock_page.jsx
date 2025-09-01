@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import { Client } from '../../../blockchain/transactions-sdk/src/index.ts';
 import { Networks } from '@stellar/stellar-sdk';
+import logger from '@/lib/logger';
 
 const MockPage = () => {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
 
   const executeTransaction = async () => {
-    console.log('Botón presionado, ejecutando transacción...');
+    logger.stellar('Button pressed, executing transaction');
     setError(null);
     setResult(null);
     try {
-      console.log('Creando instancia del contrato...');
+      logger.stellar('Creating contract instance');
       const contract = new Client({
         networkPassphrase: Networks.TESTNET,
         rpcUrl: 'https://soroban-testnet.stellar.org',
         contractId: 'CBPIN7VOPCXDCWT2QIXTXCAX2N4XBNGSQKNEWPRP7J5Z4QSQOGGXBPGP'
       });
 
-      console.log('Llamando a initialize...');
+      logger.stellar('Calling initialize');
       const { result: transactionResult } = await contract.initialize({
         admin: 'GB3A3QFF7SDBEIE2NMNJ2JGR7DWRMX2QV4EFR7WUC7OIT2O3EOUEOCJF'
       });
 
-      console.log('Transacción completada:', transactionResult);
+      logger.stellar('Transaction completed', transactionResult);
       setResult(transactionResult);
-      console.log(transactionResult)
     } catch (err) {
-      console.error('Error atrapado:', err);
+      logger.error('Transaction error', err);
       setError(err.message || 'Error al ejecutar la transacción');
     }
   };

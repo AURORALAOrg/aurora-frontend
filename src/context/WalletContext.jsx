@@ -9,6 +9,7 @@ import {
   XBULL_ID,
 } from "@creit.tech/stellar-wallets-kit";
 import { Horizon } from "@stellar/stellar-sdk";
+import logger from "@/lib/logger";
 
 // Stellar testnet server
 const stellarServer = new Horizon.Server("https://horizon-testnet.stellar.org");
@@ -41,37 +42,37 @@ export const WalletProvider = ({ children }) => {
   
   const fundTestnetAccount = async (publicKey) => {
     try {
-      console.log("Funding testnet account:", publicKey);
+      logger.wallet("Funding testnet account", { publicKey });
       const response = await fetch(`https://friendbot.stellar.org?addr=${publicKey}`);
       if (response.ok) {
-        console.log("Account funded successfully!");
+        logger.wallet("Account funded successfully");
         return true;
       } else {
-        console.error("Failed to fund account");
+        logger.error("Failed to fund account");
         return false;
       }
     } catch (error) {
-      console.error("Error funding account:", error);
+      logger.error("Error funding account", error);
       return false;
     }
   };
 
   const fetchBalances = async (publicKey, autoFund = false) => {
     try {
-      console.log("Fetching balances for:", publicKey);
+      logger.wallet("Fetching balances", { publicKey });
       const account = await stellarServer.loadAccount(publicKey);
       setBalances(account.balances);
-      console.log("Balances fetched successfully:", account.balances);
+      logger.wallet("Balances fetched successfully", account.balances);
     } catch (error) {
-      console.error("Error fetching balances:", error);
+      logger.error("Error fetching balances", error);
       
       // If account doesn't exist (404), it means the account is not funded yet
       if (error.response?.status === 404 || error.name === 'NotFoundError') {
-        console.log("Account not found - account needs to be funded first");
+        logger.wallet("Account not found - account needs to be funded first");
         
         // Auto-fund if requested (testnet only)
         if (autoFund) {
-          console.log("Attempting to auto-fund testnet account...");
+          logger.wallet("Attempting to auto-fund testnet account");
           const funded = await fundTestnetAccount(publicKey);
           if (funded) {
             // Try fetching balances again after funding
@@ -89,7 +90,7 @@ export const WalletProvider = ({ children }) => {
           }
         ]);
       } else {
-        console.error("Unexpected error:", error);
+        logger.error("Unexpected error", error);
         setBalances([]);
       }
     }
@@ -107,21 +108,21 @@ export const WalletProvider = ({ children }) => {
             const { address } = await kit.getAddress();
             setWalletAddress(address);
             setWalletType(option.id);
-            console.log("Connected wallet address:", address, "Type:", option.id);
+            logger.wallet("Connected wallet", { address, type: option.id });
 
             localStorage.setItem("stellar_wallet_address", address);
             localStorage.setItem("stellar_wallet_id", option.id);
 
             await fetchBalances(address);
           } catch (error) {
-            console.error("Error setting wallet:", error);
+            logger.error("Error setting wallet", error);
           } finally {
             setIsConnecting(false);
           }
         },
         onClosed: (err) => {
           if (err) {
-            console.error("Modal closed with error:", err);
+            logger.error("Modal closed with error", err);
           }
           setIsConnecting(false);
         },
@@ -129,7 +130,7 @@ export const WalletProvider = ({ children }) => {
         notAvailableText: "Selected wallet is not available",
       });
     } catch (error) {
-      console.error("Error connecting wallet:", error);
+      logger.error("Error connecting wallet", error);
       setIsConnecting(false);
     }
   };
@@ -154,7 +155,7 @@ export const WalletProvider = ({ children }) => {
       localStorage.setItem("stellar_wallet_id", "rabbit");
       await fetchBalances(publicKey);
     } catch (error) {
-      console.error("Rabbit connection error:", error);
+      logger.error("Rabbit connection error", error);
       alert("Failed to connect to Rabbit wallet.");
     } finally {
       setIsConnecting(false);
@@ -168,7 +169,7 @@ export const WalletProvider = ({ children }) => {
     setBalances(null);
     localStorage.removeItem("stellar_wallet_address");
     localStorage.removeItem("stellar_wallet_id");
-    console.log("Wallet disconnected");
+    logger.wallet("Wallet disconnected");
   };
 
   // Sign transaction
@@ -180,7 +181,7 @@ export const WalletProvider = ({ children }) => {
     try {
       // Handle different transaction formats
       let transactionXDR;
-      console.log("🔍 Analyzing transaction format:", { 
+      logger.transaction("Analyzing transaction format", { 
         type: typeof transaction, 
         hasToXDR: !!(transaction && typeof transaction.toXDR === 'function'),
         hasBuilt: !!(transaction && transaction.built),
@@ -197,7 +198,7 @@ export const WalletProvider = ({ children }) => {
         // Soroban contract transaction object
         transactionXDR = transaction.built.toXDR();
       } else {
-        console.error("Unknown transaction format:", transaction);
+        logger.error("Unknown transaction format", transaction);
         throw new Error(`Invalid transaction format. Type: ${typeof transaction}, hasToXDR: ${!!(transaction && typeof transaction.toXDR === 'function')}, hasBuilt: ${!!(transaction && transaction.built)}`);
       }
 
@@ -208,18 +209,18 @@ export const WalletProvider = ({ children }) => {
         const { xdr } = await window.rabet.sign(transactionXDR, "testnet");
         return xdr;
       } else {
-        console.log("🔍 Available kit methods:", Object.getOwnPropertyNames(kit).filter(name => typeof kit[name] === 'function'));
+        logger.wallet("Available kit methods", Object.getOwnPropertyNames(kit).filter(name => typeof kit[name] === 'function'));
         
         // Try different methods that might be available
         if (typeof kit.signTransaction === 'function') {
-          console.log("📝 Using kit.signTransaction from WalletContext");
+          logger.wallet("Using kit.signTransaction from WalletContext");
           const result = await kit.signTransaction(transactionXDR, {
             publicKey: walletAddress,
             network: WalletNetwork.TESTNET,
           });
-          console.log("🔍 WalletContext kit.signTransaction result:", result);
+          logger.wallet("WalletContext kit.signTransaction result", result);
           const signedXdr = result.signedXDR || result.signedTxXdr || result.xdr || result;
-          console.log("🔍 WalletContext extracted XDR:", { 
+          logger.wallet("WalletContext extracted XDR", { 
             type: typeof signedXdr, 
             length: signedXdr ? signedXdr.length : 0,
             preview: signedXdr ? signedXdr.substring(0, 100) + '...' : 'null'
@@ -232,15 +233,15 @@ export const WalletProvider = ({ children }) => {
           
           return signedXdr;
         } else if (typeof kit.signTx === 'function') {
-          console.log("📝 Using kit.signTx from WalletContext");
+          logger.wallet("Using kit.signTx from WalletContext");
           const result = await kit.signTx({
             xdr: transactionXDR,
             publicKeys: [walletAddress],
             network: WalletNetwork.TESTNET,
           });
-          console.log("🔍 WalletContext kit.signTx result:", result);
+          logger.wallet("WalletContext kit.signTx result", result);
           const signedXdr = result.signedXDR || result.signedTxXdr || result.xdr || result;
-          console.log("🔍 WalletContext extracted XDR:", { 
+          logger.wallet("WalletContext extracted XDR", { 
             type: typeof signedXdr, 
             length: signedXdr ? signedXdr.length : 0,
             preview: signedXdr ? signedXdr.substring(0, 100) + '...' : 'null'
@@ -257,7 +258,7 @@ export const WalletProvider = ({ children }) => {
         }
       }
     } catch (error) {
-      console.error("Transaction signing error:", error);
+      logger.error("Transaction signing error", error);
       throw error;
     }
   };

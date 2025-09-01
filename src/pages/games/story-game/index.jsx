@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import LevelSelector from "@/components/practices/funny_practices/LevelSelector";
-import MultiChoiceStoryGame from "@/components/Games/story-game/multi-choice-story-game";
+import MultiChoiceStoryGame from "@/components/games/story-game/multi-choice-story-game";
 import { questionsApi } from "@/services/questionsApi";
 
 const StoryGame = () => {
@@ -27,25 +27,29 @@ const StoryGame = () => {
   };
 
   const shuffleQuestionsInStories = (stories) => {
-    return stories.map(story => ({
+    return stories.map((story) => ({
       ...story,
-      questions: shuffleArray(story.questions || [])
+      questions: shuffleArray(story.questions || []),
     }));
   };
 
   const fetchQuestions = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const response = await questionsApi.getAllQuestions({
         englishLevel: selectedLevel,
-        type: "story_game"
+        type: "story_game",
       });
-      
+
       const questionsData = response.data || response.questions || response;
-      
-      if (questionsData && Array.isArray(questionsData) && questionsData.length > 0) {
+
+      if (
+        questionsData &&
+        Array.isArray(questionsData) &&
+        questionsData.length > 0
+      ) {
         const normalizeQuestions = (qs = []) =>
           qs.map((q) => ({
             question: q?.question ?? q?.text ?? "",
@@ -64,22 +68,33 @@ const StoryGame = () => {
 
         const transformedQuestions = questionsData.map((item) => ({
           storyText: item?.content?.story ?? item?.story ?? "",
-          questions: normalizeQuestions(item?.content?.questions ?? item?.questions),
+          questions: normalizeQuestions(
+            item?.content?.questions ?? item?.questions
+          ),
           metadata: item?.metadata ?? {},
           gameMetadata: item?.gameMetadata ?? {},
         }));
-        
+
         const shuffledStories = shuffleArray([...transformedQuestions]);
-        const storiesWithShuffledQuestions = shuffleQuestionsInStories(shuffledStories);
-        
+        const storiesWithShuffledQuestions =
+          shuffleQuestionsInStories(shuffledStories);
+
         setQuestions(storiesWithShuffledQuestions);
         setCurrentIndex(0);
         setGameStarted(true);
       } else {
-        setError(`No stories available for level ${selectedLevel}. Please check if questions are properly imported in the backend.`);
+        setError(
+          `No stories available for level ${selectedLevel}. Please check if questions are properly imported in the backend.`
+        );
       }
     } catch (err) {
-      setError(`Failed to load stories: ${err.message}. Make sure your backend server is running at ${import.meta.env.VITE_API_BASE_URL}`);
+      setError(
+        `Failed to load stories: ${
+          err.message
+        }. Make sure your backend server is running at ${
+          import.meta.env.VITE_API_BASE_URL
+        }`
+      );
     } finally {
       setLoading(false);
     }
@@ -106,7 +121,7 @@ const StoryGame = () => {
   const handleComplete = () => {
     // Add score saving logic here if needed
   };
-  
+
   const handleNextStory = () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -117,7 +132,9 @@ const StoryGame = () => {
     return (
       <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-        <p className="text-gray-600">Loading stories for level {selectedLevel}...</p>
+        <p className="text-gray-600">
+          Loading stories for level {selectedLevel}...
+        </p>
       </div>
     );
   }
@@ -160,7 +177,9 @@ const StoryGame = () => {
   if (!questions.length && selectedLevel && !loading) {
     return (
       <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg text-center">
-        <p className="text-gray-600 mb-4">No stories available for level {selectedLevel}.</p>
+        <p className="text-gray-600 mb-4">
+          No stories available for level {selectedLevel}.
+        </p>
         <div className="space-y-2">
           <button
             onClick={() => fetchQuestions()}
@@ -181,7 +200,7 @@ const StoryGame = () => {
 
   if (gameStarted && questions[currentIndex]) {
     const currentQuestion = questions[currentIndex];
-    
+
     return (
       <MultiChoiceStoryGame
         storyText={currentQuestion.storyText}

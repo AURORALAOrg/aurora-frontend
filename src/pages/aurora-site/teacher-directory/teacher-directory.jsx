@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Search, Users, Star, Clock, Filter, UserCheck } from "lucide-react";
+import { Search, Users, Clock, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,12 +16,13 @@ const mockTeachers = [
     totalClasses: 1250,
     languages: ["English", "Spanish"],
     levels: ["A1", "A2", "B1", "B2"],
-    description: "Experienced English teacher with 8+ years helping students achieve fluency through interactive methods.",
+    description:
+      "Experienced English teacher with 8+ years helping students achieve fluency through interactive methods.",
     specialties: ["Business English", "IELTS Prep", "Conversation"],
     availability: ["Available this week", "1:1", "Group class"],
     nextAvailable: "Today 3:00 PM",
     hourlyRate: 25,
-    timezone: "EST (UTC-5)"
+    timezone: "EST (UTC-5)",
   },
   {
     id: 2,
@@ -31,12 +32,13 @@ const mockTeachers = [
     totalClasses: 2100,
     languages: ["French", "English"],
     levels: ["A1", "A2", "B1", "B2", "+2"],
-    description: "French native with expertise in DELF/DALF preparation and French literature for advanced students.",
+    description:
+      "French native with expertise in DELF/DALF preparation and French literature for advanced students.",
     specialties: ["DELF/DALF", "Literature", "Pronunciation"],
     availability: ["Group class", "Weekend available"],
     nextAvailable: "Friday 2:00 PM",
     hourlyRate: 30,
-    timezone: "CET (UTC+1)"
+    timezone: "CET (UTC+1)",
   },
   {
     id: 3,
@@ -46,12 +48,13 @@ const mockTeachers = [
     totalClasses: 980,
     languages: ["Mandarin", "English"],
     levels: ["A1", "A2", "B1", "B2", "+1"],
-    description: "Certified Mandarin teacher with HSK preparation expertise and traditional Chinese culture knowledge.",
+    description:
+      "Certified Mandarin teacher with HSK preparation expertise and traditional Chinese culture knowledge.",
     specialties: ["HSK Prep", "Culture", "Characters"],
     availability: ["Available this week", "Group class"],
     nextAvailable: "Today 6:00 PM",
     hourlyRate: 24,
-    timezone: "CST (UTC+8)"
+    timezone: "CST (UTC+8)",
   },
   {
     id: 4,
@@ -61,12 +64,13 @@ const mockTeachers = [
     totalClasses: 830,
     languages: ["Spanish", "English"],
     levels: ["A1", "A2", "B1", "B2"],
-    description: "Native Spanish speaker specializing in conversational Spanish and Latin American culture.",
+    description:
+      "Native Spanish speaker specializing in conversational Spanish and Latin American culture.",
     specialties: ["Conversation", "Culture", "Grammar"],
     availability: ["1:1", "Group class"],
     nextAvailable: "Tomorrow 10:00 AM",
     hourlyRate: 22,
-    timezone: "CST (UTC-6)"
+    timezone: "CST (UTC-6)",
   },
   {
     id: 5,
@@ -76,12 +80,13 @@ const mockTeachers = [
     totalClasses: 1450,
     languages: ["Polish", "English"],
     levels: ["A1", "A2", "B1", "B2"],
-    description: "Experienced Polish teacher with focus on business Polish and cultural immersion.",
+    description:
+      "Experienced Polish teacher with focus on business Polish and cultural immersion.",
     specialties: ["Business Polish", "Culture", "Grammar"],
     availability: ["Available this week", "1:1"],
     nextAvailable: "Monday 9:00 AM",
     hourlyRate: 28,
-    timezone: "CET (UTC+1)"
+    timezone: "CET (UTC+1)",
   },
   {
     id: 6,
@@ -91,17 +96,18 @@ const mockTeachers = [
     totalClasses: 650,
     languages: ["Japanese", "English"],
     levels: ["A1", "A2", "B1"],
-    description: "Japanese language instructor with expertise in JLPT preparation and Japanese business culture.",
+    description:
+      "Japanese language instructor with expertise in JLPT preparation and Japanese business culture.",
     specialties: ["JLPT Prep", "Business Japanese", "Kanji"],
     availability: ["Group class", "Weekend available"],
     nextAvailable: "Wednesday 7:00 PM",
     hourlyRate: 32,
-    timezone: "JST (UTC+9)"
-  }
+    timezone: "JST (UTC+9)",
+  },
 ];
 
 const TeacherDirectoryPage = () => {
-  const [teachers, setTeachers] = useState(mockTeachers);
+  const [teachers] = useState(mockTeachers);
   const [filteredTeachers, setFilteredTeachers] = useState(mockTeachers);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -110,7 +116,7 @@ const TeacherDirectoryPage = () => {
     level: "All Levels",
     classType: "All Types",
     availability: "Any Time",
-    sortBy: "Highest Rated"
+    sortBy: "Highest Rated",
   });
 
   const teachersPerPage = 6;
@@ -123,23 +129,28 @@ const TeacherDirectoryPage = () => {
     let filtered = [...teachers];
 
     if (searchTerm) {
-      filtered = filtered.filter(teacher =>
-        teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        teacher.languages.some(lang => lang.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        teacher.specialties.some(spec => spec.toLowerCase().includes(searchTerm.toLowerCase()))
+      filtered = filtered.filter(
+        (teacher) =>
+          teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          teacher.languages.some((lang) =>
+            lang.toLowerCase().includes(searchTerm.toLowerCase())
+          ) ||
+          teacher.specialties.some((spec) =>
+            spec.toLowerCase().includes(searchTerm.toLowerCase())
+          )
       );
     }
 
     // Language filter
     if (filters.language !== "All Languages") {
-      filtered = filtered.filter(teacher =>
+      filtered = filtered.filter((teacher) =>
         teacher.languages.includes(filters.language)
       );
     }
 
     // Level filter
     if (filters.level !== "All Levels") {
-      filtered = filtered.filter(teacher =>
+      filtered = filtered.filter((teacher) =>
         teacher.levels.includes(filters.level)
       );
     }
@@ -148,16 +159,16 @@ const TeacherDirectoryPage = () => {
     if (filters.classType !== "All Types") {
       const classTypeMap = {
         "1:1 Classes": "1:1",
-        "Group Classes": "Group class"
+        "Group Classes": "Group class",
       };
-      filtered = filtered.filter(teacher =>
+      filtered = filtered.filter((teacher) =>
         teacher.availability.includes(classTypeMap[filters.classType])
       );
     }
 
     // Availability filter
     if (filters.availability === "Available This Week") {
-      filtered = filtered.filter(teacher =>
+      filtered = filtered.filter((teacher) =>
         teacher.availability.includes("Available this week")
       );
     }
@@ -177,7 +188,7 @@ const TeacherDirectoryPage = () => {
     setCurrentPage(1);
   }, [searchTerm, filters, teachers]);
 
-  const availableThisWeek = teachers.filter(teacher =>
+  const availableThisWeek = teachers.filter((teacher) =>
     teacher.availability.includes("Available this week")
   ).length;
 
@@ -188,9 +199,12 @@ const TeacherDirectoryPage = () => {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-white">👩‍🏫 Teacher Directory</h1>
+              <h1 className="text-3xl font-bold text-white">
+                👩‍🏫 Teacher Directory
+              </h1>
               <p className="text-neutral-3 mt-1">
-                Find the perfect teacher for your learning journey. Book 1:1 sessions or join group classes.
+                Find the perfect teacher for your learning journey. Book 1:1
+                sessions or join group classes.
               </p>
             </div>
           </div>
@@ -252,8 +266,12 @@ const TeacherDirectoryPage = () => {
         ) : (
           <div className="text-center py-12">
             <Users className="w-16 h-16 text-neutral-3 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">No teachers found</h3>
-            <p className="text-neutral-3">Try adjusting your filters to see more results.</p>
+            <h3 className="text-xl font-semibold text-white mb-2">
+              No teachers found
+            </h3>
+            <p className="text-neutral-3">
+              Try adjusting your filters to see more results.
+            </p>
           </div>
         )}
 
@@ -297,4 +315,4 @@ const TeacherDirectoryPage = () => {
   );
 };
 
-export default TeacherDirectoryPage; 
+export default TeacherDirectoryPage;
