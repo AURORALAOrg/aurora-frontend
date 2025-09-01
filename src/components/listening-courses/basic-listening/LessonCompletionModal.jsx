@@ -21,7 +21,7 @@ const LessonCompletionModal = ({ isOpen, onClose, lessonTitle, score, totalQuest
 
   if (!isOpen) return null;
 
-  const percentage = Math.round((score / totalQuestions) * 100);
+  const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">

@@ -49,6 +49,7 @@ class ProgressService {
   // Get progress percentage for the course
   getCourseProgress(allLessons) {
     const completed = this.getCompletedLessons();
+    if (!Array.isArray(allLessons) || allLessons.length === 0) return 0;
     const totalLessons = allLessons.length;
     const completedCount = allLessons.filter(lesson => 
       completed.includes(lesson.id)
@@ -86,7 +87,7 @@ class ProgressService {
       scores[lessonId] = {
         score,
         totalQuestions,
-        percentage: Math.round((score / totalQuestions) * 100),
+        percentage: totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0,
         completedAt: new Date().toISOString()
       };
       localStorage.setItem(`${this.storageKey}-scores`, JSON.stringify(scores));
