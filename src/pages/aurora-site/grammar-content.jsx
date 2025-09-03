@@ -158,9 +158,9 @@ const GrammarPage = () => {
                     {item.progress}%
                   </span>
                   {/* Only show navigation if unlocked */}
-                  {item.unlocked && (
+                  {topic.unlocked && topic.id === "past-simple" && (
                     <Link
-                      to={`/${item.id}-course`}
+                      to="/past-simple-course"
                       className="text-xs bg-light-blue-1 text-white px-3 py-1 rounded hover:bg-light-blue-2 transition-colors"
                     >
                       Start Course

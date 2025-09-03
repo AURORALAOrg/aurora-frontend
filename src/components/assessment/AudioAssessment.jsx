@@ -3,7 +3,7 @@ import { Play, Pause, Mic, MicOff, AlertCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import useAudioQuality from "../../hooks/use-audio-quality";
-// import PronunciationFeedback from "./PronunciationFeedback"; // Uncomment if you have this
+import PronunciationFeedback from "./PronunciationFeedback";
 
 const AudioAssessment = ({
   question,
@@ -97,7 +97,9 @@ const AudioAssessment = ({
       setIsRecording(true);
     } catch (error) {
       console.error("Error starting recording:", error);
-      setAudioError("Could not access microphone. Please allow microphone permissions.");
+      setAudioError(
+        "Could not access microphone. Please allow microphone permissions."
+      );
     }
   };
 
@@ -143,7 +145,9 @@ const AudioAssessment = ({
                   <Play className="w-5 h-5" />
                 )}
               </Button>
-              <span className="text-neutral-2">Audio {String.fromCharCode(65 + index)}</span>
+              <span className="text-neutral-2">
+                Audio {String.fromCharCode(65 + index)}
+              </span>
             </div>
           ))}
         </div>
@@ -157,7 +161,11 @@ const AudioAssessment = ({
                 isRecording ? "bg-red-500/20 text-red-500" : "text-light-blue-1"
               }`}
             >
-              {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+              {isRecording ? (
+                <MicOff className="w-4 h-4" />
+              ) : (
+                <Mic className="w-4 h-4" />
+              )}
               {isRecording ? "Stop Recording" : "Start Recording"}
             </Button>
           </div>
@@ -181,7 +189,11 @@ const AudioAssessment = ({
         </div>
       </div>
 
-      <audio ref={audioRef} onEnded={() => setIsPlaying(false)} onPause={() => setIsPlaying(false)} />
+      <audio
+        ref={audioRef}
+        onEnded={() => setIsPlaying(false)}
+        onPause={() => setIsPlaying(false)}
+      />
 
       {showFeedback && recordedAudio && (
         <PronunciationFeedback
