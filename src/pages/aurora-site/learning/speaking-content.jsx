@@ -104,17 +104,15 @@ const SpeakingPage = () => {
 
   // Simulate marking a lesson complete (for demo)
   const handleComplete = (idx) => {
-    setProgressList((prev) =>
-      prev.map((item, i) => (i === idx ? { ...item, progress: 100 } : item))
-    );
-
-    // unlock next lesson if previous is completed
     setProgressList((prev) => {
-      return prev.map((item, index) => {
-        if (index === 0) return { ...item, unlocked: true };
-        const prevCompleted = prev[index - 1].progress === 100;
-        return { ...item, unlocked: prevCompleted };
-      });
+      const updated = prev.map((item, i) =>
+        i === idx ? { ...item, progress: 100 } : item
+      );
+
+      return updated.map((item, i, arr) => ({
+        ...item,
+        unlocked: i === 0 ? true : arr[i - 1].progress === 100,
+      }));
     });
   };
 

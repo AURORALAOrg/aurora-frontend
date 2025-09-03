@@ -39,10 +39,10 @@ const getInitialProgress = () => {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) return JSON.parse(stored);
   // Default: first lesson unlocked, rest locked, all progress 0
-  return listeningTopics.map((t, i) => ({
-    id: t.id,
+  return listeningTopics.map((topic, index) => ({
+    id: topic.id,
     progress: 0,
-    unlocked: i === 0,
+    unlocked: index === 0,
   }));
 };
 

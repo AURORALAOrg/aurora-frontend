@@ -57,7 +57,7 @@ const getInitialProgress = () => {
   // Default: first lesson unlocked, rest locked, all progress 0
   return grammarTopics.map((topic, index) => ({
     id: topic.id,
-    progress: index === 0 ? 0 : 0,
+    progress: 0,
     unlocked: index === 0,
   }));
 };
@@ -72,17 +72,14 @@ const GrammarPage = () => {
 
   // Simulate marking a lesson complete (for demo)
   const handleComplete = (idx) => {
-    setProgressList((prev) =>
-      prev.map((item, i) => (i === idx ? { ...item, progress: 100 } : item))
-    );
-
-    // Unlock next lesson if previous is completed
     setProgressList((prev) => {
-      return prev.map((item, index) => {
-        if (index === 0) return { ...item, unlocked: true };
-        const prevCompleted = prev[index - 1].progress === 100;
-        return { ...item, unlocked: prevCompleted };
-      });
+      const updated = prev.map((item, i) =>
+        i === idx ? { ...item, progress: 100 } : item
+      );
+      return updated.map((item, i, arr) => ({
+        ...item,
+        unlocked: i === 0 ? true : arr[i - 1].progress === 100,
+      }));
     });
   };
 
@@ -158,7 +155,7 @@ const GrammarPage = () => {
                     {item.progress}%
                   </span>
                   {/* Only show navigation if unlocked */}
-                  {topic.unlocked && topic.id === "past-simple" && (
+                  {item.unlocked && topic.id === "past-simple" && (
                     <Link
                       to="/past-simple-course"
                       className="text-xs bg-light-blue-1 text-white px-3 py-1 rounded hover:bg-light-blue-2 transition-colors"
