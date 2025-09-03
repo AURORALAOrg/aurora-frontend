@@ -15,6 +15,7 @@ import {
   Users,
   UserCheck,
   Award,
+  LayoutDashboard,
 } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -179,6 +180,22 @@ const Sidebar = ({ isOpen, onClose }) => {
               </div>
             )}
           </div>
+
+          {/* Dashboard */}
+          <NavLink to="dashboard">
+            <button
+              onClick={() => handleNavClick("dashboard")}
+              className="flex items-center gap-3 px-3 py-2 w-full text-left rounded-lg transition-colors hover:bg-[#374151]"
+              style={{
+                backgroundColor:
+                  currentPage === "dashboard" ? "#1f2937" : "transparent",
+                color: "#FFFFFF",
+              }}
+            >
+              <LayoutDashboard className="w-5 h-5 text-[#ced2d8]" />
+              <span className="text-sm font-medium">Dashboard</span>
+            </button>
+          </NavLink>
 
           {/* Courses */}
           <NavLink to="course-listing">
