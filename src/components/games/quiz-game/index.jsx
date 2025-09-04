@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import LevelSelector from "../word-matching/level-selector"
+import LevelSelector from "./LevelSelector"
 import { questionsApi } from "@/services/questionsApi"
 
-const Games = () => {
+const QuizGame = () => {
   const [selectedLevel, setSelectedLevel] = useState(null)
   const [questions, setQuestions] = useState([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -262,4 +262,4 @@ const Games = () => {
   )
 }
 
-export default Games
+export default QuizGame
