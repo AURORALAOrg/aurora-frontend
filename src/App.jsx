@@ -94,6 +94,8 @@ import ListeningComprehensionPage from "@/pages/aurora-site/assessment/listening
 // 👨‍🏫 Teacher Features (from main branch)
 import EscrowClassesPage from "@/pages/aurora-site/escrow/classes";
 import TeacherSignupPage from "@/pages/teacher-signup";
+import PlacementTest from "./pages/placementTest";
+
 // Rewards System
 import RewardsSystem from "@/pages/aurora-site/rewards/page.jsx";
 
@@ -156,6 +158,8 @@ function App() {
               <Route path="/games/word-scramble" element={<WordScramble />} />
               <Route path="/games/word-matching/" element={<WordMatching />} />
               <Route path="/games" element={<GamePanel />} />
+              <Route path="/placement-test" element={<PlacementTest />} />
+
               <Route
                 path="/games/memory-card"
                 element={<DifficultySelector />}
