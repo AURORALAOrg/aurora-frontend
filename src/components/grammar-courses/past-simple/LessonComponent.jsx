@@ -45,9 +45,12 @@ const LessonComponent = ({ lessonData, onComplete, onNext, onPrevious, lessonNum
   };
 
   const getProgressPercentage = () => {
-    const totalQuestions = lessonData.exercises.reduce((total, exercise) => total + exercise.questions.length, 0);
-    const answeredQuestions = Object.keys(selectedAnswers).length;
-    return Math.round((answeredQuestions / totalQuestions) * 100);
+    const totalQuestions = lessonData.exercises?.reduce((total, exercise) => total + exercise.questions.length, 0) ?? 0;
+    const answeredQuestions = Object.values(selectedAnswers).reduce((count, val) => {
+      if (typeof val === 'string') return count + (val.trim() ? 1 : 0);
+      return count + (val != null ? 1 : 0);
+    }, 0);
+    return totalQuestions ? Math.round((answeredQuestions / totalQuestions) * 100) : 0;
   };
 
   const renderTheory = () => (
