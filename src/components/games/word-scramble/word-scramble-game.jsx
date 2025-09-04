@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback, useEffect } from "react"
-import WordScrambleDifficultySelector from "./difficulty-selector"
+import LevelSelector from "@/components/practices/funny_practices/LevelSelector"
 import ResultModal from "./result-modal"
 import { questionsApi } from "@/services/questionsApi"
 import { IoMdArrowRoundBack } from "react-icons/io"
@@ -131,7 +131,7 @@ const WordScrambleGame = () => {
   if (!difficulty) {
     return (
       <div className="p-6">
-        <WordScrambleDifficultySelector onSelectDifficulty={setDifficulty} />
+        <LevelSelector onLevelSelect={setDifficulty} />
       </div>
     )
   }
@@ -160,7 +160,7 @@ const WordScrambleGame = () => {
       {endGame ? (
         <ResultModal totalMoves={moves} startAgain={resetGame} returnToGame={() => setEndGame(false)} />
       ) : (
-        <div className="bg-white pt-0 rounded-2xl shadow-lg text-center max-w-md mx-auto animate-popup mt-10">
+        <div className="bg-white pt-0 rounded-2xl shadow-lg text-center max-w-md mx-auto animate-popup">
           <div className="flex items-center justify-between border-b mb-5 p-6 text-sm">
             <IoMdArrowRoundBack className="fill-blue-500 cursor-pointer" onClick={() => setDifficulty(null)} />
             <span className="text-blue-500 space-x-2">
