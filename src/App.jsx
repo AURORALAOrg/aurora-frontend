@@ -65,6 +65,7 @@ import GameBoard from "@/components/games/memory-card/game-board";
 import PracticeSystem from "@/components/practices/funny_practices/DragDropSentenceBuilder";
 import IdiomChallenge from "@/components/practices/funny_practices/idiom-challenge";
 import SentenceBuilder from "@/components/practices/funny_practices/SentenceBuilder";
+import DirectionsCourse from "@/components/practices/directions-course/directions-course";
 
 //Quizzes
 import FillInTheBlanksQuizPage from "@/components/practices/funny_practices/FillInTheBlanksPage";
@@ -73,6 +74,7 @@ import Quiz from "@/components/practices/funny_practices/QuizPage";
 // 🏛️ Grammar & Language
 import GrammarContent from "@/pages/aurora-site/grammar-content";
 import PresentSimpleCoursePage from "@/pages/aurora-site/present-simple-course";
+import PastSimpleCoursePage from "@/pages/aurora-site/past-simple-course";
 
 // ✨ Question Creator
 import QuestionCreator from "@/components/practices/question-creator/question-creator";
@@ -83,9 +85,16 @@ import PublicProfile from "@/pages/public-profile/public-profile";
 import LeaderboardPage from "@/pages/aurora-site/community/leaderboard";
 import CertificatePage from "@/pages/aurora-site/certificate";
 import MyRequestsPage from "@/pages/aurora-site/my-requests";
+
+// 🎧 Audio Assessments (from feature/audio-assessments branch)
+import PronunciationAssessmentPage from "@/pages/aurora-site/assessment/pronunciation-assessment";
+import ListeningComprehensionPage from "@/pages/aurora-site/assessment/listening-comprehension";
+
+// 👨‍🏫 Teacher Features (from main branch)
 import EscrowClassesPage from "@/pages/aurora-site/escrow/classes";
 import TeacherSignupPage from "@/pages/teacher-signup";
-import QuizGamePage from "./pages/games/quiz-game";
+// Rewards System
+import RewardsSystem from "@/pages/aurora-site/rewards/page.jsx";
 
 function App() {
   return (
@@ -160,10 +169,18 @@ function App() {
                 path="/practice/fill-in-the-blanks"
                 element={<FillInTheBlanksQuizPage />}
               />
+              <Route 
+                path="/practice/directions-course" 
+                element={<DirectionsCourse />} 
+              />
               <Route path="/grammar" element={<GrammarContent />} />
               <Route
                 path="/present-simple-course"
                 element={<PresentSimpleCoursePage />}
+              />
+              <Route
+                path="/past-simple-course"
+                element={<PastSimpleCoursePage />}
               />
               <Route path="/vocabulary" element={<VocabularyPage />} />
               <Route path="/speaking" element={<SpeakingPage />} />
@@ -191,7 +208,14 @@ function App() {
               <Route path="/team" element={<GitHubProfiles />} />
               <Route path="/nft-interact" element={<NFTInteract />} />
               <Route path="/certificate" element={<CertificatePage />} />
+              
+              {/* Audio Assessment Routes (from feature/audio-assessments) */}
+              <Route path="/assessment/pronunciation" element={<PronunciationAssessmentPage />} />
+              <Route path="/assessment/listening" element={<ListeningComprehensionPage />} />
+              
+              {/* Teacher Routes (from main) */}
               <Route path="/teacher-signup" element={<TeacherSignupPage />} />
+              <Route path="/reward-system" element={<RewardsSystem />} />
 
               {/*</Route>*/}
             </Route>

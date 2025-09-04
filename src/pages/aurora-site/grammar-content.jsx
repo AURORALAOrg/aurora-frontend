@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const GrammarPage = () => {
   const grammarTopics = [
     { id: "present-simple", title: "Present Simple", progress: 100, unlocked: true },
+    { id: "past-simple", title: "Past Simple", progress: 0, unlocked: true },
     { id: "present-continuous", title: "Present Continuous", progress: 75, unlocked: true },
     { id: "articles", title: "Articles (A/An/The)", progress: 30, unlocked: true },
     { id: "plural-nouns", title: "Plural Nouns", progress: 0, unlocked: true },
@@ -70,6 +71,14 @@ const GrammarPage = () => {
                 {topic.unlocked && topic.id === "present-simple" && (
                   <Link
                     to="/present-simple-course"
+                    className="text-xs bg-light-blue-1 text-white px-3 py-1 rounded hover:bg-light-blue-2 transition-colors"
+                  >
+                    Start Course
+                  </Link>
+                )}
+                {topic.unlocked && topic.id === "past-simple" && (
+                  <Link
+                    to="/past-simple-course"
                     className="text-xs bg-light-blue-1 text-white px-3 py-1 rounded hover:bg-light-blue-2 transition-colors"
                   >
                     Start Course
