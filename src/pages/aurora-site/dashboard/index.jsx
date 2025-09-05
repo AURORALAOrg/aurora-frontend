@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getDashboardData } from "@/data/mock-dashboard-data";
+import { getContinueLearningLesson, getDashboardData } from "@/data/mock-dashboard-data";
 import { CircleCheck, Star } from "lucide-react";
 import React from "react";
 
@@ -24,7 +24,7 @@ const TopCard = ({ title, description, stat }) => {
 
 const Dashboard = () => {
   const dashboardData = getDashboardData();
-  console.log(dashboardData);
+  const continueLearningLesson = getContinueLearningLesson();
 
   return (
     <div className="min-h-screen bg-dark-blue-6">
@@ -46,17 +46,17 @@ const Dashboard = () => {
           <TopCard
             title="Total Points"
             description="Earn points by completing lessons and assessments"
-            stat={dashboardData.stats.totalPoints}
+            stat={dashboardData.gamification.pointsTotal}
           />
           <TopCard
             title="Streak"
             description="Come back every day to grow your streak"
-            stat={dashboardData.stats.streakDays}
+            stat={dashboardData.gamification.streakCount}
           />
           <TopCard
             title="Overall Completion"
             description="Average across all areas"
-            stat={`${dashboardData.stats.overallCompletion}%`}
+            stat={`${dashboardData.gamification.overallCompletion}%`}
           />
         </div>
 
@@ -68,7 +68,7 @@ const Dashboard = () => {
                   <p className="text-sm text-gray-500 font-medium">
                     Continue where you left off
                   </p>
-                  <p className="font-medium">{`${dashboardData?.continueLearning.course} • ${dashboardData?.continueLearning.lesson}`}</p>
+                  <p className="font-medium">{`${continueLearningLesson.title}`}</p>
                 </div>
                 <Button>Continue</Button>
               </CardContent>
@@ -79,8 +79,8 @@ const Dashboard = () => {
                 <a>Explore All</a>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {dashboardData?.courses.map(
-                  ({ title, progress, nextLesson, status }) => (
+                {dashboardData?.lessons.map(
+                  ({ title, percentComplete, nextLesson, status }) => (
                     <Card>
                       <img
                         src="https://placehold.co/400"
@@ -91,7 +91,7 @@ const Dashboard = () => {
                         <div className="flex flex-col">
                           <div className="flex justify-between items-center">
                             <p className="text-sm text-gray-500">Progress</p>
-                            <p className="text-sm font-semibold">{progress}%</p>
+                            <p className="text-sm font-semibold">{percentComplete}%</p>
                           </div>
                           <div>line</div>
                         </div>
@@ -99,7 +99,7 @@ const Dashboard = () => {
                           <p className="text-gray-500 text-sm">
                             Next:{" "}
                             <span className="text-gray-800 font-medium">
-                              {nextLesson}
+                              {nextLesson.title}
                             </span>
                           </p>
                           <Button>{status}</Button>
