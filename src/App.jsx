@@ -54,11 +54,9 @@ import HomePage from "@/pages/aurora-site/home";
 
 // 🧩 Games & Challenges
 import StoryGame from "@/pages/games/story-game";
-import WordScramble from "@/components/games/word-scramble/word-scramble-game.jsx";
 import WordMatching from "@/pages/games/word-matching";
 import GamePanel from "@/pages/games/game-panel";
-import DifficultySelector from "@/components/games/memory-card/difficulty-selector";
-import GameBoard from "@/components/games/memory-card/game-board";
+// import GameBoard from "@/components/games/memory-card/game-board";
 // import WordScrambleGame from "@/pages/games/word-scramble"; // Uncomment if exists
 
 // 📝 Practices & Exercises
@@ -99,6 +97,9 @@ import PlacementTest from "./pages/placementTest";
 
 // Rewards System
 import RewardsSystem from "@/pages/aurora-site/rewards/page.jsx";
+import GameBoard from "./components/Games/memory-card/game-board";
+import DifficultySelector from "./components/Games/word-matching/difficulty-selector";
+import GreetingIntro from "./pages/GreatingandInto/greetingandIntroduction";
 
 function App() {
   return (
@@ -156,19 +157,20 @@ function App() {
               />
               <Route path="/notifications" element={<Notifications />} />
               <Route path="/games/story-game" element={<StoryGame />} />
-              <Route path="/games/word-scramble" element={<WordScramble />} />
+              {/* <Route path="/games/word-scramble" element={<WordScramble />} /> */}
               <Route path="/games/word-matching/" element={<WordMatching />} />
               <Route path="/games" element={<GamePanel />} />
               <Route path="/placement-test" element={<PlacementTest />} />
+              <Route path="/greetingcourse" element={<GreetingIntro />} />
 
-              <Route
+              {/* <Route
                 path="/games/memory-card"
                 element={<DifficultySelector />}
-              />
-              <Route
+              /> */}
+              {/* <Route
                 path="/games/memory-card/:levelId"
                 element={<GameBoard />}
-              />
+              /> */}
               <Route path="/practice/quiz" element={<Quiz />} />
               <Route
                 path="/practice/fill-in-the-blanks"

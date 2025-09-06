@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import AssessmentContainer from '../../components/assessment/AssessmentContainer';
-import { Card } from '../../components/ui/card';
+// import AssessmentContainer from '../../components/assessment/AssessmentContainer';
+// import { Card } from '../../components/ui/card';
+import AssessmentContainer from '@/components/assessment/AssessmentContainer';
+import { Card } from '@/components/ui/card';
 
 // Mock audio sources - replace with actual audio file paths
 const mockAudioPaths = {
