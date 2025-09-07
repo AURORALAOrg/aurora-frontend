@@ -100,6 +100,7 @@ import RewardsSystem from "@/pages/aurora-site/rewards/page.jsx";
 import GameBoard from "./components/Games/memory-card/game-board";
 import DifficultySelector from "./components/Games/word-matching/difficulty-selector";
 import GreetingIntro from "./pages/GreatingandInto/greetingandIntroduction";
+import GrammarCourse from "./pages/grammercourse/grammercourse";
 
 function App() {
   return (
@@ -162,6 +163,7 @@ function App() {
               <Route path="/games" element={<GamePanel />} />
               <Route path="/placement-test" element={<PlacementTest />} />
               <Route path="/greetingcourse" element={<GreetingIntro />} />
+              <Route path="/grammercourse" element={<GrammarCourse />} />
 
               {/* <Route
                 path="/games/memory-card"
