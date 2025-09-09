@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useState } from "react";
 // import AssessmentContainer from '../../components/assessment/AssessmentContainer';
 // import { Card } from '../../components/ui/card';
-import AssessmentContainer from '@/components/assessment/AssessmentContainer';
-import { Card } from '@/components/ui/card';
+import AssessmentContainer from "@/components/assessment/AssessmentContainer";
+import { Card } from "@/components/ui/card";
 
 // Mock audio sources - replace with actual audio file paths
 const mockAudioPaths = {
-  thinkVsSink: '/audio/think-vs-sink.mp3',
-  veryVsBerry: '/audio/very.mp3',
-  carSpanish: '/audio/car-spanish.mp3',
-  carAmerican: '/audio/car-american.mp3',
-  sheep: '/audio/sheep.mp3',
-  fast: '/audio/fast.mp3',
+  thinkVsSink: "/audio/think-vs-sink.mp3",
+  veryVsBerry: "/audio/very.mp3",
+  carSpanish: "/audio/car-spanish.mp3",
+  carAmerican: "/audio/car-american.mp3",
+  sheep: "/audio/sheep.mp3",
+  fast: "/audio/fast.mp3",
 };
 
 const difficultSoundsQuestions = [
@@ -30,7 +30,8 @@ const difficultSoundsQuestions = [
     correctAnswer: "very",
   },
   {
-    question: "Listen to these words and identify which has the correct American R sound:",
+    question:
+      "Listen to these words and identify which has the correct American R sound:",
     type: "single-choice",
     audioSources: [mockAudioPaths.carSpanish, mockAudioPaths.carAmerican],
     options: ["First pronunciation", "Second pronunciation"],
@@ -44,20 +45,22 @@ const difficultSoundsQuestions = [
     correctAnswer: "sheep",
   },
   {
-    question: "Listen to this word and count how many sounds you hear at the end:",
+    question:
+      "Listen to this word and count how many sounds you hear at the end:",
     type: "single-choice",
     audioSources: [mockAudioPaths.fast],
     options: ["1 sound", "2 sounds", "3 sounds", "4 sounds"],
     correctAnswer: "2 sounds",
   },
   {
-    question: "Record yourself saying: 'I think this is thirty-three.' Compare with native speaker model.",
+    question:
+      "Record yourself saying: 'I think this is thirty-three.' Compare with native speaker model.",
     type: "recording",
     audioSources: ["/audio/model-sentence.mp3"],
     showRecording: true,
     options: ["Re-record", "Submit Recording"],
     correctAnswer: null, // Will be evaluated by AI
-  }
+  },
 ];
 
 const PronunciationAssessmentPage = () => {
@@ -74,13 +77,15 @@ const PronunciationAssessmentPage = () => {
       return acc;
     }, 0);
 
-    const maxScore = difficultSoundsQuestions.filter(q => q.correctAnswer).length;
+    const maxScore = difficultSoundsQuestions.filter(
+      (q) => q.correctAnswer
+    ).length;
     const percentage = Math.round((score / maxScore) * 100);
 
     setResults({
       score,
       maxScore,
-      percentage
+      percentage,
     });
 
     setAssessmentCompleted(true);
@@ -90,10 +95,13 @@ const PronunciationAssessmentPage = () => {
     return (
       <div className="min-h-screen bg-dark-blue-6 p-6">
         <Card className="max-w-2xl mx-auto p-8 bg-dark-blue-5 border-dark-blue-4">
-          <h2 className="text-2xl font-bold text-white mb-4">Assessment Complete!</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">
+            Assessment Complete!
+          </h2>
           <div className="space-y-4">
             <p className="text-neutral-2">
-              You scored {results.score} out of {results.maxScore} ({results.percentage}%)
+              You scored {results.score} out of {results.maxScore} (
+              {results.percentage}%)
             </p>
             {/* Add more detailed feedback and recommendations here */}
           </div>
