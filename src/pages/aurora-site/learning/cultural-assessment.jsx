@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { culturalAssessments } from "@/data/cultural-assessments";
 import {
   Card,
@@ -47,12 +48,24 @@ const AssessmentSelector = ({ onSelectAssessment }) => {
               <div className="text-sm text-neutral-2">
                 {assessment.questions.length} questions
               </div>
-              <Button
-                onClick={() => onSelectAssessment(assessment)}
-                className="bg-[#00C2CB] hover:bg-[#00A8B0] text-white"
-              >
-                Start Assessment
-              </Button>
+              <div className="space-x-2">
+                {assessment.id === "social-media-communication" && (
+                  <Link to="/social-media-course">
+                    <Button
+                      variant="outline"
+                      className="border-[#00C2CB] text-[#00C2CB] hover:bg-[#00C2CB] hover:text-white"
+                    >
+                      Start Course
+                    </Button>
+                  </Link>
+                )}
+                <Button
+                  onClick={() => onSelectAssessment(assessment)}
+                  className="bg-[#00C2CB] hover:bg-[#00A8B0] text-white"
+                >
+                  Start Assessment
+                </Button>
+              </div>
             </CardFooter>
           </Card>
         ))}

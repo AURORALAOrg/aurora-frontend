@@ -1,14 +1,14 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Play, Pause, Mic, MicOff, AlertCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import useAudioQuality from "../../hooks/use-audio-quality";
-import PronunciationFeedback from "./PronunciationFeedback";
+// import PronunciationFeedback from "./PronunciationFeedback"; // Uncomment if you have this
 
 const AudioAssessment = ({
   question,
-  audioSources,
-  options,
+  audioSources = [],
+  options = [],
   type,
   onAnswer,
   showRecording = false,
@@ -24,11 +24,11 @@ const AudioAssessment = ({
   const handleQualityCheck = useCallback(
     (audioUrl) => (result) => {
       if (result.status === "error") {
-        setAudioError(result.error);
+        setAudioError(result.error || "Audio quality check failed");
       } else {
         setProcessedAudioUrls((prev) => ({
           ...prev,
-          [audioUrl]: result.data.normalizedAudio,
+          [audioUrl]: result.data?.normalizedAudio || audioUrl,
         }));
         setAudioError(null);
       }
@@ -36,30 +36,32 @@ const AudioAssessment = ({
     []
   );
 
-  // Apply audio quality check to each audio source
-  audioSources?.forEach((audioUrl) => {
-    useAudioQuality(audioUrl, handleQualityCheck(audioUrl));
-  });
+  // ✅ Run audio quality hook inside an effect, not inside forEach with hooks
+  useEffect(() => {
+    audioSources.forEach((audioUrl) => {
+      useAudioQuality(audioUrl, handleQualityCheck(audioUrl));
+    });
+  }, [audioSources, handleQualityCheck]);
 
   const handlePlay = (audioSource) => {
-    if (audioRef.current) {
-      if (isPlaying && selectedAudio === audioSource) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        if (selectedAudio !== audioSource) {
-          setSelectedAudio(audioSource);
-          const sourceUrl = processedAudioUrls[audioSource] || audioSource;
-          audioRef.current.src = sourceUrl;
-        }
-        audioRef.current
-          .play()
-          .then(() => setIsPlaying(true))
-          .catch((error) => {
-            console.error("Error playing audio:", error);
-            setAudioError("Failed to play audio. Please try again.");
-          });
+    if (!audioRef.current) return;
+
+    if (isPlaying && selectedAudio === audioSource) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      if (selectedAudio !== audioSource) {
+        setSelectedAudio(audioSource);
+        const sourceUrl = processedAudioUrls[audioSource] || audioSource;
+        audioRef.current.src = sourceUrl;
       }
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((error) => {
+          console.error("Error playing audio:", error);
+          setAudioError("Failed to play audio. Please try again.");
+        });
     }
   };
 
@@ -68,8 +70,8 @@ const AudioAssessment = ({
     onAnswer(answer);
   };
 
-  // Recording state
-  const [recordedAudio, setRecordedAudio] = useState<string | null>(null);
+  // 🎙 Recording state
+  const [recordedAudio, setRecordedAudio] = useState(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef([]);
@@ -81,7 +83,7 @@ const AudioAssessment = ({
       chunksRef.current = [];
 
       mediaRecorderRef.current.ondataavailable = (e) => {
-        chunksRef.current.push(e.data);
+        if (e.data.size > 0) chunksRef.current.push(e.data);
       };
 
       mediaRecorderRef.current.onstop = () => {
@@ -95,7 +97,7 @@ const AudioAssessment = ({
       setIsRecording(true);
     } catch (error) {
       console.error("Error starting recording:", error);
-      alert("Could not access microphone. Please ensure microphone permissions are granted.");
+      setAudioError("Could not access microphone. Please allow microphone permissions.");
     }
   };
 
@@ -127,7 +129,7 @@ const AudioAssessment = ({
         )}
 
         <div className="space-y-4">
-          {audioSources?.map((source, index) => (
+          {audioSources.map((source, index) => (
             <div key={index} className="flex items-center gap-4">
               <Button
                 variant="ghost"
@@ -181,11 +183,7 @@ const AudioAssessment = ({
         </div>
       </div>
 
-      <audio
-        ref={audioRef}
-        onEnded={() => setIsPlaying(false)}
-        onPause={() => setIsPlaying(false)}
-      />
+      <audio ref={audioRef} onEnded={() => setIsPlaying(false)} onPause={() => setIsPlaying(false)} />
 
       {showFeedback && recordedAudio && (
         <PronunciationFeedback

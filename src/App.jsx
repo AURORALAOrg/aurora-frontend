@@ -17,6 +17,7 @@ import VerifyEmailPage from "@/pages/auth/verify-email";
 
 // 📚 Learning & Education
 import ListeningPage from "@/pages/aurora-site/learning/listening-content";
+import BasicListeningCoursePage from "@/components/listening-courses/basic-listening/BasicListeningCoursePage";
 import ReadingContent from "@/pages/aurora-site/learning/reading-content";
 import SpeakingPage from "@/pages/aurora-site/learning/speaking-content";
 import VocabularyPage from "@/pages/aurora-site/learning/vocabulary-content";
@@ -53,11 +54,9 @@ import HomePage from "@/pages/aurora-site/home";
 
 // 🧩 Games & Challenges
 import StoryGame from "@/pages/games/story-game";
-import WordScramble from "@/components/games/word-scramble/word-scramble-game.jsx";
 import WordMatching from "@/pages/games/word-matching";
 import GamePanel from "@/pages/games/game-panel";
-import DifficultySelector from "@/components/games/memory-card/difficulty-selector";
-import GameBoard from "@/components/games/memory-card/game-board";
+// import GameBoard from "@/components/games/memory-card/game-board";
 // import WordScrambleGame from "@/pages/games/word-scramble"; // Uncomment if exists
 
 // 📝 Practices & Exercises
@@ -74,6 +73,7 @@ import Quiz from "@/components/practices/funny_practices/QuizPage";
 // 🏛️ Grammar & Language
 import GrammarContent from "@/pages/aurora-site/grammar-content";
 import PresentSimpleCoursePage from "@/pages/aurora-site/present-simple-course";
+import SocialMediaCoursePage from "@/pages/aurora-site/social-media-course";
 import PastSimpleCoursePage from "@/pages/aurora-site/past-simple-course";
 
 // ✨ Question Creator
@@ -93,8 +93,14 @@ import ListeningComprehensionPage from "@/pages/aurora-site/assessment/listening
 // 👨‍🏫 Teacher Features (from main branch)
 import EscrowClassesPage from "@/pages/aurora-site/escrow/classes";
 import TeacherSignupPage from "@/pages/teacher-signup";
+import PlacementTest from "./pages/placementTest";
+
 // Rewards System
 import RewardsSystem from "@/pages/aurora-site/rewards/page.jsx";
+import GameBoard from "./components/Games/memory-card/game-board";
+import DifficultySelector from "./components/Games/word-matching/difficulty-selector";
+import GreetingIntro from "./pages/GreatingandInto/greetingandIntroduction";
+import GrammarCourse from "./pages/grammercourse/grammercourse";
 
 function App() {
   return (
@@ -152,17 +158,21 @@ function App() {
               />
               <Route path="/notifications" element={<Notifications />} />
               <Route path="/games/story-game" element={<StoryGame />} />
-              <Route path="/games/word-scramble" element={<WordScramble />} />
+              {/* <Route path="/games/word-scramble" element={<WordScramble />} /> */}
               <Route path="/games/word-matching/" element={<WordMatching />} />
               <Route path="/games" element={<GamePanel />} />
-              <Route
+              <Route path="/placement-test" element={<PlacementTest />} />
+              <Route path="/greetingcourse" element={<GreetingIntro />} />
+              <Route path="/grammercourse" element={<GrammarCourse />} />
+
+              {/* <Route
                 path="/games/memory-card"
                 element={<DifficultySelector />}
-              />
-              <Route
+              /> */}
+              {/* <Route
                 path="/games/memory-card/:levelId"
                 element={<GameBoard />}
-              />
+              /> */}
               <Route path="/practice/quiz" element={<Quiz />} />
               <Route
                 path="/practice/fill-in-the-blanks"
@@ -178,12 +188,16 @@ function App() {
                 element={<PresentSimpleCoursePage />}
               />
               <Route
-                path="/past-simple-course"
-                element={<PastSimpleCoursePage />}
+                path="/social-media-course"
+                element={<SocialMediaCoursePage />}
               />
+                  <Route path="/past-simple-course"
+                element={<PastSimpleCoursePage />} />
               <Route path="/vocabulary" element={<VocabularyPage />} />
               <Route path="/speaking" element={<SpeakingPage />} />
               <Route path="/listening" element={<ListeningPage />} />
+              <Route path="/listening-course" element={<BasicListeningCoursePage />} />
+              <Route path="/listening-course/:lessonId" element={<BasicListeningCoursePage />} />
               <Route path="/reading" element={<ReadingContent />} />
               <Route
                 path="/cultural-assessment"
