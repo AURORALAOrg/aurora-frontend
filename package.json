@@ -31,7 +31,7 @@
     "@stellar/stellar-sdk": "^14.1.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "axios": "^1.11.0",
+    "axios": "^1.12.2",
     "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
