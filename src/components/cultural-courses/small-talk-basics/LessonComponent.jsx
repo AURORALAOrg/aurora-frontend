@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CheckCircle,
   XCircle,
@@ -22,6 +22,14 @@ const LessonComponent = ({
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
 
+  // Reset when lesson changes
+  useEffect(() => {
+    setSelectedAnswers({});
+    setShowResults(false);
+    setScore(0);
+    setCurrentSection("theory");
+  }, [lessonNumber, lessonData]);
+
   const exercises = Array.isArray(lessonData?.exercises)
     ? lessonData.exercises
     : [];
@@ -33,10 +41,38 @@ const LessonComponent = ({
   const sections = ["theory", "examples", "exercises"];
 
   const handleAnswerSelect = (exerciseIndex, questionIndex, answer) => {
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [`${exerciseIndex}-${questionIndex}`]: answer,
-    }));
+    const question = exercises[exerciseIndex]?.questions[questionIndex];
+    const isMultiSelect = Array.isArray(question?.correctAnswer);
+
+    setSelectedAnswers((prev) => {
+      const key = `${exerciseIndex}-${questionIndex}`;
+      if (isMultiSelect) {
+        // Handle multi-select answers
+        const currentSelections = Array.isArray(prev[key])
+          ? [...prev[key]]
+          : [];
+        const answerIndex = currentSelections.indexOf(answer);
+
+        if (answerIndex >= 0) {
+          // If answer is already selected, remove it
+          currentSelections.splice(answerIndex, 1);
+        } else {
+          // Otherwise add it
+          currentSelections.push(answer);
+        }
+
+        return {
+          ...prev,
+          [key]: currentSelections,
+        };
+      } else {
+        // Handle single-select answers
+        return {
+          ...prev,
+          [key]: answer,
+        };
+      }
+    });
   };
 
   const handleExerciseComplete = () => {
@@ -46,8 +82,23 @@ const LessonComponent = ({
       (exercise.questions || []).forEach((question, questionIndex) => {
         const selectedAnswer =
           selectedAnswers[`${exerciseIndex}-${questionIndex}`];
-        if (selectedAnswer === question.correctAnswer) {
-          currentScore++;
+        const correctAnswer = question?.correctAnswer;
+
+        if (Array.isArray(correctAnswer)) {
+          // Multi-select question
+          if (
+            Array.isArray(selectedAnswer) &&
+            // Check if selected answers match correct answers (order insensitive)
+            selectedAnswer.length === correctAnswer.length &&
+            correctAnswer.every((answer) => selectedAnswer.includes(answer))
+          ) {
+            currentScore++;
+          }
+        } else {
+          // Single-select question
+          if (selectedAnswer === correctAnswer) {
+            currentScore++;
+          }
         }
       });
     });
@@ -66,12 +117,50 @@ const LessonComponent = ({
     const selectedAnswer = selectedAnswers[`${exerciseIndex}-${questionIndex}`];
     const exercise = exercises[exerciseIndex];
     const question = exercise?.questions?.[questionIndex];
-    return selectedAnswer === question?.correctAnswer;
+    if (!question) return false;
+
+    const correctAnswer = question.correctAnswer;
+
+    if (Array.isArray(correctAnswer)) {
+      // Multi-select question
+      return (
+        Array.isArray(selectedAnswer) &&
+        selectedAnswer.length === correctAnswer.length &&
+        correctAnswer.every((answer) => selectedAnswer.includes(answer))
+      );
+    } else {
+      // Single-select question
+      return selectedAnswer === correctAnswer;
+    }
+  };
+
+  const isQuestionAnswered = (exerciseIndex, questionIndex) => {
+    const question = exercises[exerciseIndex]?.questions?.[questionIndex];
+    const selectedAnswer = selectedAnswers[`${exerciseIndex}-${questionIndex}`];
+
+    if (!question) return false;
+
+    if (Array.isArray(question.correctAnswer)) {
+      // For multi-select questions, require at least one selection
+      return Array.isArray(selectedAnswer) && selectedAnswer.length > 0;
+    } else {
+      // For single-select questions, require a selection
+      return selectedAnswer !== undefined;
+    }
   };
 
   const getProgressPercentage = () => {
     if (totalQuestions === 0) return 0;
-    const answeredQuestions = Object.keys(selectedAnswers).length;
+
+    let answeredQuestions = 0;
+    exercises.forEach((exercise, exerciseIndex) => {
+      (exercise.questions || []).forEach((question, questionIndex) => {
+        if (isQuestionAnswered(exerciseIndex, questionIndex)) {
+          answeredQuestions++;
+        }
+      });
+    });
+
     return Math.round((answeredQuestions / totalQuestions) * 100);
   };
 
@@ -227,29 +316,62 @@ const LessonComponent = ({
                       {question.question}
                     </h4>
                     <div className="space-y-2">
-                      {question.options.map((option, optionIndex) => (
-                        <button
-                          key={optionIndex}
-                          className={`w-full text-left p-3 rounded-md transition-all ${
-                            selectedAnswers[
-                              `${exerciseIndex}-${questionIndex}`
-                            ] === option
-                              ? "bg-light-blue-1/20 border border-light-blue-1"
-                              : "bg-dark-blue-4 border border-[#1f2937] hover:border-light-blue-1/50"
-                          }`}
-                          onClick={() =>
-                            handleAnswerSelect(
-                              exerciseIndex,
-                              questionIndex,
-                              option
-                            )
-                          }
-                        >
-                          <span className="text-sm text-neutral-1">
-                            {option}
-                          </span>
-                        </button>
-                      ))}
+                      {question.options.map((option, optionIndex) => {
+                        const isMultiSelect = Array.isArray(
+                          question.correctAnswer
+                        );
+                        const selectedAnswer =
+                          selectedAnswers[`${exerciseIndex}-${questionIndex}`];
+                        const isSelected = isMultiSelect
+                          ? Array.isArray(selectedAnswer) &&
+                            selectedAnswer.includes(option)
+                          : selectedAnswer === option;
+
+                        return (
+                          <button
+                            key={optionIndex}
+                            className={`w-full text-left p-3 rounded-md transition-all flex items-center ${
+                              isSelected
+                                ? "bg-light-blue-1/20 border border-light-blue-1"
+                                : "bg-dark-blue-4 border border-[#1f2937] hover:border-light-blue-1/50"
+                            }`}
+                            onClick={() =>
+                              handleAnswerSelect(
+                                exerciseIndex,
+                                questionIndex,
+                                option
+                              )
+                            }
+                          >
+                            {isMultiSelect && (
+                              <div
+                                className={`w-5 h-5 flex-shrink-0 border rounded mr-3 flex items-center justify-center ${
+                                  isSelected
+                                    ? "bg-light-blue-1 border-light-blue-1"
+                                    : "border-neutral-3"
+                                }`}
+                              >
+                                {isSelected && (
+                                  <CheckCircle className="w-4 h-4 text-white" />
+                                )}
+                              </div>
+                            )}
+                            <span className="text-sm text-neutral-1">
+                              {option}
+                            </span>
+                            {isMultiSelect && isSelected && (
+                              <span className="ml-2 text-xs text-light-blue-1">
+                                (selected)
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                      {Array.isArray(question.correctAnswer) && (
+                        <p className="text-xs text-neutral-2 italic mt-2">
+                          Select all that apply
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -327,12 +449,17 @@ const LessonComponent = ({
                                   isCorrect ? "text-green-500" : "text-red-500"
                                 }
                               >
-                                {selectedAnswer || "Not answered"}
+                                {Array.isArray(selectedAnswer)
+                                  ? selectedAnswer.join(", ") || "Not answered"
+                                  : selectedAnswer || "Not answered"}
                               </span>
                             </p>
                             {!isCorrect && (
                               <p className="text-sm text-green-500 mb-2">
-                                Correct answer: {question.correctAnswer}
+                                Correct answer:{" "}
+                                {Array.isArray(question.correctAnswer)
+                                  ? question.correctAnswer.join(", ")
+                                  : question.correctAnswer}
                               </p>
                             )}
                             <p className="text-sm text-neutral-2 bg-dark-blue-5 p-2 rounded border border-[#1f2937]">
