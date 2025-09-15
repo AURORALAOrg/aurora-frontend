@@ -97,8 +97,6 @@ import PlacementTest from "./pages/placementTest";
 
 // Rewards System
 import RewardsSystem from "@/pages/aurora-site/rewards/page.jsx";
-import GameBoard from "./components/Games/memory-card/game-board";
-import DifficultySelector from "./components/Games/word-matching/difficulty-selector";
 import GreetingIntro from "./pages/GreatingandInto/greetingandIntroduction";
 import GrammarCourse from "./pages/grammercourse/grammercourse";
 
