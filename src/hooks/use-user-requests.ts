@@ -35,7 +35,8 @@ const mockRequests: UserRequest[] = [
 
 /**
  * Hook for fetching and managing user requests
- * @param params Optional filter parameters
+ * @param params Optional filter parameters - IMPORTANT: If passing an object literal,
+ * ensure it's memoized with useMemo or useRef to prevent unnecessary re-renders
  * @returns Request data, loading state and error info
  */
 export default function useUserRequests(params?: UserRequestParams) {
@@ -44,8 +45,16 @@ export default function useUserRequests(params?: UserRequestParams) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    // Create a flag to track if the component is mounted
+    let mounted = true;
+    // Variable to store timeout ID for cleanup
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    // Only update state if component is still mounted
+    if (mounted) {
+      setLoading(true);
+      setError(null);
+    }
 
     // In a real implementation, this would use axios or fetch to call the API
     // with params for filtering and pagination
@@ -71,23 +80,33 @@ export default function useUserRequests(params?: UserRequestParams) {
             })
           : mockRequests;
 
-        // Simulate delayed response
-        setTimeout(() => {
-          setData(filteredRequests);
-          setLoading(false);
+        // Simulate delayed response with timeout
+        timeoutId = setTimeout(() => {
+          // Only update state if component is still mounted
+          if (mounted) {
+            setData(filteredRequests);
+            setLoading(false);
+          }
         }, 800);
       } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Failed to fetch user requests"
-        );
-        setLoading(false);
+        // Only update state if component is still mounted
+        if (mounted) {
+          setError(
+            err instanceof Error ? err.message : "Failed to fetch user requests"
+          );
+          setLoading(false);
+        }
       }
     };
 
     fetchUserRequests();
 
+    // Cleanup function to prevent memory leaks and state updates after unmount
     return () => {
-      // Cleanup for any pending requests if needed
+      mounted = false;
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
     };
   }, [params]);
 

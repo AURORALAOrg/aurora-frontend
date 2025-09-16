@@ -1,7 +1,7 @@
 /**
  * Types related to UI components, props, and UI state
  */
-import { ReactNode } from "react";
+import { ReactNode, ChangeEvent } from "react";
 import { Course, Lesson, Module } from "./course-types";
 import { User } from "./user-types";
 import { NFTToken } from "./wallet-types";
@@ -192,7 +192,7 @@ export interface InputProps extends FormFieldProps {
   type?: "text" | "email" | "password" | "number" | "tel" | "url";
   placeholder?: string;
   value?: string | number;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   readOnly?: boolean;
   autoComplete?: string;
