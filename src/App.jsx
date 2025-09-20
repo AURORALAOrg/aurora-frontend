@@ -74,6 +74,7 @@ import Quiz from "@/components/practices/funny_practices/QuizPage";
 import GrammarContent from "@/pages/aurora-site/grammar-content";
 import PresentSimpleCoursePage from "@/pages/aurora-site/present-simple-course";
 import SocialMediaCoursePage from "@/pages/aurora-site/social-media-course";
+import HolidayTraditionsCoursePage from "@/pages/aurora-site/holiday-traditions-course";
 import PastSimpleCoursePage from "@/pages/aurora-site/past-simple-course";
 
 // ✨ Question Creator
@@ -190,6 +191,10 @@ function App() {
               <Route
                 path="/social-media-course"
                 element={<SocialMediaCoursePage />}
+              />
+              <Route
+                path="/holiday-traditions-course"
+                element={<HolidayTraditionsCoursePage />}
               />
                   <Route path="/past-simple-course"
                 element={<PastSimpleCoursePage />} />
