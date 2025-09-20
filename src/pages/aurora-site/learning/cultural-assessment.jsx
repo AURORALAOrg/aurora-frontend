@@ -49,8 +49,8 @@ const AssessmentSelector = ({ onSelectAssessment }) => {
                 {assessment.questions.length} questions
               </div>
               <div className="space-x-2">
-                {assessment.id === "social-media-communication" && (
-                  <Link to="/social-media-course">
+                {assessment.courseRoute && (
+                  <Link to={assessment.courseRoute}>
                     <Button
                       variant="outline"
                       className="border-[#00C2CB] text-[#00C2CB] hover:bg-[#00C2CB] hover:text-white"
