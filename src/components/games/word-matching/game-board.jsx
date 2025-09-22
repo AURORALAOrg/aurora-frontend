@@ -6,8 +6,6 @@ import {
   WORD_PAIRS,
 } from "./mock-data-word-matching/word-matching";
 import Card from "@/components/games/word-matching/Card";
-
-
 import ScoreDisplay from "./score-display";
 
 const levelToDifficulty = {
