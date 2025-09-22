@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { FaArrowLeft, FaSyncAlt } from 'react-icons/fa';
-import { AiFillTrophy } from "react-icons/ai";
+import { ArrowLeft, RotateCcw } from 'lucide-react';
+import { Trophy } from "lucide-react";
 
 const MultiChoiceStoryGame = ({ 
   storyText = "", 
@@ -110,7 +110,7 @@ const MultiChoiceStoryGame = ({
   if (showResults) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6 rounded-lg shadow-lg">
-        <AiFillTrophy className="text-yellow-500 text-6xl mb-4" />
+        <Trophy className="text-yellow-500 text-6xl mb-4" />
         <h2 className="text-2xl font-bold mb-2">Story Completed!</h2>
         <p className="text-lg text-gray-700 mb-4">
           Your Score: {score}/{questions.length}
@@ -172,7 +172,7 @@ const MultiChoiceStoryGame = ({
             className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center gap-2 transform transition-transform active:scale-95"
             onClick={restartGame}
           >
-            <FaSyncAlt /> Play Again
+            <RotateCcw /> Play Again
           </button>
 
           {currentStory < totalStories && (
@@ -203,7 +203,7 @@ const MultiChoiceStoryGame = ({
           className="text-blue-500 hover:text-blue-700 flex items-center gap-2"
           onClick={onGoBack}
         >
-          <FaArrowLeft /> Back
+          <ArrowLeft /> Back
         </button>
         
         <div className="text-center">
@@ -217,7 +217,7 @@ const MultiChoiceStoryGame = ({
           className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-transform transform active:scale-95"
           onClick={restartGame}
         >
-          <FaSyncAlt />
+          <RotateCcw />
         </button>
       </div>
 

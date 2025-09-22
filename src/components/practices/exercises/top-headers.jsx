@@ -1,6 +1,6 @@
-import { FaPlus } from "react-icons/fa6";
-import { MdCreditScore } from "react-icons/md";
-import { MdOutlineAccessTime } from "react-icons/md";
+import { Plus } from "lucide-react";
+import { Award } from "lucide-react";
+import { Clock } from "lucide-react";
 
 
 
@@ -11,7 +11,7 @@ const TopHeaders = ({currentQuestion,totalQuestion,scorePercentage}) => {
       {/* current question */}
       <div className=" w-60 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 text-black   flex flex-row items-center">
           <div className="rounded-full bg-blue-300 w-10 h-10 flex items-center align-middle flex-row justify-center">
-          <FaPlus className="text-blue-600"/>  
+          <Plus className="text-blue-600"/>  
           </div>
           <div className="ml-5">
               <h2 className="text-sm">Current Question</h2>
@@ -22,7 +22,7 @@ const TopHeaders = ({currentQuestion,totalQuestion,scorePercentage}) => {
       {/*scores  */}
       <div className=" md:w-60 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-white text-black flex flex-row items-center ml-4">
           <div className="rounded-full bg-green-200 w-10 h-10 flex items-center align-middle flex-row justify-center">
-          <MdCreditScore className="text-green-600"/>  
+          <Award className="text-green-600"/>  
           </div>
           <div className="ml-5">
               <h2 className="text-sm">Score</h2>

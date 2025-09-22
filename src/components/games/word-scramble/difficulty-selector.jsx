@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { ArrowLeft } from "lucide-react";
 
 const WordScrambleDifficultySelector = ({ onSelectDifficulty }) => {
   const [selectedLevel, setSelectedLevel] = useState(null);
@@ -14,7 +14,7 @@ const WordScrambleDifficultySelector = ({ onSelectDifficulty }) => {
     <div className="bg-white text-white p-6 rounded-2xl min-w-[350px] mx-auto text-center shadow-lg animate-popup">
       <div className="flex items-center justify-between border-b mb-5 px-0 py-2 text-sm">
         <Link to={"/games"}>
-          <IoMdArrowRoundBack className="fill-blue-500 cursor-pointer" />
+          <ArrowLeft className="text-blue-500 cursor-pointer" />
         </Link>
       </div>
       <h2 className="text-xl md:text-[2rem] mb-8 text-blue-500 font-extrabold">

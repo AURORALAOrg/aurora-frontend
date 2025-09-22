@@ -2,8 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import WordScrambleDifficultySelector from "@/components/games/word-scramble/difficulty-selector";
 import ResultModal from "@/components/games/word-scramble/result-modal";
 import { words } from "@/lib/constants/mock-data/word-list";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { PiSpeakerSimpleNone } from "react-icons/pi";
+import { ArrowLeft, Volume2 } from "lucide-react";
 
 const WordScrambleGame = () => {
   const [endGame, setEndGame] = useState(false);
@@ -83,8 +82,8 @@ const WordScrambleGame = () => {
       ) : (
         <div className="bg-white pt-0 rounded-2xl shadow-lg text-center max-w-md mx-auto animate-popup">
           <div className="flex items-center justify-between border-b mb-5 p-6 text-sm">
-            <IoMdArrowRoundBack
-              className="fill-blue-500 cursor-pointer"
+            <ArrowLeft
+              className="text-blue-500 cursor-pointer"
               onClick={resetGame}
             />
             <span className="text-blue-500 space-x-2">
@@ -106,7 +105,7 @@ const WordScrambleGame = () => {
               className="flex items-center text-[12px] space-x-3 w-fit mx-auto my-5 text-blue-500 cursor-pointer"
               onClick={speakWord}
             >
-              <PiSpeakerSimpleNone />
+              <Volume2 />
               <span>Listen</span>
             </div>
             <p className="text-gray-500 mt-2 text-sm">

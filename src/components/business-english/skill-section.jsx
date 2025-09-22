@@ -1,4 +1,5 @@
 
+import React from "react";
 import { Card, CardContent } from "../ui/card";
 import { skills } from "@/data/business-english-mock-date";
 
