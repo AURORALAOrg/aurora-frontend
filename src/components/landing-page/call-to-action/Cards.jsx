@@ -1,3 +1,4 @@
+import React from "react";
 import { memo } from "react";
 import { Quote } from "lucide-react";
 
