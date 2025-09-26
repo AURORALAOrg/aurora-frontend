@@ -7,6 +7,7 @@ const GrammarPage = () => {
     { id: "present-simple", title: "Present Simple", progress: 100, unlocked: true },
     { id: "past-simple", title: "Past Simple", progress: 0, unlocked: true },
     { id: "present-continuous", title: "Present Continuous", progress: 75, unlocked: true },
+    { id: "basic-pronouns-articles", title: "Basic Pronouns & Articles", progress: 0, unlocked: true },
     { id: "articles", title: "Articles (A/An/The)", progress: 30, unlocked: true },
     { id: "plural-nouns", title: "Plural Nouns", progress: 0, unlocked: true },
     { id: "basic-pronouns", title: "Basic Pronouns", progress: 0, unlocked: false },
@@ -79,6 +80,14 @@ const GrammarPage = () => {
                 {topic.unlocked && topic.id === "past-simple" && (
                   <Link
                     to="/past-simple-course"
+                    className="text-xs bg-light-blue-1 text-white px-3 py-1 rounded hover:bg-light-blue-2 transition-colors"
+                  >
+                    Start Course
+                  </Link>
+                )}
+                {topic.unlocked && topic.id === "basic-pronouns-articles" && (
+                  <Link
+                    to="/basic-pronouns-articles-course"
                     className="text-xs bg-light-blue-1 text-white px-3 py-1 rounded hover:bg-light-blue-2 transition-colors"
                   >
                     Start Course

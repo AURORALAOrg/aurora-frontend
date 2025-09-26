@@ -75,6 +75,7 @@ import GrammarContent from "@/pages/aurora-site/grammar-content";
 import PresentSimpleCoursePage from "@/pages/aurora-site/present-simple-course";
 import SocialMediaCoursePage from "@/pages/aurora-site/social-media-course";
 import PastSimpleCoursePage from "@/pages/aurora-site/past-simple-course";
+import BasicPronounsArticlesCoursePage from "@/pages/aurora-site/basic-pronouns-articles-course";
 
 // ✨ Question Creator
 import QuestionCreator from "@/components/practices/question-creator/question-creator";
@@ -193,6 +194,7 @@ function App() {
               />
                   <Route path="/past-simple-course"
                 element={<PastSimpleCoursePage />} />
+              <Route path="/basic-pronouns-articles-course" element={<BasicPronounsArticlesCoursePage />} />
               <Route path="/vocabulary" element={<VocabularyPage />} />
               <Route path="/speaking" element={<SpeakingPage />} />
               <Route path="/listening" element={<ListeningPage />} />
