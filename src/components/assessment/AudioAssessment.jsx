@@ -14,12 +14,12 @@ const AudioAssessment = ({
   showRecording = false,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [selectedAudio, setSelectedAudio] = useState(null);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [selectedAudio, setSelectedAudio] = useState<string | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState(false);
-  const [audioError, setAudioError] = useState(null);
+  const [audioError, setAudioError] = useState<string | null>(null);
   const [processedAudioUrls, setProcessedAudioUrls] = useState({});
-  const audioRef = useRef(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleQualityCheck = useCallback(
     (audioUrl) => (result) => {
@@ -73,7 +73,7 @@ const AudioAssessment = ({
   // 🎙 Recording state
   const [recordedAudio, setRecordedAudio] = useState(null);
   const [showFeedback, setShowFeedback] = useState(false);
-  const mediaRecorderRef = useRef(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef([]);
 
   const startRecording = async () => {
@@ -143,7 +143,9 @@ const AudioAssessment = ({
                   <Play className="w-5 h-5" />
                 )}
               </Button>
-              <span className="text-neutral-2">Audio {String.fromCharCode(65 + index)}</span>
+              <span className="text-neutral-2">
+                Audio {String.fromCharCode(65 + index)}
+              </span>
             </div>
           ))}
         </div>
