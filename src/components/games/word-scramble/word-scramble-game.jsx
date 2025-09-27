@@ -1,11 +1,11 @@
-"use client"
 
-import { useState, useCallback, useEffect } from "react"
-import LevelSelector from "@/components/practices/funny_practices/LevelSelector"
-import ResultModal from "./result-modal"
-import { questionsApi } from "@/services/questionsApi"
-import { IoMdArrowRoundBack } from "react-icons/io"
-import { PiSpeakerSimpleNone } from "react-icons/pi"
+use client;
+import { useState, useMemo, useCallback } from "react";
+import WordScrambleDifficultySelector from "@/components/games/word-scramble/difficulty-selector";
+import ResultModal from "@/components/games/word-scramble/result-modal";
+import { words } from "@/lib/constants/mock-data/word-list";
+import { ArrowLeft, Volume2 } from "lucide-react";
+
 
 const WordScrambleGame = () => {
   const [endGame, setEndGame] = useState(false)
@@ -162,6 +162,7 @@ const WordScrambleGame = () => {
       ) : (
         <div className="bg-white pt-0 rounded-2xl shadow-lg text-center max-w-md mx-auto animate-popup">
           <div className="flex items-center justify-between border-b mb-5 p-6 text-sm">
+
             <IoMdArrowRoundBack className="fill-blue-500 cursor-pointer" onClick={() => setDifficulty(null)} />
             <span className="text-blue-500 space-x-2">
               Moves: <span className="font-extrabold text-[15px] ml-1"> {moves} </span>
@@ -179,7 +180,7 @@ const WordScrambleGame = () => {
               className="flex items-center text-[12px] space-x-3 w-fit mx-auto my-5 text-blue-500 cursor-pointer"
               onClick={speakWord}
             >
-              <PiSpeakerSimpleNone />
+              <Volume2 />
               <span>Listen</span>
             </div>
             <p className="text-gray-500 mt-2 text-sm">Hint: {currentWord.hint}</p>
