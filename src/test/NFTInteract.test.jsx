@@ -53,23 +53,23 @@ jest.mock('@stellar/stellar-sdk', () => ({
 }));
 
 // Mock the contexts
-jest.mock('../../context/WalletContext', () => ({
+jest.mock('../context/WalletContext', () => ({
   useWallet: () => mockWalletContext
 }));
 
-jest.mock('../../context/ToastContext', () => ({
+jest.mock('../context/ToastContext', () => ({
   useToast: () => mockToastContext
 }));
 
 // Mock UI components
-jest.mock('../ui/card', () => ({
+jest.mock('../components/ui/card', () => ({
   Card: ({ children }) => <div data-testid="card">{children}</div>,
   CardContent: ({ children }) => <div data-testid="card-content">{children}</div>,
   CardHeader: ({ children }) => <div data-testid="card-header">{children}</div>,
   CardTitle: ({ children }) => <div data-testid="card-title">{children}</div>
 }));
 
-jest.mock('../ui/button', () => ({
+jest.mock('../components/ui/button', () => ({
   Button: ({ children, onClick, disabled, ...props }) => (
     <button onClick={onClick} disabled={disabled} {...props}>
       {children}
@@ -77,22 +77,22 @@ jest.mock('../ui/button', () => ({
   )
 }));
 
-jest.mock('../ui/input', () => ({
+jest.mock('../components/ui/input', () => ({
   Input: (props) => <input {...props} />
 }));
 
-jest.mock('../ui/label', () => ({
+jest.mock('../components/ui/label', () => ({
   Label: ({ children, ...props }) => <label {...props}>{children}</label>
 }));
 
-jest.mock('../ui/tabs', () => ({
+jest.mock('../components/ui/tabs', () => ({
   Tabs: ({ children }) => <div data-testid="tabs">{children}</div>,
   TabsContent: ({ children }) => <div data-testid="tabs-content">{children}</div>,
   TabsList: ({ children }) => <div data-testid="tabs-list">{children}</div>,
   TabsTrigger: ({ children, value }) => <button data-testid={`tab-${value}`}>{children}</button>
 }));
 
-jest.mock('../ui/badge', () => ({
+jest.mock('../components/ui/badge', () => ({
   Badge: ({ children }) => <span data-testid="badge">{children}</span>
 }));
 

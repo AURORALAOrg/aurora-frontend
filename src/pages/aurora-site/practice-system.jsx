@@ -1,7 +1,7 @@
 import TopHeaders from "@/components/practices/exercises/top-headers";
 import QuestionsSection from "@/components/practices/exercises/questions-section";
-import { MdOutlineReplay } from "react-icons/md";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { RotateCcw } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import { web3Questions } from "@/components/practices/mock-data-practices/qestion";
 import { useState } from "react";
@@ -78,14 +78,14 @@ const PracticeSystem = () => {
             onClick={handleBack}
             className="bg-blue-500 flex items-center mt-4 mr-6 text-white px-4 py-2 rounded-lg"
           >
-            <IoMdArrowRoundBack className="text-white font-bold text-xl mr-2" />
+            <ArrowLeft className="text-white font-bold text-xl mr-2" />
             back
           </button>
           <button
             onClick={handleReplay}
             className="bg-blue-500 flex items-center mt-4 text-white px-4 py-2 rounded-lg"
           >
-            <MdOutlineReplay className="text-white font-bold text-xl mr-2" />
+            <RotateCcw className="text-white font-bold text-xl mr-2" />
             Replay
           </button>
           </div>

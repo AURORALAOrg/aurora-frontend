@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { courses } from '../call-to-action/Content';
 import { CoursesCard } from '../call-to-action/Cards';

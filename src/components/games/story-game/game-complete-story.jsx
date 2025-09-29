@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { FaArrowLeft, FaSyncAlt } from "react-icons/fa";
+import { ArrowLeft, RotateCcw } from "lucide-react";
 import StoryRenderer from "./story-renderer";
 import DraggableWord from "./draggable-word";
 import CompletionScreen from "./completion-screen";
@@ -61,7 +61,7 @@ const GameCompleteStory = ({
           className="absolute top-4 left-4 text-blue-500 hover:text-blue-700"
           onClick={onGoBack}
         >
-          <FaArrowLeft />
+          <ArrowLeft />
         </button>
         <h2 className="text-2xl font-bold mb-4">Complete the Story</h2>
         <p className="text-gray-600 mb-6">
@@ -84,7 +84,7 @@ const GameCompleteStory = ({
             className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-transform transform active:scale-95"
             onClick={restartGame}
           >
-            <FaSyncAlt className="text-xl" />
+            <RotateCcw className="text-xl" />
           </button>
         </div>
       </div>

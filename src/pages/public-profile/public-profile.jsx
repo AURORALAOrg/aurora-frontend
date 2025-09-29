@@ -1,5 +1,5 @@
 import { BookOpen, Clock, Target, Award, Flame } from 'lucide-react';
-import { PiPulse } from 'react-icons/pi';
+import { Activity } from 'lucide-react';
 import { usePublicProfile } from '@/hooks/use-public-profile';
 import {
   ProfileHeader,
@@ -67,7 +67,7 @@ const PublicProfile = () => {
           {/* Activity Chart */}
           <div className="bg-[#192436] h-full p-6 rounded-lg border border-gray-700">
             <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-              <PiPulse className="w-5 h-5 text-light-blue-1" />
+              <Activity className="w-5 h-5 text-light-blue-1" />
               Activity (Last 7 Days)
             </h2>
             <ActivityChart data={userProfile.activityData} />
