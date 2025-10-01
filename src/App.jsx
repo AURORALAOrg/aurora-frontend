@@ -94,13 +94,15 @@ import ListeningComprehensionPage from "@/pages/aurora-site/assessment/listening
 import EscrowClassesPage from "@/pages/aurora-site/escrow/classes";
 import TeacherSignupPage from "@/pages/teacher-signup";
 import PlacementTest from "./pages/placementTest";
-
 // Rewards System
 import RewardsSystem from "@/pages/aurora-site/rewards/page.jsx";
 // import GameBoard from "./components/Games/memory-card/game-board";
 // import DifficultySelector from "./components/Games/word-matching/difficulty-selector";
 import GreetingIntro from "./pages/GreatingandInto/greetingandIntroduction";
 import GrammarCourse from "./pages/grammercourse/grammercourse";
+
+// import GameBoard from "./components/Games/memory-card/game-board";
+// import DifficultySelector from "./components/Games/word-matching/difficulty-selector";
 
 function App() {
   return (
