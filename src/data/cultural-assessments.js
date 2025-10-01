@@ -168,6 +168,7 @@ export const culturalAssessments = [
     title: "Holiday Traditions Assessment",
     description:
       "Learn about common holiday traditions and greetings in North America",
+    courseRoute: "/holiday-traditions-course",
     questions: [
       {
         id: "holiday-traditions-1",
@@ -239,6 +240,7 @@ export const culturalAssessments = [
     title: "Social Media & Modern Communication Assessment",
     description:
       "Test your knowledge of modern digital communication and social media etiquette",
+    courseRoute: "/social-media-course",
     questions: [
       {
         id: "social-media-communication-1",
